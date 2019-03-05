@@ -3,10 +3,6 @@ before_script:
   - apt update
   - apt -y install maven
 
-build:
-    stage: build
-    script: mvn compile
-
 test:
     stage: test
     script: mvn test
