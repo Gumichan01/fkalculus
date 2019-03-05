@@ -1,13 +1,18 @@
 
-before-script:
-    - apt update
-    - apt -y install maven
-
 build:
-    
     stage: build
+
+    before-script:
+      - apt update
+      - apt -y install maven
+
     script: mvn compile
 
 test:
     stage: test
+
+    before-script:
+      - apt update
+      - apt -y install maven
+
     script: mvn test
