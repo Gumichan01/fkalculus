@@ -1,4 +1,8 @@
 
+before-script:
+    - apt update
+    - apt -y install maven
+
 build:
     
     stage: build
