@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test as test
 
 class TestArgumentParser {
 
-    @test
+/*    @test
     fun `test argument parser with no argument`() {
 
         val args = arrayOf("")
@@ -132,5 +132,5 @@ class TestArgumentParser {
         assertTrue(arguments.verbose)
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
-    }
+    }*/
 }
