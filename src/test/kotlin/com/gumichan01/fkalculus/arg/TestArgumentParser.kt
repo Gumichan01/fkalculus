@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test as test
 
 class TestArgumentParser {
 
-/*    @test
+    @test
     fun `test argument parser with no argument`() {
 
         val args = arrayOf("")
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertFalse(arguments.verbose)
         assertTrue(arguments.fileInput.isEmpty())
         assertTrue(arguments.fileOutput.isEmpty())
@@ -25,7 +25,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.verbose)
     }
 
@@ -36,7 +36,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.verbose)
     }
 
@@ -47,7 +47,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
     }
 
@@ -58,7 +58,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
     }
 
@@ -69,7 +69,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileOutput.isNotEmpty())
     }
 
@@ -80,7 +80,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileOutput.isNotEmpty())
     }
 
@@ -91,7 +91,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
     }
@@ -103,7 +103,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
     }
@@ -115,7 +115,7 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.verbose)
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
@@ -128,9 +128,9 @@ class TestArgumentParser {
         val argumentParser: ArgumentParser = ArgumentParser()
         val arguments = argumentParser.parse(args)
 
-        println(arguments)
+        println("$args - $arguments")
         assertTrue(arguments.verbose)
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
-    }*/
+    }
 }
