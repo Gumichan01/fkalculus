@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test as test
 
 class TestArgumentParser {
 
+    init {
+        println("\n=== TestArgumentParser ===\n")
+    }
+
     @test
     fun `test argument parser with no argument`() {
 
@@ -18,6 +22,7 @@ class TestArgumentParser {
         assertFalse(arguments.verbose)
         assertTrue(arguments.fileInput.isEmpty())
         assertTrue(arguments.fileOutput.isEmpty())
+        println("========")
     }
 
     @test
@@ -30,6 +35,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.verbose)
+        println("========")
     }
 
     @test
@@ -42,6 +48,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.verbose)
+        println("========")
     }
 
     @test
@@ -54,6 +61,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -66,6 +74,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -78,6 +87,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -90,6 +100,7 @@ class TestArgumentParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -103,6 +114,7 @@ class TestArgumentParser {
         println("- $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -116,6 +128,7 @@ class TestArgumentParser {
         println("- $arguments")
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -130,6 +143,7 @@ class TestArgumentParser {
         assertTrue(arguments.verbose)
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 
     @test
@@ -144,5 +158,6 @@ class TestArgumentParser {
         assertTrue(arguments.verbose)
         assertTrue(arguments.fileInput.isNotEmpty())
         assertTrue(arguments.fileOutput.isNotEmpty())
+        println("========")
     }
 }

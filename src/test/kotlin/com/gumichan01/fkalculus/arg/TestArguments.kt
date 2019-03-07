@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test as test
 
 class TestArguments {
 
+    init {
+        println("\n=== TestArguments ===\n")
+    }
+
     @test
     fun `test basic arguments`() {
         val arguments = Arguments(true, "path_to_filename.fkalc", "destination_file.tex")
