@@ -1,10 +1,10 @@
 package com.gumichan01.fkalculus.ast
 
-// Abstract Syntax Tree (AST) of expressions
+// Abstract Syntax Tree (AST) of commands and expressions
 
-sealed class Command
-object Help: Command()
-sealed class Instruction : Command()
+sealed class FKalculusAST
+object Help: FKalculusAST()
+sealed class Instruction : FKalculusAST()
 data class Eval(val expr: Expression) : Instruction()
 data class Simpl(val expr: Expression) : Instruction()
 data class Subst(val expr: Expression, val variable: String, val expr1: Expression) : Instruction()
@@ -12,7 +12,7 @@ data class Solve(val expr: Expression, val variable: String) : Instruction()
 data class Derive(val expr: Expression, val variable: String) : Instruction()
 data class Integ(val expr: Expression, val variable: String, val min: Expression, val max: Expression) : Instruction()
 
-sealed class Expression : Command()
+sealed class Expression : FKalculusAST()
 object Pi : Expression()
 object exp1 : Expression()
 data class Const(val value: Double) : Expression()
