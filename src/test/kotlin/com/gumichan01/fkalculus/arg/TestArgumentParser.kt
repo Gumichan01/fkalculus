@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test as test
 
 class TestArgumentParser {
 
-    init {
-        println("\n=== TestArgumentParser ===\n")
-    }
-
     @test
     fun `test argument parser with no argument`() {
 
