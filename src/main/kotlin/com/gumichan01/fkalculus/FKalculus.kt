@@ -11,6 +11,7 @@ class FKalculus(val arguments: Arguments) {
     fun start() {
         var quit = false
         while (!quit) {
+            print("fkalculus > ")
             val kalculus: Option<FKalculusAST> = read()
             when (kalculus) {
                 is Some -> {
@@ -29,18 +30,25 @@ class FKalculus(val arguments: Arguments) {
     }
 
     private fun read(): Option<FKalculusAST> {
-        TODO("not implemented")
+        return when (readString()) {
+            is Some -> TODO("Parse the text")
+            is None -> None
+        }
     }
 
     private fun readString(): Option<String> {
-        TODO("not implemented")
+        return try {
+            Some(readLine()!!)
+        } catch (e: NullPointerException) {
+            None
+        }
     }
 
     private fun eval(ast: FKalculusAST): Option<Expression> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("Evaluate expression") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun print(expression: Expression): Unit {
+    private fun print(expression: Expression) {
         TODO("print expression")
     }
 }
