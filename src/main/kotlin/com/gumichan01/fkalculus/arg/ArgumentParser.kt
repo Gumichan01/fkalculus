@@ -1,5 +1,6 @@
-package com.gumichan01.fkalculus
+package com.gumichan01.fkalculus.arg
 
+import com.gumichan01.fkalculus.Arguments
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
 
