@@ -50,7 +50,7 @@ class TestAst {
     @test
     fun `test solve instruction`() {
 
-        val expression: Instruction = Solve(Binop(Plus, Var("x"),Const(5.0)), "x")
+        val expression: Instruction = Solve(Binop(Plus, Var("x"), Const(5.0)), "x")
         println(expression)
         assertTrue(expression is Solve)
         println("========")
@@ -68,7 +68,7 @@ class TestAst {
     @test
     fun `test integration instruction`() {
 
-    val expression: Instruction = Integ(Var("x"), "x", Const(5.0), Const(10.0))
+        val expression: Instruction = Integ(Var("x"), "x", Const(5.0), Const(10.0))
         println(expression)
         assertTrue(expression is Integ)
 
