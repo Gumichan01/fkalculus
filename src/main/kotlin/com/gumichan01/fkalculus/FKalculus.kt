@@ -45,7 +45,7 @@ class FKalculus(val arguments: Arguments) {
     }
 
     private fun eval(ast: FKalculusAST): Option<Expression> {
-        TODO("Evaluate expression") //To change body of created functions use File | Settings | File Templates.
+        TODO("Evaluate expression")
     }
 
     private fun print(expression: Expression) {
