@@ -6,12 +6,13 @@
 
     <groupId>com.gumichan01</groupId>
     <artifactId>fkalculus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-unstable</version>
 
     <properties>
         <kotlin.version>1.3.21</kotlin.version>
         <main.class>com.gumichan01.fkalculus.MainKt</main.class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
     <dependencies>
@@ -85,7 +86,7 @@
                                 </manifest>
                             </archive>
                             <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                                <descriptorRef>standalone</descriptorRef>
                             </descriptorRefs>
                         </configuration>
                     </execution>
