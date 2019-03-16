@@ -10,15 +10,25 @@ class FKalculus(val arguments: Arguments) {
 
     fun start() {
         var quit = false
+
         while (!quit) {
             print("fkalculus > ")
-            val kalculus: Option<FKalculusAST> = read()
-            when (kalculus) {
+            val text : Option<String> = readText()
+
+            when (text) {
                 is Some -> {
-                    val result: Option<Expression> = eval(kalculus.t)
-                    when (result) {
-                        is Some -> print(result.t)
-                        is None -> println("Unrecognized command, type \"help\" to get available commands.")
+                    val kalculus: Option<FKalculusAST> = parse(text.t)
+                    when (kalculus) {
+                        is Some -> {
+                            val result: Option<Expression> = eval(kalculus.t)
+                            when (result) {
+                                is Some -> print(result.t)
+                                is None -> println("Unrecognized command, type \"help\" to get available commands.")
+                            }
+                        }
+                        is None -> {
+                            println("Invalid command/expression to evaluate")
+                        }
                     }
                 }
                 is None -> {
@@ -29,14 +39,11 @@ class FKalculus(val arguments: Arguments) {
         }
     }
 
-    private fun read(): Option<FKalculusAST> {
-        return when (readString()) {
-            is Some -> TODO("Parse the text")
-            is None -> None
-        }
+    private fun parse(text: String): Option<FKalculusAST> {
+        TODO("Parse the text")
     }
 
-    private fun readString(): Option<String> {
+    private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
         } catch (e: NullPointerException) {
