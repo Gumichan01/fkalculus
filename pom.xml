@@ -116,7 +116,7 @@
                 <configuration>
                     <executable>mv</executable>
                     <arguments>
-                        <argument>target/${project.artifactId}-${project.version}-*</argument>
+                        <argument>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</argument>
                         <argument>target/${project.artifactId}-${project.version}-standalone.jar</argument>
                     </arguments>
                 </configuration>
