@@ -14,7 +14,7 @@ data class Integ(val expr: Expression, val variable: String, val min: Expression
 
 sealed class Expression : FKalculusAST()
 object Pi : Expression()
-object exp1 : Expression()
+object Exp1 : Expression()
 data class Const(val value: Double) : Expression()
 data class Var(val variable: String) : Expression()
 data class Binop(val operator: Operator, val expr1: Expression, val expr2: Expression) : Expression()
