@@ -220,7 +220,7 @@ class TestFKParser {
     }
 
     @test
-    fun `parse eval number / var`() {
+    fun `parse eval number div var`() {
 
         val instructionString = "eval(4 / x)"
         val parser = FKParser()
