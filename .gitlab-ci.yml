@@ -2,6 +2,11 @@ before_script:
   - apt update
   - apt -y install maven openjdk-8-jdk openjdk-8-jre
 
+compile:
+  stage: build
+  script:
+    - mvn compile
+
 unit_test:
   stage: test
   script:
