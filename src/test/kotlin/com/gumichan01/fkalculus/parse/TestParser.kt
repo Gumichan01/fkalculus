@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test as test
 
 
-class TestFKParser {
+class TestParser {
 
     @test
     fun `parse eval Pi`() {
 
         val instructionString = "eval(Pi)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -27,7 +27,7 @@ class TestFKParser {
     fun `parse eval exp1`() {
 
         val instructionString = "eval(e)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -41,7 +41,7 @@ class TestFKParser {
     fun `parse eval const`() {
 
         val instructionString = "eval(42)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -55,7 +55,7 @@ class TestFKParser {
     fun `parse eval negative const`() {
 
         val instructionString = "eval(-64)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -69,7 +69,7 @@ class TestFKParser {
     fun `parse eval Var`() {
 
         val instructionString = "eval(x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -83,7 +83,7 @@ class TestFKParser {
     fun `parse eval number addition`() {
 
         val instructionString = "eval(4 + 2)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -97,7 +97,7 @@ class TestFKParser {
     fun `parse eval number + var`() {
 
         val instructionString = "eval(4 + x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -111,7 +111,7 @@ class TestFKParser {
     fun `parse eval number complex addition`() {
 
         val instructionString = "eval(4 + x + e + Pi)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -125,7 +125,7 @@ class TestFKParser {
     fun `parse eval -`() {
 
         val instructionString = "eval(4 - 2)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -139,7 +139,7 @@ class TestFKParser {
     fun `parse eval number - variable`() {
 
         val instructionString = "eval(4 - x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -153,7 +153,7 @@ class TestFKParser {
     fun `parse eval number complex sub`() {
 
         val instructionString = "eval(4 - x - e - Pi)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -167,7 +167,7 @@ class TestFKParser {
     fun `parse eval number multiply`() {
 
         val instructionString = "eval(4 * 2)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -181,7 +181,7 @@ class TestFKParser {
     fun `parse eval number * var`() {
 
         val instructionString = "eval(4 * x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -195,7 +195,7 @@ class TestFKParser {
     fun `parse eval number complex multiplication`() {
 
         val instructionString = "eval(4 * x * e * Pi)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -209,7 +209,7 @@ class TestFKParser {
     fun `parse eval number div`() {
 
         val instructionString = "eval(4 / 2)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -223,7 +223,7 @@ class TestFKParser {
     fun `parse eval number div var`() {
 
         val instructionString = "eval(4 / x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -237,7 +237,7 @@ class TestFKParser {
     fun `parse eval number complex div`() {
 
         val instructionString = "eval(4 / x / e / Pi)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -251,7 +251,7 @@ class TestFKParser {
     fun `parse eval number pow`() {
 
         val instructionString = "eval(4^2)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -265,7 +265,7 @@ class TestFKParser {
     fun `parse eval number pow var`() {
 
         val instructionString = "eval(4^x)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -279,7 +279,7 @@ class TestFKParser {
     fun `parse eval number complex pow`() {
 
         val instructionString = "eval(4^x^e^Pi)" // ((4^x)^e)^π
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -293,7 +293,7 @@ class TestFKParser {
     fun `parse eval priority op + *`() {
 
         val instructionString = "eval(2*x + 1)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -307,7 +307,7 @@ class TestFKParser {
     fun `parse eval priority op - *`() {
 
         val instructionString = "eval(2*x - 1)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -321,7 +321,7 @@ class TestFKParser {
     fun `parse eval priority op div *`() {
 
         val instructionString = "eval(4 * 2 / 3)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -335,7 +335,7 @@ class TestFKParser {
     fun `parse eval priority op div * (2)`() {
 
         val instructionString = "eval(2 / 3 * 4)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -349,7 +349,7 @@ class TestFKParser {
     fun `parse eval priority op div * (3)`() {
 
         val instructionString = "eval(4 * (2 / 3))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -363,7 +363,7 @@ class TestFKParser {
     fun `parse eval priority op div * (4)`() {
 
         val instructionString = "eval((2 / 3) * 4)"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -377,7 +377,7 @@ class TestFKParser {
     fun `parse eval priority op ^ +`() {
 
         val instructionString = "eval(4^2 + 3))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -391,7 +391,7 @@ class TestFKParser {
     fun `parse eval priority op ^ + (2)`() {
 
         val instructionString = "eval(4^(2 / 3))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -405,7 +405,7 @@ class TestFKParser {
     fun `parse eval priority op ^ + (3)`() {
 
         val instructionString = "eval(3 + 4^2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -419,7 +419,7 @@ class TestFKParser {
     fun `parse eval priority op ^ + (4)`() {
 
         val instructionString = "eval((3 + 4)^2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -433,7 +433,7 @@ class TestFKParser {
     fun `parse eval basic sqrt`() {
 
         val instructionString = "eval(sqrt(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -447,7 +447,7 @@ class TestFKParser {
     fun `parse eval sqrt of var`() {
 
         val instructionString = "eval(sqrt(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -461,7 +461,7 @@ class TestFKParser {
     fun `parse eval complex sqrt`() {
 
         val instructionString = "eval(sqrt(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -475,7 +475,7 @@ class TestFKParser {
     fun `parse eval basic expo`() {
 
         val instructionString = "eval(exp(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -489,7 +489,7 @@ class TestFKParser {
     fun `parse eval expo of var`() {
 
         val instructionString = "eval(exp(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -503,7 +503,7 @@ class TestFKParser {
     fun `parse eval complex expo`() {
 
         val instructionString = "eval(exp(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -517,7 +517,7 @@ class TestFKParser {
     fun `parse eval basic ln`() {
 
         val instructionString = "eval(ln(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -531,7 +531,7 @@ class TestFKParser {
     fun `parse eval ln of var`() {
 
         val instructionString = "eval(ln(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -545,7 +545,7 @@ class TestFKParser {
     fun `parse eval complex ln`() {
 
         val instructionString = "eval(ln(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -559,7 +559,7 @@ class TestFKParser {
     fun `parse eval basic log10`() {
 
         val instructionString = "eval(log10(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -573,7 +573,7 @@ class TestFKParser {
     fun `parse eval basic normalized notation, lg = log10`() {
 
         val instructionString = "eval(lg(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -587,7 +587,7 @@ class TestFKParser {
     fun `parse eval log10 of var`() {
 
         val instructionString = "eval(log10(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -601,7 +601,7 @@ class TestFKParser {
     fun `parse eval complex log10`() {
 
         val instructionString = "eval(log10(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -615,7 +615,7 @@ class TestFKParser {
     fun `parse eval basic log2`() {
 
         val instructionString = "eval(log2(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -629,7 +629,7 @@ class TestFKParser {
     fun `parse eval basic normalized notation, lb = log2`() {
 
         val instructionString = "eval(lb(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -643,7 +643,7 @@ class TestFKParser {
     fun `parse eval log2 of var`() {
 
         val instructionString = "eval(log2(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -657,7 +657,7 @@ class TestFKParser {
     fun `parse eval complex log2`() {
 
         val instructionString = "eval(log2(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -671,7 +671,7 @@ class TestFKParser {
     fun `parse eval basic Sin`() {
 
         val instructionString = "eval(sin(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -685,7 +685,7 @@ class TestFKParser {
     fun `parse eval Sin of var`() {
 
         val instructionString = "eval(sin(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -699,7 +699,7 @@ class TestFKParser {
     fun `parse eval complex Sin`() {
 
         val instructionString = "eval(sin(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -713,7 +713,7 @@ class TestFKParser {
     fun `parse eval basic Cos`() {
 
         val instructionString = "eval(cos(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -727,7 +727,7 @@ class TestFKParser {
     fun `parse eval Cos of var`() {
 
         val instructionString = "eval(cos(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -741,7 +741,7 @@ class TestFKParser {
     fun `parse eval complex Cos`() {
 
         val instructionString = "eval(cos(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -755,7 +755,7 @@ class TestFKParser {
     fun `parse eval basic Tan`() {
 
         val instructionString = "eval(tan(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -769,7 +769,7 @@ class TestFKParser {
     fun `parse eval Tan of var`() {
 
         val instructionString = "eval(tan(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -783,7 +783,7 @@ class TestFKParser {
     fun `parse eval complex Tan`() {
 
         val instructionString = "eval(tan(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -797,7 +797,7 @@ class TestFKParser {
     fun `parse eval basic arcsin`() {
 
         val instructionString = "eval(arcsin(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -811,7 +811,7 @@ class TestFKParser {
     fun `parse eval arcsin of var`() {
 
         val instructionString = "eval(arcsin(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -825,7 +825,7 @@ class TestFKParser {
     fun `parse eval complex arcsin`() {
 
         val instructionString = "eval(arcsin(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -839,7 +839,7 @@ class TestFKParser {
     fun `parse eval basic arccos`() {
 
         val instructionString = "eval(arccos(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -853,7 +853,7 @@ class TestFKParser {
     fun `parse eval arccos of var`() {
 
         val instructionString = "eval(arccos(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -867,7 +867,7 @@ class TestFKParser {
     fun `parse eval complex arccos`() {
 
         val instructionString = "eval(arcsin(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -881,7 +881,7 @@ class TestFKParser {
     fun `parse eval basic arctan`() {
 
         val instructionString = "eval(arctan(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -895,7 +895,7 @@ class TestFKParser {
     fun `parse eval arctan of var`() {
 
         val instructionString = "eval(arctan(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -909,7 +909,7 @@ class TestFKParser {
     fun `parse eval complex arctan`() {
 
         val instructionString = "eval(arctan(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -923,7 +923,7 @@ class TestFKParser {
     fun `parse eval basic sec`() {
 
         val instructionString = "eval(sec(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -937,7 +937,7 @@ class TestFKParser {
     fun `parse eval sec of var`() {
 
         val instructionString = "eval(sec(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -951,7 +951,7 @@ class TestFKParser {
     fun `parse eval complex sec`() {
 
         val instructionString = "eval(sec(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -965,7 +965,7 @@ class TestFKParser {
     fun `parse eval basic cosec`() {
 
         val instructionString = "eval(cosec(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -979,7 +979,7 @@ class TestFKParser {
     fun `parse eval cosec of var`() {
 
         val instructionString = "eval(cosec(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -993,7 +993,7 @@ class TestFKParser {
     fun `parse eval complex cosec`() {
 
         val instructionString = "eval(cosec(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1007,7 +1007,7 @@ class TestFKParser {
     fun `parse eval basic cotan`() {
 
         val instructionString = "eval(cotan(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1021,7 +1021,7 @@ class TestFKParser {
     fun `parse eval cotan of var`() {
 
         val instructionString = "eval(cotan(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1035,7 +1035,7 @@ class TestFKParser {
     fun `parse eval complex cotan`() {
 
         val instructionString = "eval(cotan(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1049,7 +1049,7 @@ class TestFKParser {
     fun `parse eval basic arcsec`() {
 
         val instructionString = "eval(arcsec(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1063,7 +1063,7 @@ class TestFKParser {
     fun `parse eval arcsec of var`() {
 
         val instructionString = "eval(arcsec(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1077,7 +1077,7 @@ class TestFKParser {
     fun `parse eval complex arcsec`() {
 
         val instructionString = "eval(arcsec(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1091,7 +1091,7 @@ class TestFKParser {
     fun `parse eval basic arccosec`() {
 
         val instructionString = "eval(arccosec(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1105,7 +1105,7 @@ class TestFKParser {
     fun `parse eval arccosec of var`() {
 
         val instructionString = "eval(arccosec(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1119,7 +1119,7 @@ class TestFKParser {
     fun `parse eval complex arccosec`() {
 
         val instructionString = "eval(arccosec(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1133,7 +1133,7 @@ class TestFKParser {
     fun `parse eval basic arccotan`() {
 
         val instructionString = "eval(arccotan(2))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1147,7 +1147,7 @@ class TestFKParser {
     fun `parse eval arccotan of var`() {
 
         val instructionString = "eval(arccotan(x))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)
@@ -1161,7 +1161,7 @@ class TestFKParser {
     fun `parse eval complex arccotan`() {
 
         val instructionString = "eval(arccotan(x + 1))"
-        val parser = FKParser()
+        val parser = Parser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
         println(instructionString)

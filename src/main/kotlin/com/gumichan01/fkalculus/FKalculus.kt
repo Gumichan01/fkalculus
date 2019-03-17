@@ -2,7 +2,7 @@ package com.gumichan01.fkalculus
 
 import com.gumichan01.fkalculus.ast.Expression
 import com.gumichan01.fkalculus.ast.FKalculusAST
-import com.gumichan01.fkalculus.parse.FKParser
+import com.gumichan01.fkalculus.parse.Parser
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
@@ -41,7 +41,7 @@ class FKalculus(val arguments: Arguments) {
     }
 
     private fun parse(text: String): Option<FKalculusAST> {
-        return FKParser().parse(text)
+        return Parser().parse(text)
     }
 
     private fun readText(): Option<String> {
