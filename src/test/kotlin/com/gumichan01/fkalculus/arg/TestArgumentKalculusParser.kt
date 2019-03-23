@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test as test
 
-class TestArgumentParser {
+class TestArgumentKalculusParser {
 
     @test
     fun `test argument parser with no argument`() {
