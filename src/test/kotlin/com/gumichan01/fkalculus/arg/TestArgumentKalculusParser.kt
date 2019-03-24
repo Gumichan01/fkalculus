@@ -17,8 +17,6 @@ class TestArgumentKalculusParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertFalse(arguments.verbose)
-        assertTrue(arguments.fileInput.isEmpty())
-        assertTrue(arguments.fileOutput.isEmpty())
         println("========")
     }
 
@@ -45,116 +43,6 @@ class TestArgumentKalculusParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.verbose)
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with short file`() {
-
-        val args = arrayOf("-f", "hello.fkalc")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileInput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with file`() {
-
-        val args = arrayOf("--file=hello.fkalc")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileInput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with short output`() {
-
-        val args = arrayOf("-o", "hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with output`() {
-
-        val args = arrayOf("--output=hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with short files`() {
-
-        val args = arrayOf("-f", "hello.fkalc", "-o", "hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileInput.isNotEmpty())
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with files`() {
-
-        val args = arrayOf("--file=hello.fkalc", "--output=hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.fileInput.isNotEmpty())
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with all short arguments`() {
-
-        val args = arrayOf("-v", "-f", "hello.fkalc", "-o", "hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.verbose)
-        assertTrue(arguments.fileInput.isNotEmpty())
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        println("========")
-    }
-
-    @test
-    fun `test argument parser with all arguments`() {
-
-        val args = arrayOf("--verbose", "--file=hello.fkalc", "--output=hello.tex")
-        val argumentParser = ArgumentParser()
-        val arguments = argumentParser.parse(args)
-
-        args.forEach { arg -> print("$arg ") }
-        println("- $arguments")
-        assertTrue(arguments.verbose)
-        assertTrue(arguments.fileInput.isNotEmpty())
-        assertTrue(arguments.fileOutput.isNotEmpty())
         println("========")
     }
 }

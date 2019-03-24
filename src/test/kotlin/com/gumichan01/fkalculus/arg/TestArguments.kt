@@ -1,5 +1,6 @@
 package com.gumichan01.fkalculus
 
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test as test
 
@@ -7,13 +8,17 @@ class TestArguments {
 
     @test
     fun `test basic arguments`() {
-        val arguments = Arguments(true, "path_to_filename.fkalc", "destination_file.tex")
+        val arguments = Arguments(true)
         println(arguments.toString())
 
         assertTrue(arguments.verbose)
-        assertTrue(arguments.fileInput.isNotEmpty())
-        assertTrue(arguments.fileOutput.isNotEmpty())
-        assertTrue(arguments.fileInput.endsWith(".fkalc"))
-        assertTrue(arguments.fileOutput.endsWith(".tex"))
+    }
+
+    @test
+    fun `test basic arguments 2`() {
+        val arguments = Arguments(false)
+        println(arguments.toString())
+
+        assertFalse(arguments.verbose)
     }
 }
