@@ -6,9 +6,10 @@ This file describes the FKalculus language.
 ## Tokens ##
 
 ```
-lowercase_alpha ≡ [a-z]
-cmd             ≡ (lowercase_alpha)+
-number          ≡ [0-9]+
+lowercase_alpha ≡ [a-z] \ {e}
+integer         ≡ [0-9]+
+double          ≡ (integer).(integer)
+number          ≡ integer | double
 newline         ≡ ('\r' | '\n' | '\r\n')
 
 /* Tokens */
@@ -26,9 +27,15 @@ SLASH   : '/'
 CIRCUM  : '^'
 
 // Keywords
-PI      : "Pi" | "pi" | 'π'       // TODO unicode charactere for Pi
+EVAL    : eval
+SUBST   : subst
+SIMPL   : simpl
+SOLVE   : solve
+DERIVE  : derive
+INTEG   : integ
+PI      : "Pi" | "pi" | 'π'     // TODO unicode character for Pi
 EXP     : 'e'
-SQRT    : "sqrt" | "√"      // TODO unicode charactere for square root
+SQRT    : "sqrt" | "√"          // TODO unicode character for square root
 EXPON   : exp
 LOGN    : "ln"
 LOG10   : "lg" | "log10"
@@ -45,15 +52,42 @@ COTAN   : "cotan"
 ASEC    : "sec"
 ACOSEC  : "cosec"
 ACOTAN  : "cotan"
-
-
 ```
 
 ## Grammar ##
 
 ```
+instruction ::= command
+    command ::= EVAL(expr)
+              | SUBST(expr, lowercase_alpha, expr)  
+              | SIMPL(expr)
+              | SOLVE(expr, lowercase_alpha)
+              | DERIVE(expr, lowercase_alpha)
+              | INTEG(expr, lowercase_alpha, number, number)
 
-
+       expr ::= PI | EXP
+              | (expr)
+              | expr PLUS expr
+              | expr MINUS expr
+              | expr MULT expr
+              | expr DIV expr
+              | expr POW expr
+              | SQRT(expr)
+              | LOGN(expr)
+              | LOG10(expr)
+              | LOG2(expr)
+              | COS(expr)
+              | SINE(expr)
+              | TAN(expr)
+              | ACOS(expr)
+              | ASINE(expr)
+              | ATAN(expr)
+              | SEC(expr)
+              | COSEC(expr)
+              | COTAN(expr)
+              | ASEC(expr)
+              | ACOSEC(expr)
+              | ACOTAN(expr)
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
