@@ -5,19 +5,19 @@ package com.gumichan01.fkalculus.ast
 sealed class FKalculusAST
 object Help : FKalculusAST()
 sealed class Instruction : FKalculusAST()
-data class Identifier(val identifier: String, val value : Expression) : Instruction()
 data class Eval(val expr: Expression) : Instruction()
 data class Simpl(val expr: Expression) : Instruction()
 data class Subst(val expr: Expression, val variable: String, val expr1: Expression) : Instruction()
 data class Solve(val expr: Expression, val variable: String) : Instruction()
 data class Derive(val expr: Expression, val variable: String) : Instruction()
 data class Integ(val expr: Expression, val variable: String, val min: Expression, val max: Expression) : Instruction()
-
 sealed class Expression : FKalculusAST()
+
 object Pi : Expression()
 object Exp1 : Expression()
 data class Const(val value: Double) : Expression()
 data class Var(val variable: String) : Expression()
+data class Identifier(val name: String) : Expression()
 data class Binop(val operator: Operator, val expr1: Expression, val expr2: Expression) : Expression()
 data class Sqrt(val expr: Expression) : Expression()
 data class Expo(val expr: Expression) : Expression()
@@ -33,6 +33,7 @@ data class Log2(val expr: Expression) : Expression()
 data class Sin(val expr: Expression) : Expression()
 data class Cos(val expr: Expression) : Expression()
 data class Tan(val expr: Expression) : Expression()
+
 /* Every A{cos/sine/tan} are inverse functions of cos/sin/tan */
 data class Asin(val expr: Expression) : Expression()
 
@@ -51,3 +52,6 @@ object Minus : Operator()
 object Mult : Operator()
 object Div : Operator()
 object Pow : Operator()
+
+sealed class ResultValue
+data class IdentifierValue(val identifier: String, val value: Expression) : ResultValue()

@@ -21,9 +21,18 @@ class TestAst {
     }
 
     @test
-    fun `test identifier declaration`() {
+    fun `test identifier value`() {
 
-        val expression: Instruction = Identifier("v1", Const(5.0))
+        val expression: ResultValue = IdentifierValue("v1", Const(5.0))
+        println(expression)
+        assertTrue(expression is IdentifierValue)
+        println("========")
+    }
+
+    @test
+    fun `test identifier use`() {
+
+        val expression: Expression = Identifier("v1")
         println(expression)
         assertTrue(expression is Identifier)
         println("========")
@@ -32,7 +41,7 @@ class TestAst {
     @test
     fun `test simpl instruction`() {
 
-        val expression: Instruction = Simpl(Const(5.0))
+        val expression: Instruction = Simpl(Identifier("v0"))
         println(expression)
         assertTrue(expression is Simpl)
         println("========")
