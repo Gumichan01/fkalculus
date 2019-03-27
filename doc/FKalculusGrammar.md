@@ -11,6 +11,7 @@ integer         ≡ [0-9]+
 double          ≡ (integer).(integer)
 number          ≡ integer | double
 newline         ≡ ('\r' | '\n' | '\r\n')
+identifier      ≡ 'v'(integer)
 
 /* Tokens */
 
@@ -25,6 +26,8 @@ MINUS   : '-'
 STAR    : '*'
 SLASH   : '/'
 CIRCUM  : '^'
+
+IDENTIFIER : identifier
 
 // Keywords
 EVAL    : eval
@@ -56,8 +59,10 @@ ACOTAN  : "cotan"
 
 ## Grammar ##
 
+NB: Spaces must be skipped
+
 ```
-instruction ::= command
+instruction ::= command NL
     command ::= EVAL(expr)
               | SUBST(expr, lowercase_alpha, expr)  
               | SIMPL(expr)
@@ -65,9 +70,7 @@ instruction ::= command
               | DERIVE(expr, lowercase_alpha)
               | INTEG(expr, lowercase_alpha, number, number)
 
-       expr ::= mathexpr | command
-
-      mathexpr ::= PI | EXP
+       expr ::= PI | EXP | IDENTIFIER
               | (mathexpr)
               | mathexpr PLUS mathexpr
               | mathexpr MINUS mathexpr
