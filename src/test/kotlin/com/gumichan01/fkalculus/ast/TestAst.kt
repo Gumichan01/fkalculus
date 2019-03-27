@@ -21,6 +21,15 @@ class TestAst {
     }
 
     @test
+    fun `test identifier declaration`() {
+
+        val expression: Instruction = Identifier("v1", Const(5.0))
+        println(expression)
+        assertTrue(expression is Identifier)
+        println("========")
+    }
+
+    @test
     fun `test simpl instruction`() {
 
         val expression: Instruction = Simpl(Const(5.0))

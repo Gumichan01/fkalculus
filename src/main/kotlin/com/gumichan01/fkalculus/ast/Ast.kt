@@ -5,6 +5,7 @@ package com.gumichan01.fkalculus.ast
 sealed class FKalculusAST
 object Help : FKalculusAST()
 sealed class Instruction : FKalculusAST()
+data class Identifier(val identifier: String, val value : Expression) : Instruction()
 data class Eval(val expr: Expression) : Instruction()
 data class Simpl(val expr: Expression) : Instruction()
 data class Subst(val expr: Expression, val variable: String, val expr1: Expression) : Instruction()
