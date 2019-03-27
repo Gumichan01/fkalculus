@@ -12,7 +12,7 @@ class TestKalculusParser {
     @test
     fun `parse eval Pi`() {
 
-        val instructionString = "eval(Pi)"
+        val instructionString = "Pi"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -26,7 +26,7 @@ class TestKalculusParser {
     @test
     fun `parse eval exp1`() {
 
-        val instructionString = "eval(e)"
+        val instructionString = "e"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -40,7 +40,7 @@ class TestKalculusParser {
     @test
     fun `parse eval const`() {
 
-        val instructionString = "eval(42)"
+        val instructionString = "42"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -54,7 +54,7 @@ class TestKalculusParser {
     @test
     fun `parse eval negative const`() {
 
-        val instructionString = "eval(-64)"
+        val instructionString = "-64"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -68,7 +68,7 @@ class TestKalculusParser {
     @test
     fun `parse eval Var`() {
 
-        val instructionString = "eval(x)"
+        val instructionString = "x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -82,7 +82,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number addition`() {
 
-        val instructionString = "eval(4 + 2)"
+        val instructionString = "4 + 2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -96,7 +96,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number + var`() {
 
-        val instructionString = "eval(4 + x)"
+        val instructionString = "4 + x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -110,7 +110,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number complex addition`() {
 
-        val instructionString = "eval(4 + x + e + Pi)"
+        val instructionString = "4 + x + e + Pi"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -124,7 +124,7 @@ class TestKalculusParser {
     @test
     fun `parse eval -`() {
 
-        val instructionString = "eval(4 - 2)"
+        val instructionString = "4 - 2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -138,7 +138,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number - variable`() {
 
-        val instructionString = "eval(4 - x)"
+        val instructionString = "4 - x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -152,7 +152,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number complex sub`() {
 
-        val instructionString = "eval(4 - x - e - Pi)"
+        val instructionString = "4 - x - e - Pi"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -166,7 +166,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number multiply`() {
 
-        val instructionString = "eval(4 * 2)"
+        val instructionString = "4 * 2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -180,7 +180,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number * var`() {
 
-        val instructionString = "eval(4 * x)"
+        val instructionString = "4 * x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -194,7 +194,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number complex multiplication`() {
 
-        val instructionString = "eval(4 * x * e * Pi)"
+        val instructionString = "4 * x * e * Pi"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -208,7 +208,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number div`() {
 
-        val instructionString = "eval(4 / 2)"
+        val instructionString = "4 / 2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -222,7 +222,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number div var`() {
 
-        val instructionString = "eval(4 / x)"
+        val instructionString = "4 / x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -236,7 +236,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number complex div`() {
 
-        val instructionString = "eval(4 / x / e / Pi)"
+        val instructionString = "4 / x / e / Pi"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -250,7 +250,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number pow`() {
 
-        val instructionString = "eval(4^2)"
+        val instructionString = "4^2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -264,7 +264,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number pow var`() {
 
-        val instructionString = "eval(4^x)"
+        val instructionString = "4^x"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -278,7 +278,7 @@ class TestKalculusParser {
     @test
     fun `parse eval number complex pow`() {
 
-        val instructionString = "eval(4^x^e^Pi)" // ((4^x)^e)^π
+        val instructionString = "4^x^e^Pi" // ((4^x)^e)^π
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -292,7 +292,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op + *`() {
 
-        val instructionString = "eval(2*x + 1)"
+        val instructionString = "2*x + 1"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -306,7 +306,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op - *`() {
 
-        val instructionString = "eval(2*x - 1)"
+        val instructionString = "2*x - 1"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -320,7 +320,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op div *`() {
 
-        val instructionString = "eval(4 * 2 / 3)"
+        val instructionString = "4 * 2 / 3"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -334,7 +334,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op div * (2)`() {
 
-        val instructionString = "eval(2 / 3 * 4)"
+        val instructionString = "2 / 3 * 4"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -348,7 +348,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op div * (3)`() {
 
-        val instructionString = "eval(4 * (2 / 3))"
+        val instructionString = "4 * (2 / 3)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -362,7 +362,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op div * (4)`() {
 
-        val instructionString = "eval((2 / 3) * 4)"
+        val instructionString = "(2 / 3) * 4"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -376,7 +376,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op ^ +`() {
 
-        val instructionString = "eval(4^2 + 3))"
+        val instructionString = "4^2 + 3"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -390,7 +390,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op ^ + (2)`() {
 
-        val instructionString = "eval(4^(2 / 3))"
+        val instructionString = "4^(2 / 3)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -404,7 +404,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op ^ + (3)`() {
 
-        val instructionString = "eval(3 + 4^2))"
+        val instructionString = "3 + 4^2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -418,7 +418,7 @@ class TestKalculusParser {
     @test
     fun `parse eval priority op ^ + (4)`() {
 
-        val instructionString = "eval((3 + 4)^2))"
+        val instructionString = "(3 + 4)^2"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -432,7 +432,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic sqrt`() {
 
-        val instructionString = "eval(sqrt(2))"
+        val instructionString = "sqrt(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -446,7 +446,7 @@ class TestKalculusParser {
     @test
     fun `parse eval sqrt of var`() {
 
-        val instructionString = "eval(sqrt(x))"
+        val instructionString = "sqrt(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -460,7 +460,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex sqrt`() {
 
-        val instructionString = "eval(sqrt(x + 1))"
+        val instructionString = "sqrt(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -474,7 +474,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic expo`() {
 
-        val instructionString = "eval(exp(2))"
+        val instructionString = "exp(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -488,7 +488,7 @@ class TestKalculusParser {
     @test
     fun `parse eval expo of var`() {
 
-        val instructionString = "eval(exp(x))"
+        val instructionString = "exp(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -502,7 +502,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex expo`() {
 
-        val instructionString = "eval(exp(x + 1))"
+        val instructionString = "exp(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -516,7 +516,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic ln`() {
 
-        val instructionString = "eval(ln(2))"
+        val instructionString = "ln(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -530,7 +530,7 @@ class TestKalculusParser {
     @test
     fun `parse eval ln of var`() {
 
-        val instructionString = "eval(ln(x))"
+        val instructionString = "ln(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -544,7 +544,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex ln`() {
 
-        val instructionString = "eval(ln(x + 1))"
+        val instructionString = "ln(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -558,7 +558,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic log10`() {
 
-        val instructionString = "eval(log10(2))"
+        val instructionString = "log10(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -572,7 +572,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic normalized notation, lg = log10`() {
 
-        val instructionString = "eval(lg(2))"
+        val instructionString = "lg(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -586,7 +586,7 @@ class TestKalculusParser {
     @test
     fun `parse eval log10 of var`() {
 
-        val instructionString = "eval(log10(x))"
+        val instructionString = "log10(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -600,7 +600,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex log10`() {
 
-        val instructionString = "eval(log10(x + 1))"
+        val instructionString = "log10(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -614,7 +614,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic log2`() {
 
-        val instructionString = "eval(log2(2))"
+        val instructionString = "log2(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -628,7 +628,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic normalized notation, lb = log2`() {
 
-        val instructionString = "eval(lb(2))"
+        val instructionString = "lb(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -642,7 +642,7 @@ class TestKalculusParser {
     @test
     fun `parse eval log2 of var`() {
 
-        val instructionString = "eval(log2(x))"
+        val instructionString = "log2(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -656,7 +656,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex log2`() {
 
-        val instructionString = "eval(log2(x + 1))"
+        val instructionString = "log2(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -670,7 +670,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic Sin`() {
 
-        val instructionString = "eval(sin(2))"
+        val instructionString = "sin(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -684,7 +684,7 @@ class TestKalculusParser {
     @test
     fun `parse eval Sin of var`() {
 
-        val instructionString = "eval(sin(x))"
+        val instructionString = "sin(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -698,7 +698,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex Sin`() {
 
-        val instructionString = "eval(sin(x + 1))"
+        val instructionString = "sin(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -712,7 +712,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic Cos`() {
 
-        val instructionString = "eval(cos(2))"
+        val instructionString = "cos(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -726,7 +726,7 @@ class TestKalculusParser {
     @test
     fun `parse eval Cos of var`() {
 
-        val instructionString = "eval(cos(x))"
+        val instructionString = "cos(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -740,7 +740,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex Cos`() {
 
-        val instructionString = "eval(cos(x + 1))"
+        val instructionString = "cos(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -754,7 +754,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic Tan`() {
 
-        val instructionString = "eval(tan(2))"
+        val instructionString = "tan(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -768,7 +768,7 @@ class TestKalculusParser {
     @test
     fun `parse eval Tan of var`() {
 
-        val instructionString = "eval(tan(x))"
+        val instructionString = "tan(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -782,7 +782,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex Tan`() {
 
-        val instructionString = "eval(tan(x + 1))"
+        val instructionString = "tan(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -796,7 +796,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arcsin`() {
 
-        val instructionString = "eval(arcsin(2))"
+        val instructionString = "arcsin(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -810,7 +810,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arcsin of var`() {
 
-        val instructionString = "eval(arcsin(x))"
+        val instructionString = "arcsin(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -824,7 +824,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arcsin`() {
 
-        val instructionString = "eval(arcsin(x + 1))"
+        val instructionString = "arcsin(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -838,7 +838,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arccos`() {
 
-        val instructionString = "eval(arccos(2))"
+        val instructionString = "arccos(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -852,7 +852,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arccos of var`() {
 
-        val instructionString = "eval(arccos(x))"
+        val instructionString = "arccos(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -866,7 +866,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arccos`() {
 
-        val instructionString = "eval(arcsin(x + 1))"
+        val instructionString = "arcsin(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -880,7 +880,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arctan`() {
 
-        val instructionString = "eval(arctan(2))"
+        val instructionString = "arctan(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -894,7 +894,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arctan of var`() {
 
-        val instructionString = "eval(arctan(x))"
+        val instructionString = "arctan(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -908,7 +908,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arctan`() {
 
-        val instructionString = "eval(arctan(x + 1))"
+        val instructionString = "arctan(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -922,7 +922,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic sec`() {
 
-        val instructionString = "eval(sec(2))"
+        val instructionString = "sec(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -936,7 +936,7 @@ class TestKalculusParser {
     @test
     fun `parse eval sec of var`() {
 
-        val instructionString = "eval(sec(x))"
+        val instructionString = "sec(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -950,7 +950,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex sec`() {
 
-        val instructionString = "eval(sec(x + 1))"
+        val instructionString = "sec(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -964,7 +964,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic cosec`() {
 
-        val instructionString = "eval(cosec(2))"
+        val instructionString = "cosec(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -978,7 +978,7 @@ class TestKalculusParser {
     @test
     fun `parse eval cosec of var`() {
 
-        val instructionString = "eval(cosec(x))"
+        val instructionString = "cosec(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -992,7 +992,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex cosec`() {
 
-        val instructionString = "eval(cosec(x + 1))"
+        val instructionString = "cosec(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1006,7 +1006,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic cotan`() {
 
-        val instructionString = "eval(cotan(2))"
+        val instructionString = "cotan(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1020,7 +1020,7 @@ class TestKalculusParser {
     @test
     fun `parse eval cotan of var`() {
 
-        val instructionString = "eval(cotan(x))"
+        val instructionString = "cotan(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1034,7 +1034,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex cotan`() {
 
-        val instructionString = "eval(cotan(x + 1))"
+        val instructionString = "cotan(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1048,7 +1048,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arcsec`() {
 
-        val instructionString = "eval(arcsec(2))"
+        val instructionString = "arcsec(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1062,7 +1062,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arcsec of var`() {
 
-        val instructionString = "eval(arcsec(x))"
+        val instructionString = "arcsec(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1076,7 +1076,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arcsec`() {
 
-        val instructionString = "eval(arcsec(x + 1))"
+        val instructionString = "arcsec(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1090,7 +1090,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arccosec`() {
 
-        val instructionString = "eval(arccosec(2))"
+        val instructionString = "arccosec(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1104,7 +1104,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arccosec of var`() {
 
-        val instructionString = "eval(arccosec(x))"
+        val instructionString = "arccosec(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1118,7 +1118,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arccosec`() {
 
-        val instructionString = "eval(arccosec(x + 1))"
+        val instructionString = "arccosec(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1132,7 +1132,7 @@ class TestKalculusParser {
     @test
     fun `parse eval basic arccotan`() {
 
-        val instructionString = "eval(arccotan(2))"
+        val instructionString = "arccotan(2)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1146,7 +1146,7 @@ class TestKalculusParser {
     @test
     fun `parse eval arccotan of var`() {
 
-        val instructionString = "eval(arccotan(x))"
+        val instructionString = "arccotan(x)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
@@ -1160,7 +1160,7 @@ class TestKalculusParser {
     @test
     fun `parse eval complex arccotan`() {
 
-        val instructionString = "eval(arccotan(x + 1))"
+        val instructionString = "arccotan(x + 1)"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
