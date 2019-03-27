@@ -7,7 +7,7 @@ This file describes the FKalculus language.
 
 ```
 lowercase_alpha ≡ [a-z] \ {e}
-integer         ≡ [0-9]+
+integer         ≡ [-+]?[0-9]+
 double          ≡ (integer).(integer)
 number          ≡ integer | double
 newline         ≡ ('\r' | '\n' | '\r\n')
