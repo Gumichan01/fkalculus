@@ -63,7 +63,7 @@ NB: Spaces must be skipped
 
 ```
 instruction ::= command NL
-    command ::= EVAL(expr)
+    command ::= expr
               | SUBST(expr, lowercase_alpha, expr)  
               | SIMPL(expr)
               | SOLVE(expr, lowercase_alpha)
@@ -71,28 +71,28 @@ instruction ::= command NL
               | INTEG(expr, lowercase_alpha, number, number)
 
        expr ::= PI | EXP | IDENTIFIER
-              | (mathexpr)
-              | mathexpr PLUS mathexpr
-              | mathexpr MINUS mathexpr
-              | mathexpr MULT mathexpr
-              | mathexpr DIV mathexpr
-              | mathexpr POW mathexpr
-              | SQRT(mathexpr)
-              | LOGN(mathexpr)
-              | LOG10(mathexpr)
-              | LOG2(mathexpr)
-              | COS(mathexpr)
-              | SINE(mathexpr)
-              | TAN(mathexpr)
-              | ACOS(mathexpr)
-              | ASINE(mathexpr)
-              | ATAN(mathexpr)
-              | SEC(mathexpr)
-              | COSEC(mathexpr)
-              | COTAN(mathexpr)
-              | ASEC(mathexpr)
-              | ACOSEC(mathexpr)
-              | ACOTAN(mathexpr)
+              | (expr)
+              | expr PLUS expr
+              | expr MINUS expr
+              | expr MULT expr
+              | expr DIV expr
+              | expr POW expr
+              | SQRT(expr)
+              | LOGN(expr)
+              | LOG10(expr)
+              | LOG2(expr)
+              | COS(expr)
+              | SINE(expr)
+              | TAN(expr)
+              | ACOS(expr)
+              | ASINE(expr)
+              | ATAN(expr)
+              | SEC(expr)
+              | COSEC(expr)
+              | COTAN(expr)
+              | ASEC(expr)
+              | ACOSEC(expr)
+              | ACOTAN(expr)
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
