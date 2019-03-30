@@ -19,11 +19,11 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == Pi) // The compiler does not understand taht at this point, ast is a Some<T>(t)
+        assertTrue(ast is Some && ast.t == Pi) // The compiler does not understand that at this point, ast is a Some<T>(t)
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse eval exp1`() {
 
         val instructionString = "e"
@@ -1169,5 +1169,5 @@ class TestKalculusParser {
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == Eval(Acotan(Binop(Plus, Var("x"), Const(1.0)))))
         println("========")
-    }
+    }*/
 }
