@@ -1,5 +1,6 @@
 package com.gumichan01.fkalculus.parse
 
+import com.gumichan01.fkalculus.ast.Exp1
 import com.gumichan01.fkalculus.ast.FKalculusAST
 import com.gumichan01.fkalculus.ast.Pi
 import com.gumichan01.fkalculus.util.Option
@@ -53,7 +54,7 @@ class TestKalculusParser {
     }
 
     @test
-    fun `parse eval π (alternative)`() {
+    fun `parse eval π - alternative`() {
 
         val instructionString = "\u03C0"
         val parser = KalculusParser()
@@ -66,7 +67,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse eval exp1`() {
 
         val instructionString = "e"
@@ -80,7 +81,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse eval const`() {
 
         val instructionString = "42"
