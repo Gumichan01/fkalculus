@@ -18,14 +18,16 @@ class KalculusParser {
         val e by token("e")
         val identifier by token("v[0-9]+")
         val integer by token("[-+]?[0-9]+")
+        val lowercaseLetter by token("[a-z]")
 
         // Rules
         val piRule by pi use { Pi }
         val eRule by e use { Exp1 }
         val identifierRule by identifier use { Identifier(text) }
         val integerRule by integer use { Const(text.toDouble()) }
+        val variableRule by lowercaseLetter use { Var(text) }
 
-        override val rootParser by piRule or eRule or identifierRule or integerRule
+        override val rootParser by piRule or eRule or identifierRule or integerRule or variableRule
     }
 
     fun parse(text: String): Option<FKalculusAST> {

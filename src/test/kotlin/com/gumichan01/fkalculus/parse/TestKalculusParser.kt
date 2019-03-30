@@ -177,7 +177,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse Var`() {
 
         val instructionString = "x"
@@ -191,7 +191,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse number addition`() {
 
         val instructionString = "4 + 2"
