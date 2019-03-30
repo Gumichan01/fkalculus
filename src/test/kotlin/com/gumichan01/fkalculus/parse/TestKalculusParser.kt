@@ -233,7 +233,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse number complex addition`() {
 
         val instructionString = "4 + x + e + Pi"
@@ -243,11 +243,11 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == (Binop(Plus, Const(4.0), Binop(Plus, Var("x"), Binop(Plus, Exp1, Pi)))))
+        assertTrue(ast is Some && ast.t == (Binop(Plus, Binop(Plus, Binop(Plus, Const(4.0), Var("x")), Exp1), Pi)))
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse -`() {
 
         val instructionString = "4 - 2"
