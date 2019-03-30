@@ -34,7 +34,23 @@
             <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.h0tk3y.betterParse/better-parse -->
+        <dependency>
+            <groupId>com.github.h0tk3y.betterParse</groupId>
+            <artifactId>better-parse</artifactId>
+            <version>0.3.5</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <!-- This repository is used in order to get better-parser -->
+        <repository>
+            <id>jcenter</id>
+            <url>http://jcenter.bintray.com/</url>
+        </repository>
+    </repositories>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin/</sourceDirectory>
