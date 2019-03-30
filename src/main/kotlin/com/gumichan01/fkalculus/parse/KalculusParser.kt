@@ -21,13 +21,15 @@ class KalculusParser {
         val lowercaseLetter by token("[a-z]")
 
         // Rules
-        val piRule by pi use { Pi }
-        val eRule by e use { Exp1 }
-        val identifierRule by identifier use { Identifier(text) }
-        val integerRule by integer use { Const(text.toDouble()) }
-        val variableRule by lowercaseLetter use { Var(text) }
+        val piParser by pi use { Pi }
+        val eParser by e use { Exp1 }
+        val identifierParser by identifier use { Identifier(text) }
+        val integerParser by integer use { Const(text.toDouble()) }
+        val variableParser by lowercaseLetter use { Var(text) }
 
-        override val rootParser by piRule or eRule or identifierRule or integerRule or variableRule
+        val expr by piParser or eParser or identifierParser or integerParser or variableParser
+
+        override val rootParser by expr
     }
 
     fun parse(text: String): Option<FKalculusAST> {
