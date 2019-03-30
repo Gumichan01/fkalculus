@@ -62,9 +62,9 @@ ACOTAN  : "cotan"
 NB: Spaces must be skipped
 
 ```
-instruction ::= command NL
-    command ::= expr
-              | SUBST(expr, lowercase_alpha, expr)  
+    program ::= instruction+
+instruction ::= expr | funcall
+    funcall ::= SUBST(expr, lowercase_alpha, expr)
               | SIMPL(expr)
               | SOLVE(expr, lowercase_alpha)
               | DERIVE(expr, lowercase_alpha)
