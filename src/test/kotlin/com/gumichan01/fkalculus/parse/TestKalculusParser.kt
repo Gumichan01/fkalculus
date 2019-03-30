@@ -1,8 +1,6 @@
 package com.gumichan01.fkalculus.parse
 
-import com.gumichan01.fkalculus.ast.Exp1
-import com.gumichan01.fkalculus.ast.FKalculusAST
-import com.gumichan01.fkalculus.ast.Pi
+import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -78,6 +76,76 @@ class TestKalculusParser {
 
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == Exp1)
+        println("========")
+    }
+
+    @test
+    fun `parse eval identifier 0`() {
+
+        val instructionString = "v0"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Identifier("v0"))
+        println("========")
+    }
+
+    @test
+    fun `parse eval identifier 1`() {
+
+        val instructionString = "v1"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Identifier("v1"))
+        println("========")
+    }
+
+    @test
+    fun `parse eval identifier 8`() {
+
+        val instructionString = "v8"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Identifier("v8"))
+        println("========")
+    }
+
+    @test
+    fun `parse eval identifier 42`() {
+
+        val instructionString = "v42"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Identifier("v42"))
+        println("========")
+    }
+
+    @test
+    fun `parse eval identifier 999`() {
+
+        val instructionString = "v999"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Identifier("v999"))
         println("========")
     }
 
