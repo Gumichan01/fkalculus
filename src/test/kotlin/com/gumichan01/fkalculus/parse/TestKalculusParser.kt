@@ -191,7 +191,21 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
+    fun `parse number addition 0`() {
+
+        val instructionString = "4+2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Plus, Const(4.0), Const(2.0))))
+        println("========")
+    }
+
+    @test
     fun `parse number addition`() {
 
         val instructionString = "4 + 2"
@@ -219,7 +233,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse number complex addition`() {
 
         val instructionString = "4 + x + e + Pi"
