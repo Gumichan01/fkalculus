@@ -17,7 +17,7 @@ class KalculusParser {
         val pi by token("Pi|pi|\u03C0")
         val e by token("e")
         val identifier by token("v[0-9]+")
-        val integer by token("[0-9]+")
+        val integer by token("[-+]?[0-9]+")
 
         // Rules
         val piRule by pi use { Pi }

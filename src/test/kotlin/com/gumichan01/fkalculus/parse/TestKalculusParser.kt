@@ -163,7 +163,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse negative const`() {
 
         val instructionString = "-64"
@@ -177,7 +177,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse Var`() {
 
         val instructionString = "x"
