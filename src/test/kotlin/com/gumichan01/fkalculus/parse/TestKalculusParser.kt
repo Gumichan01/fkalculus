@@ -1,6 +1,7 @@
 package com.gumichan01.fkalculus.parse
 
-import com.gumichan01.fkalculus.ast.*
+import com.gumichan01.fkalculus.ast.FKalculusAST
+import com.gumichan01.fkalculus.ast.Pi
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -27,6 +28,34 @@ class TestKalculusParser {
     fun `parse eval pi`() {
 
         val instructionString = "pi"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Pi)
+        println("========")
+    }
+
+    @test
+    fun `parse eval π`() {
+
+        val instructionString = "π"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Pi)
+        println("========")
+    }
+
+    @test
+    fun `parse eval π (alternative)`() {
+
+        val instructionString = "\u03C0"
         val parser = KalculusParser()
 
         val ast: Option<FKalculusAST> = parser.parse(instructionString)

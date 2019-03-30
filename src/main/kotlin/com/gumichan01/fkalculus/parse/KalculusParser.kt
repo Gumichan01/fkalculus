@@ -14,7 +14,7 @@ class KalculusParser {
     val fkalculusGrammar = object : Grammar<FKalculusAST>() {
 
         // Tokens
-        val pi by token("Pi|pi")
+        val pi by token("Pi|pi|\u03C0")
 
         // Rules
         val piRule by pi use { Pi }
