@@ -23,6 +23,20 @@ class TestKalculusParser {
         println("========")
     }
 
+    @test
+    fun `parse eval pi`() {
+
+        val instructionString = "pi"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Pi)
+        println("========")
+    }
+
     /*@test
     fun `parse eval exp1`() {
 
