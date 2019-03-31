@@ -723,7 +723,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse priority op div * (3)`() {
 
         val instructionString = "4 * (2 / 3)"
@@ -751,7 +751,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse priority op ^ +`() {
 
         val instructionString = "4^2 + 3"

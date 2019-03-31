@@ -3,7 +3,9 @@ package com.gumichan01.fkalculus.parse
 import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parseToEnd
+import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.lexer.TokenMatch
+import com.github.h0tk3y.betterParse.parser.Parser
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
@@ -19,19 +21,19 @@ class KalculusParser {
         val e by token("e")
 
         // Basic tokens
+        val lparen by token("\\(")
+        val rparen by token("\\)")
         val identifier by token("v[0-9]+")
         val positiveInteger by token("[0-9]+")
         val lowercaseLetter by token("[a-z]")
-        val lparen by token("\\(")
-        val rparen by token("\\)")
         val whitespace by token("\\s+", ignore = true)
 
         // Math tokens
-        val plus by token("\\+")
-        val minus by token("-")
+        val pow by token("\\^")
         val mult by token("\\*")
         val div by token("/")
-        val pow by token("\\^")
+        val minus by token("-")
+        val plus by token("\\+")
 
         /** Rules */
         val piParser by pi use { Pi }
@@ -41,7 +43,7 @@ class KalculusParser {
         val negativeIntegerParser by (skip(minus) and positiveInteger) use { Const(-text.toDouble()) }
         val variableParser by lowercaseLetter use { Var(text) }
         val integerParser by positiveIntegerParser or negativeIntegerParser
-        val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
+        val simpleExpr: Parser<Expression> by piParser or eParser or identifierParser or integerParser or variableParser or (skip(lparen) and parser { rootParser } and skip(rparen))
 
         val powParser by leftAssociative(simpleExpr, pow) { left, _, right -> Binop(Pow, left, right) }
         val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
@@ -58,8 +60,7 @@ class KalculusParser {
         }
 
         val expr by arithmmeticParser
-        val parenExpr by skip(lparen) and expr and skip(rparen)
-        override val rootParser by expr or parenExpr
+        override val rootParser by /*parenExpr or*/ expr
     }
 
     fun parse(text: String): Option<FKalculusAST> {
