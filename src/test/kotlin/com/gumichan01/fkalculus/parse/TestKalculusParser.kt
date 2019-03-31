@@ -569,7 +569,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse number pow`() {
 
         val instructionString = "4^2"
@@ -607,11 +607,11 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == (Binop(Pow, Const(4.0), Binop(Pow, Var("x"), Binop(Pow, Exp1, Pi)))))
+        assertTrue(ast is Some && ast.t == (Binop(Pow, Binop(Pow, Binop(Pow,Const(4.0), Var("x")), Exp1),Pi)))
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse priority op + *`() {
 
         val instructionString = "2*x + 1"
