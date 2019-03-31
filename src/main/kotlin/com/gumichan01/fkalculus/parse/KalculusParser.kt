@@ -1,9 +1,6 @@
 package com.gumichan01.fkalculus.parse
 
-import com.github.h0tk3y.betterParse.combinators.and
-import com.github.h0tk3y.betterParse.combinators.leftAssociative
-import com.github.h0tk3y.betterParse.combinators.or
-import com.github.h0tk3y.betterParse.combinators.use
+import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import com.github.h0tk3y.betterParse.lexer.TokenMatch
@@ -39,14 +36,15 @@ class KalculusParser {
         val eParser by e use { Exp1 }
         val identifierParser by identifier use { Identifier(text) }
         val positiveIntegerParser by positiveInteger use { Const(text.toDouble()) }
-        val negativeIntegerParser by (minus and positiveInteger) use { Const(-t2.text.toDouble()) } // skip the minus and test
-        val integerParser by positiveIntegerParser or negativeIntegerParser
+        val negativeIntegerParser by (skip(minus) and positiveInteger) use { Const(-text.toDouble()) }
         val variableParser by lowercaseLetter use { Var(text) }
+        val integerParser by positiveIntegerParser or negativeIntegerParser
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
         val powParser by leftAssociative(termexpr, pow) { left, _, right -> Binop(Pow, left, right) }
         val multDivParser by leftAssociative(powParser, mult or div) { left, op, right -> Binop(produceOperator(op), left, right) }
         val sumDiffParser by leftAssociative(multDivParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
+        val arithmmeticParser by sumDiffParser
 
         private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
@@ -58,7 +56,7 @@ class KalculusParser {
             }
         }
 
-        val expr by sumDiffParser
+        val expr by arithmmeticParser
         override val rootParser by expr
     }
 
