@@ -19,7 +19,7 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == Pi) // The compiler does not understand that at this point, ast is a Some<T>(t)
+        assertTrue(ast is Some && ast.t == Pi) // The compiler does not understand that at this point, ast is a Some<T>
         println("========")
     }
 
@@ -247,7 +247,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse -`() {
 
         val instructionString = "4 - 2"
@@ -257,7 +257,7 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(4.0), Var("x"))))
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(4.0), Const(2.0))))
         println("========")
     }
 
@@ -285,11 +285,39 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(4.0), Binop(Minus, Var("x"), Binop(Minus, Exp1, Pi)))))
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Binop(Minus, Binop(Minus,Const(4.0), Var("x")), Exp1), Pi)))
         println("========")
     }
 
     @test
+    fun `parse add and sub same priority`() {
+
+        val instructionString = "4 + 2 - 3" // (4 + 2) - 3
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Binop(Plus, Const(4.0), Const(2.0)), Const(3.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse sub and add same priority`() {
+
+        val instructionString = "4 - 2 + 3" // (4 - 2) + 3
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Plus, Binop(Minus, Const(4.0), Const(2.0)), Const(3.0))))
+        println("========")
+    }
+
+    /*@test
     fun `parse number multiply`() {
 
         val instructionString = "4 * 2"

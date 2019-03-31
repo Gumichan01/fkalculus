@@ -1,9 +1,11 @@
 package com.gumichan01.fkalculus.parse
 
-import com.github.h0tk3y.betterParse.combinators.*
+import com.github.h0tk3y.betterParse.combinators.leftAssociative
+import com.github.h0tk3y.betterParse.combinators.or
+import com.github.h0tk3y.betterParse.combinators.use
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parseToEnd
-import com.github.h0tk3y.betterParse.grammar.parser
+import com.github.h0tk3y.betterParse.lexer.TokenMatch
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
@@ -22,7 +24,10 @@ class KalculusParser {
         val identifier by token("v[0-9]+")
         val integer by token("-?[0-9]+")
         val lowercaseLetter by token("[a-z]")
+
+        // Math tokens
         val plus by token("\\+")
+        val minus by token("-")
         val whitespace by token("\\s+", ignore = true)
 
         /** Rules */
@@ -33,9 +38,17 @@ class KalculusParser {
         val variableParser by lowercaseLetter use { Var(text) }
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val plusParser by leftAssociative(termexpr, plus) { left, _, right -> Binop(Plus, left, right) }
+        val sumDiffParser by leftAssociative(termexpr, plus or minus) { left, op, right -> Binop(getOpAST(op), left, right) }
 
-        val expr by plusParser
+        private fun getOpAST(op: TokenMatch): Operator {
+            return when (op.type) {
+                plus -> Plus
+                minus -> Minus
+                else -> throw RuntimeException("Internal error in parser: invalid operator: " + op)
+            }
+        }
+
+        val expr by sumDiffParser
         override val rootParser by expr
     }
 
