@@ -30,6 +30,7 @@ class KalculusParser {
         val plus by token("\\+")
         val minus by token("-")
         val mult by token("\\*")
+        val div by token("/")
         val whitespace by token("\\s+", ignore = true)
 
         /** Rules */
@@ -42,13 +43,15 @@ class KalculusParser {
         val variableParser by lowercaseLetter use { Var(text) }
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val multParser by leftAssociative(termexpr, mult) { left, _, right -> Binop(Mult, left, right) }
-        val sumDiffParser by leftAssociative(multParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
+        val multDivParser by leftAssociative(termexpr, mult or div) { left, op, right -> Binop(produceOperator(op), left, right) }
+        val sumDiffParser by leftAssociative(multDivParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
 
         private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
+                mult -> Mult
+                div -> Div
                 else -> throw RuntimeException("Internal error in parser: invalid operator: " + op)
             }
         }
