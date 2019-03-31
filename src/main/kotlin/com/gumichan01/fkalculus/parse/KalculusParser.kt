@@ -41,9 +41,9 @@ class KalculusParser {
         val variableParser by lowercaseLetter use { Var(text) }
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val sumDiffParser by leftAssociative(termexpr, plus or minus) { left, op, right -> Binop(getOpAST(op), left, right) }
+        val sumDiffParser by leftAssociative(termexpr, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
 
-        private fun getOpAST(op: TokenMatch): Operator {
+        private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
