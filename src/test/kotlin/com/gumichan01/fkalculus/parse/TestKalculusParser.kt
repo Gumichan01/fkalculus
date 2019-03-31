@@ -513,7 +513,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse number complex multiplication`() {
 
         val instructionString = "4 * x * e * Pi"
@@ -541,7 +541,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse number div var`() {
 
         val instructionString = "4 / x"
