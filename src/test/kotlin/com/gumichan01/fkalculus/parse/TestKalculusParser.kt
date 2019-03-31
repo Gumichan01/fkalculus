@@ -667,6 +667,62 @@ class TestKalculusParser {
         println("========")
     }
 
+    @test
+    fun `parse operation, paren 1`() {
+
+        val instructionString = "(2 + 3)"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Plus, Const(2.0), Const(3.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse operation, paren 2`() {
+
+        val instructionString = "(2 - 3)"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(2.0), Const(3.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse operation, paren 3`() {
+
+        val instructionString = "(2 * 3)"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Mult, Const(2.0), Const(3.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse operation, paren 4`() {
+
+        val instructionString = "(2 / 3)"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Const(2.0), Const(3.0))))
+        println("========")
+    }
+
     /*@test
     fun `parse priority op div * (3)`() {
 
