@@ -14,7 +14,7 @@ class FKalculus(val arguments: Arguments) {
 
         while (!quit) {
             print("fkalculus > ")
-            val text : Option<String> = readText()
+            val text: Option<String> = readText()
 
             when (text) {
                 is Some -> {

@@ -42,16 +42,15 @@ class KalculusParser {
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
         val powParser by leftAssociative(termexpr, pow) { left, _, right -> Binop(Pow, left, right) }
-        val multDivParser by leftAssociative(powParser, mult or div) { left, op, right -> Binop(produceOperator(op), left, right) }
-        val sumDiffParser by leftAssociative(multDivParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
+        val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
+        val divParser by leftAssociative(multParser, div) { left, _, right -> Binop(Div, left, right) }
+        val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
         val arithmmeticParser by sumDiffParser
 
         private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
-                mult -> Mult
-                div -> Div
                 else -> throw RuntimeException("Internal error in parser: invalid operator: " + op)
             }
         }
