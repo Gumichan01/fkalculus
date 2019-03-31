@@ -471,6 +471,48 @@ class TestKalculusParser {
         println("========")
     }
 
+    @test
+    fun `parse mult add value`() {
+
+        val instructionString = "2 + -4 * 1"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Plus, Const(2.0), Binop(Mult, Const(-4.0), Const(1.0)))))
+        println("========")
+    }
+
+    @test
+    fun `parse mult sub value`() {
+
+        val instructionString = "2 - 4 * 1"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(2.0), Binop(Mult, Const(4.0), Const(1.0)))))
+        println("========")
+    }
+
+    @test
+    fun `parse mult sub value (tricky)`() {
+
+        val instructionString = "2-4*1"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(2.0), Binop(Mult, Const(4.0), Const(1.0)))))
+        println("========")
+    }
+
     /*@test
     fun `parse number complex multiplication`() {
 
