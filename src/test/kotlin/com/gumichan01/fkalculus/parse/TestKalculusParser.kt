@@ -373,6 +373,48 @@ class TestKalculusParser {
         println("========")
     }
 
+    @test
+    fun `parse sub negative value`() {
+
+        val instructionString = "4 - -2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(4.0), Const(-2.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse sub negative value (again)`() {
+
+        val instructionString = "-2 - 4"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(-2.0), Const(4.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse sub negative value (tricky)`() {
+
+        val instructionString = "-2 -4"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Minus, Const(-2.0), Const(4.0))))
+        println("========")
+    }
+
     /*@test
     fun `parse number multiply`() {
 

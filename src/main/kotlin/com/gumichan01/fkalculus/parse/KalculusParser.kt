@@ -1,5 +1,6 @@
 package com.gumichan01.fkalculus.parse
 
+import com.github.h0tk3y.betterParse.combinators.and
 import com.github.h0tk3y.betterParse.combinators.leftAssociative
 import com.github.h0tk3y.betterParse.combinators.or
 import com.github.h0tk3y.betterParse.combinators.use
@@ -22,7 +23,7 @@ class KalculusParser {
 
         // Basic tokens
         val identifier by token("v[0-9]+")
-        val integer by token("-?[0-9]+")
+        val positiveInteger by token("[0-9]+")
         val lowercaseLetter by token("[a-z]")
 
         // Math tokens
@@ -34,7 +35,9 @@ class KalculusParser {
         val piParser by pi use { Pi }
         val eParser by e use { Exp1 }
         val identifierParser by identifier use { Identifier(text) }
-        val integerParser by integer use { Const(text.toDouble()) }
+        val positiveIntegerParser by positiveInteger use { Const(text.toDouble()) }
+        val negativeIntegerParser by (minus and positiveInteger) use { Const(-t2.text.toDouble()) }
+        val integerParser by positiveIntegerParser or negativeIntegerParser
         val variableParser by lowercaseLetter use { Var(text) }
         val termexpr by piParser or eParser or identifierParser or integerParser or variableParser
 
