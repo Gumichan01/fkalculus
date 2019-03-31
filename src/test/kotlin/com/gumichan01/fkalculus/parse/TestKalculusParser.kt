@@ -415,7 +415,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse number multiply`() {
 
         val instructionString = "4 * 2"
@@ -444,6 +444,34 @@ class TestKalculusParser {
     }
 
     @test
+    fun `parse mult negative value `() {
+
+        val instructionString = "-2 * -4"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Mult, Const(-2.0), Const(-4.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse mult negative value again`() {
+
+        val instructionString = "2 * -4"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Mult, Const(2.0), Const(-4.0))))
+        println("========")
+    }
+
+    /*@test
     fun `parse number complex multiplication`() {
 
         val instructionString = "4 * x * e * Pi"
@@ -453,7 +481,7 @@ class TestKalculusParser {
         println(instructionString)
 
         assertTrue(ast is Some)
-        assertTrue(ast is Some && ast.t == (Binop(Mult, Const(4.0), Binop(Mult, Var("x"), Binop(Mult, Exp1, Pi)))))
+        assertTrue(ast is Some && ast.t == (Binop(Mult, Binop(Mult, Binop(Mult, Const(4.0), Var("x")), Exp1) , Pi)))
         println("========")
     }
 
