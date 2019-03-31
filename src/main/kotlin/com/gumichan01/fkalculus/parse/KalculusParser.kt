@@ -43,9 +43,10 @@ class KalculusParser {
         val negativeIntegerParser by (skip(minus) and positiveInteger) use { Const(-text.toDouble()) }
         val variableParser by lowercaseLetter use { Var(text) }
         val integerParser by positiveIntegerParser or negativeIntegerParser
-        val simpleExpr: Parser<Expression> by piParser or eParser or identifierParser or integerParser or variableParser or (skip(lparen) and parser { rootParser } and skip(rparen))
+        val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
+        val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
 
-        val powParser by leftAssociative(simpleExpr, pow) { left, _, right -> Binop(Pow, left, right) }
+        val powParser by leftAssociative(term, pow) { left, _, right -> Binop(Pow, left, right) }
         val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
         val divParser by leftAssociative(multParser, div) { left, _, right -> Binop(Div, left, right) }
         val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
@@ -60,7 +61,7 @@ class KalculusParser {
         }
 
         val expr by arithmmeticParser
-        override val rootParser by /*parenExpr or*/ expr
+        override val rootParser by expr
     }
 
     fun parse(text: String): Option<FKalculusAST> {
