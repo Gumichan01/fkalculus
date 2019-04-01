@@ -807,7 +807,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse basic sqrt`() {
 
         val instructionString = "sqrt(2)"
@@ -846,6 +846,20 @@ class TestKalculusParser {
 
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == (Sqrt(Binop(Plus, Var("x"), Const(1.0)))))
+        println("========")
+    }
+
+    /*@test
+    fun `parse sqrt tricky`() {
+
+        val instructionString = "sqrt(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Sqrt(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
         println("========")
     }
 

@@ -19,6 +19,7 @@ class KalculusParser {
         // Keywords
         val pi by token("Pi|pi|\u03C0")
         val e by token("e")
+        val sqrt by token("sqrt")
 
         // Basic tokens
         val lparen by token("\\(")
@@ -46,6 +47,8 @@ class KalculusParser {
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
         val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
 
+        val sqrtRule: Parser<Expression> by sqrt and skip(lparen) and parser { rootParser } and skip(rparen) use { Sqrt(t2) }
+
         val powParser by leftAssociative(term, pow) { left, _, right -> Binop(Pow, left, right) }
         val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
         val divParser by leftAssociative(multParser, div) { left, _, right -> Binop(Div, left, right) }
@@ -56,11 +59,11 @@ class KalculusParser {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
-                else -> throw RuntimeException("Internal error in parser: invalid operator: " + op)
+                else -> throw RuntimeException("Internal error in parser: invalid operator: $op")
             }
         }
 
-        val expr by arithmmeticParser
+        val expr by arithmmeticParser or sqrtRule
         override val rootParser by expr
     }
 
