@@ -1059,7 +1059,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse basic log2`() {
 
         val instructionString = "log2(2)"
@@ -1116,6 +1116,34 @@ class TestKalculusParser {
     }
 
     @test
+    fun `parse log2 tricky`() {
+
+        val instructionString = "log2(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Log2(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse lb tricky`() {
+
+        val instructionString = "lb(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Log2(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
+        println("========")
+    }
+
+    /*@test
     fun `parse basic Sin`() {
 
         val instructionString = "sin(2)"

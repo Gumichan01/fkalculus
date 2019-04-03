@@ -13,15 +13,16 @@ import com.gumichan01.fkalculus.util.Some
 
 class KalculusParser {
 
-    val fkalculusGrammar = object : Grammar<FKalculusAST>() {
+    private val fkalculusGrammar = object : Grammar<FKalculusAST>() {
 
         /** Tokens */
         // Keywords
         val pi by token("Pi|pi|\u03C0")
         val sqrt by token("sqrt")
         val expo by token("exp")
-        val log10 by token("log10|lg")
         val ln by token("ln")
+        val log10 by token("log10|lg")
+        val log2 by token("log2|lb")
         val e by token("e")
 
         // Basic tokens
@@ -49,15 +50,16 @@ class KalculusParser {
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val mathFun by sqrt or expo or ln or log10
-        val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
-        val funCall: Parser<Expression> by mathFun and skip(lparen) and parser { rootParser } and skip(rparen) use { produceFunCall(t1, t2) }
+        val mathFun by sqrt or expo or ln or log10 or log2
+        val highPriorityexpressionRule by skip(lparen) and parser { rootParser } and skip(rparen)
+        val term: Parser<Expression> by simpleExpr or highPriorityexpressionRule
+        val funCall: Parser<Expression> by mathFun and highPriorityexpressionRule use { produceFunCall(t1, t2) }
         val termOrSqrt by term or funCall
 
-        val powParser by leftAssociative(termOrSqrt, pow) { left, _, right -> Binop(Pow, left, right) }
-        val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
-        val divParser by leftAssociative(multParser, div) { left, _, right -> Binop(Div, left, right) }
-        val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
+        val powParser by leftAssociative(termOrSqrt, pow) { left, op, right -> produceBinop(op, left, right) }
+        val multParser by leftAssociative(powParser, mult) { left, op, right -> produceBinop(op, left, right) }
+        val divParser by leftAssociative(multParser, div) { left, op, right -> produceBinop(op, left, right) }
+        val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> produceBinop(op, left, right) }
         val arithmmeticParser by sumDiffParser
 
         private fun produceFunCall(function: TokenMatch, argument: Expression): Expression {
@@ -66,14 +68,22 @@ class KalculusParser {
                 expo -> Expo(argument)
                 ln -> Ln(argument)
                 log10 -> Log10(argument)
+                log2 -> Log2(argument)
                 else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
             }
+        }
+
+        private fun produceBinop(op: TokenMatch, left: Expression, right: Expression): Binop {
+            return Binop(produceOperator(op), left, right)
         }
 
         private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
+                mult -> Mult
+                div -> Div
+                pow -> Pow
                 else -> throw RuntimeException("Internal error in parser - invalid operator: $op")
             }
         }
