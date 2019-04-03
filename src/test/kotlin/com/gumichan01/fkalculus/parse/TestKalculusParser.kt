@@ -919,7 +919,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse basic ln`() {
 
         val instructionString = "ln(2)"
@@ -962,6 +962,20 @@ class TestKalculusParser {
     }
 
     @test
+    fun `parse ln tricky`() {
+
+        val instructionString = "ln(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Ln(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
+        println("========")
+    }
+
+    /*@test
     fun `parse basic log10`() {
 
         val instructionString = "log10(2)"
@@ -1014,6 +1028,34 @@ class TestKalculusParser {
 
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == (Log10(Binop(Plus, Var("x"), Const(1.0)))))
+        println("========")
+    }
+
+    @test
+    fun `parse log10 tricky`() {
+
+        val instructionString = "log10(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Log10(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
+        println("========")
+    }
+
+    @test
+    fun `parse log10 alternative tricky`() {
+
+        val instructionString = "lg(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Log10(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
         println("========")
     }
 
