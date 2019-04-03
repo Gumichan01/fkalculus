@@ -10,6 +10,20 @@ import org.junit.jupiter.api.Test as test
 class TestKalculusParser {
 
     @test
+    fun `parse Help command`() {
+
+        val instructionString = "help"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Help)
+        println("========")
+    }
+
+    @test
     fun `parse Pi`() {
 
         val instructionString = "Pi"

@@ -17,6 +17,7 @@ class KalculusParser {
 
         /** Tokens */
         // Keywords
+        val help by token("help")
         val pi by token("Pi|pi|\u03C0")
         val sqrt by token("sqrt")
         val expo by token("exp")
@@ -41,6 +42,7 @@ class KalculusParser {
         val plus by token("\\+")
 
         /** Rules */
+        val helpParser by help use { Help }
         val piParser by pi use { Pi }
         val eParser by e use { Exp1 }
         val identifierParser by identifier use { Identifier(text) }
@@ -51,7 +53,7 @@ class KalculusParser {
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
         val mathFun by sqrt or expo or ln or log10 or log2
-        val highPriorityexpressionRule by skip(lparen) and parser { rootParser } and skip(rparen)
+        val highPriorityexpressionRule by skip(lparen) and parser { expr } and skip(rparen)
         val term: Parser<Expression> by simpleExpr or highPriorityexpressionRule
         val funCall: Parser<Expression> by mathFun and highPriorityexpressionRule use { produceFunCall(t1, t2) }
         val termOrSqrt by term or funCall
@@ -89,7 +91,7 @@ class KalculusParser {
         }
 
         val expr by arithmmeticParser
-        override val rootParser by expr
+        override val rootParser by expr or helpParser
     }
 
     fun parse(text: String): Option<FKalculusAST> {
