@@ -47,9 +47,9 @@ class KalculusParser {
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
         val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
 
-        val sqrtRule: Parser<Expression> by sqrt and skip(lparen) and parser { rootParser } and skip(rparen) use { Sqrt(t2) }
-
-        val termOrSqrt by term or sqrtRule
+        val mathFun by sqrt
+        val funCall: Parser<Expression> by mathFun and skip(lparen) and parser { rootParser } and skip(rparen) use { Sqrt(t2) }
+        val termOrSqrt by term or funCall
 
         val powParser by leftAssociative(termOrSqrt, pow) { left, _, right -> Binop(Pow, left, right) }
         val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
@@ -65,7 +65,7 @@ class KalculusParser {
             }
         }
 
-        val expr by arithmmeticParser or sqrtRule
+        val expr by arithmmeticParser
         override val rootParser by expr
     }
 
