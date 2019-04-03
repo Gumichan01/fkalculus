@@ -41,7 +41,7 @@ class KalculusParser {
         val eParser by e use { Exp1 }
         val identifierParser by identifier use { Identifier(text) }
         val positiveIntegerParser by positiveInteger use { Const(text.toDouble()) }
-        val negativeIntegerParser by (skip(minus) and positiveInteger) use { Const(-text.toDouble()) }
+        val negativeIntegerParser by skip(minus) and positiveInteger use { Const(-text.toDouble()) }
         val variableParser by lowercaseLetter use { Var(text) }
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
