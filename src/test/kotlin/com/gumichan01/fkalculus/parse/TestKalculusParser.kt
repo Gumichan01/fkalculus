@@ -975,7 +975,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse basic log10`() {
 
         val instructionString = "log10(2)"
@@ -1059,7 +1059,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse basic log2`() {
 
         val instructionString = "log2(2)"

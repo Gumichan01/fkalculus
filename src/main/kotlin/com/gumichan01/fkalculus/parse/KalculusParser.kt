@@ -20,6 +20,7 @@ class KalculusParser {
         val pi by token("Pi|pi|\u03C0")
         val sqrt by token("sqrt")
         val expo by token("exp")
+        val log10 by token("log10|lg")
         val ln by token("ln")
         val e by token("e")
 
@@ -48,7 +49,7 @@ class KalculusParser {
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val mathFun by sqrt or expo or ln
+        val mathFun by sqrt or expo or ln or log10
         val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
         val funCall: Parser<Expression> by mathFun and skip(lparen) and parser { rootParser } and skip(rparen) use { produceFunCall(t1, t2) }
         val termOrSqrt by term or funCall
@@ -64,6 +65,7 @@ class KalculusParser {
                 sqrt -> Sqrt(argument)
                 expo -> Expo(argument)
                 ln -> Ln(argument)
+                log10 -> Log10(argument)
                 else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
             }
         }
