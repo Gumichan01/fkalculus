@@ -49,7 +49,9 @@ class KalculusParser {
 
         val sqrtRule: Parser<Expression> by sqrt and skip(lparen) and parser { rootParser } and skip(rparen) use { Sqrt(t2) }
 
-        val powParser by leftAssociative(term, pow) { left, _, right -> Binop(Pow, left, right) }
+        val termOrSqrt by term or sqrtRule
+
+        val powParser by leftAssociative(termOrSqrt, pow) { left, _, right -> Binop(Pow, left, right) }
         val multParser by leftAssociative(powParser, mult) { left, _, right -> Binop(Mult, left, right) }
         val divParser by leftAssociative(multParser, div) { left, _, right -> Binop(Div, left, right) }
         val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }

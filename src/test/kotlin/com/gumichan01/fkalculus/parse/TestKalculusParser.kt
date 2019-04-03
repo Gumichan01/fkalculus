@@ -849,7 +849,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse sqrt tricky`() {
 
         val instructionString = "sqrt(x + 1) / 2"
@@ -863,7 +863,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    @test
+    /*@test
     fun `parse basic expo`() {
 
         val instructionString = "exp(2)"
