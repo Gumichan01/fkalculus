@@ -863,7 +863,7 @@ class TestKalculusParser {
         println("========")
     }
 
-    /*@test
+    @test
     fun `parse basic expo`() {
 
         val instructionString = "exp(2)"
@@ -906,6 +906,20 @@ class TestKalculusParser {
     }
 
     @test
+    fun `parse expo tricky`() {
+
+        val instructionString = "exp(x + 1) / 2"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Binop(Div, Expo(Binop(Plus, Var("x"), Const(1.0))), Const(2.0))))
+        println("========")
+    }
+
+    /*@test
     fun `parse basic ln`() {
 
         val instructionString = "ln(2)"

@@ -18,8 +18,9 @@ class KalculusParser {
         /** Tokens */
         // Keywords
         val pi by token("Pi|pi|\u03C0")
-        val e by token("e")
         val sqrt by token("sqrt")
+        val expo by token("exp")
+        val e by token("e")
 
         // Basic tokens
         val lparen by token("\\(")
@@ -45,10 +46,10 @@ class KalculusParser {
         val variableParser by lowercaseLetter use { Var(text) }
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
-        val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
 
-        val mathFun by sqrt
-        val funCall: Parser<Expression> by mathFun and skip(lparen) and parser { rootParser } and skip(rparen) use { Sqrt(t2) }
+        val mathFun by sqrt or expo
+        val term: Parser<Expression> by simpleExpr or (skip(lparen) and parser { rootParser } and skip(rparen))
+        val funCall: Parser<Expression> by mathFun and skip(lparen) and parser { rootParser } and skip(rparen) use { produceFunCall(t1, t2) }
         val termOrSqrt by term or funCall
 
         val powParser by leftAssociative(termOrSqrt, pow) { left, _, right -> Binop(Pow, left, right) }
@@ -57,11 +58,19 @@ class KalculusParser {
         val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> Binop(produceOperator(op), left, right) }
         val arithmmeticParser by sumDiffParser
 
+        private fun produceFunCall(function: TokenMatch, argument: Expression): Expression {
+            return when (function.type) {
+                sqrt -> Sqrt(argument)
+                expo -> Expo(argument)
+                else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
+            }
+        }
+
         private fun produceOperator(op: TokenMatch): Operator {
             return when (op.type) {
                 plus -> Plus
                 minus -> Minus
-                else -> throw RuntimeException("Internal error in parser: invalid operator: $op")
+                else -> throw RuntimeException("Internal error in parser - invalid operator: $op")
             }
         }
 
