@@ -9,8 +9,7 @@ class TestAst {
     fun `test help command`() {
 
         val help = Help
-        println(Help)
-        assertTrue(help is Instruction)
+        println(help)
         println("========")
     }
 
@@ -46,7 +45,6 @@ class TestAst {
         val expression: Instruction = Simpl(Identifier("v0"))
         println(expression)
         assertTrue(expression is Simpl)
-        assertTrue(expression is FunCall)
         println("========")
     }
 
@@ -56,7 +54,6 @@ class TestAst {
         val expression: Instruction = Subst(Var("x"), "x", Const(5.0))
         println(expression)
         assertTrue(expression is Subst)
-        assertTrue(expression is FunCall)
         println("========")
     }
 
@@ -66,7 +63,6 @@ class TestAst {
         val expression: Instruction = Solve(Binop(Plus, Var("x"), Const(5.0)), "x")
         println(expression)
         assertTrue(expression is Solve)
-        assertTrue(expression is FunCall)
         println("========")
     }
 
@@ -76,7 +72,6 @@ class TestAst {
         val expression: Instruction = Derive(Var("x"), "x")
         println(expression)
         assertTrue(expression is Derive)
-        assertTrue(expression is FunCall)
         println("========")
     }
 
@@ -86,7 +81,6 @@ class TestAst {
         val expression: Instruction = Integ(Var("x"), "x", Const(5.0), Const(10.0))
         println(expression)
         assertTrue(expression is Integ)
-        assertTrue(expression is FunCall)
         println("========")
     }
 }
