@@ -25,7 +25,7 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is HelpText)
     }
 
-    /*@test
+    @test
     fun `test eval constant value`() {
 
         val ast = Const(2.0)
@@ -34,5 +34,5 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(2.0))
         println("========")
-    }*/
+    }
 }
