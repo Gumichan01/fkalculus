@@ -20,20 +20,20 @@ class TestEvaluator {
     fun `test eval help`() {
 
         val ast = Help
-        val result : Option<ResultValue> = Evaluator().eval(ast)
+        val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is HelpText)
     }
 
     @test
-    fun `test eval constant value`() {
+    fun `test eval var`() {
 
-        val ast = Const(2.0)
-        val result : Option<ResultValue> = Evaluator().eval(ast)
+        val ast = Var("x")
+        val result: Option<ResultValue> = Evaluator().eval(ast)
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(2.0))
+        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Var("x"))
         println("========")
     }
 }

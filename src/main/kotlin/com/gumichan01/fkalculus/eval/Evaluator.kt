@@ -26,7 +26,7 @@ class Evaluator {
 
     private fun evaluate(expression: Expression): Expression {
         return when (expression) {
-            is Const -> expression
+            is Const, is Var -> expression
             else -> throw RuntimeException("Cannot evaluate the expression")
         }
     }
