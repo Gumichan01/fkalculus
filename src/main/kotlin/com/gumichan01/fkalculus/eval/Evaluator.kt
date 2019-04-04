@@ -9,24 +9,24 @@ class Evaluator {
 
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
-            Some(evaluateAst(ast))
+            Some(evaluate(ast))
         } catch (e: RuntimeException) {
             println("Failed to evaluate the following instruction: ${e.message}")
             None
         }
     }
 
-    private fun evaluateAst(ast: FKalculusAST): ResultValue {
+    private fun evaluate(ast: FKalculusAST): ResultValue {
         return when (ast) {
             is Help -> HelpText("TODO help")
-            is Expression -> evaluate(ast)
+            is Expression -> IdentifierValue("v0", evaluate(ast))
             else -> throw RuntimeException("Invalid instruction")
         }
     }
 
-    private fun evaluate(expression: Expression): ResultValue {
+    private fun evaluate(expression: Expression): Expression {
         return when (expression) {
-            is Const -> IdentifierValue("v0", expression)
+            is Const -> expression
             else -> throw RuntimeException("Cannot evaluate the expression")
         }
     }

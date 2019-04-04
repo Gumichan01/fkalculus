@@ -30,6 +30,7 @@ class TestEvaluator {
 
         val ast = Const(2.0)
         val result : Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(2.0))
