@@ -53,4 +53,5 @@ object Div : Operator()
 object Pow : Operator()
 
 sealed class ResultValue
+data class HelpText(val text: String): ResultValue()
 data class IdentifierValue(val identifier: String, val value: Expression) : ResultValue()

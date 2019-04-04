@@ -22,6 +22,15 @@ class TestAst {
     }
 
     @test
+    fun `test help value`() {
+
+        val help: ResultValue = HelpText("help")
+        println(help)
+        assertTrue(help is HelpText)
+        println("========")
+    }
+
+    @test
     fun `test identifier value`() {
 
         val expression: ResultValue = IdentifierValue("v1", Const(5.0))
