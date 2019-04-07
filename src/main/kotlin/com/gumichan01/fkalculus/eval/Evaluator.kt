@@ -4,6 +4,7 @@ import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
+import kotlin.math.asin
 
 class Evaluator {
 
@@ -27,8 +28,10 @@ class Evaluator {
     private fun evaluate(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
-            is Pi -> Const(3.14159265)
+            is Pi -> Const(calculatePi())
             else -> throw RuntimeException("Cannot evaluate the expression")
         }
     }
+
+    private fun calculatePi() = asin(1.0) * 2.0
 }
