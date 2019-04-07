@@ -10,48 +10,46 @@ class Evaluator {
 
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
-            Some(evaluate(ast))
+            Some(evaluateInstruction(ast as Instruction))
         } catch (e: RuntimeException) {
             println("Failed to evaluate the following instruction: ${e.message}")
             None
         }
     }
 
-    private fun evaluate(ast: FKalculusAST): ResultValue {
-        return when (ast) {
+    private fun evaluateInstruction(instruction: Instruction): ResultValue {
+        return when (instruction) {
             is Help -> HelpText("TODO help")
-            is Expression -> IdentifierValue("v0", evaluate(ast))
+            is Expression -> IdentifierValue("v0", evaluateExpression(instruction))
             else -> throw RuntimeException("Invalid instruction")
         }
     }
 
-    private fun evaluate(expression: Expression): Expression {
+    private fun evaluateExpression(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
             is Pi -> Const(calculatePi())
             is Binop -> evaluateBinop(expression)
-            else -> throw RuntimeException("Cannot evaluate the expression")
+            else -> throw RuntimeException("Cannot evaluateExpression the expression")
         }
     }
 
     private fun evaluateBinop(binop: Binop): Expression {
-
         return binop.run {
-
-            val value1 = evaluate(expr1)
-            val value2 = evaluate(expr2)
+            val value1 = evaluateExpression(expr1)
+            val value2 = evaluateExpression(expr2)
             if (value1 is Const && value2 is Const) {
                 applyBinop(operator, value1, value2)
             } else {
-                Binop(binop.operator, value1, value2)
+                Binop(operator, value1, value2)
             }
         }
     }
 
-    private fun applyBinop(operator: Operator, value1: Const, value2: Const): Const {
+    private fun applyBinop(operator: Operator, const1: Const, const2: Const): Const {
         return Const(when (operator) {
-            Plus -> value1.value + value2.value
-            Minus -> value1.value - value2.value
+            Plus -> const1.value + const2.value
+            Minus -> const1.value - const2.value
             else -> throw RuntimeException("Unsupported operation: $operator")
         })
     }
