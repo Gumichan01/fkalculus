@@ -27,6 +27,7 @@ class Evaluator {
     private fun evaluate(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
+            is Pi -> Const(3.14158265)
             else -> throw RuntimeException("Cannot evaluate the expression")
         }
     }
