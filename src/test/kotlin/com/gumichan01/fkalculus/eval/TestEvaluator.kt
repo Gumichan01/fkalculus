@@ -48,4 +48,22 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const)
         println("========")
     }
+
+    @test
+    fun `test eval addition`() {
+
+        val ast = Binop(Plus, Const(2.0), Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(check(result))
+        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(4.0))
+        println("========")
+    }
+
+    private fun check(result: Option<ResultValue>): Boolean {
+
+        return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
+    }
 }
