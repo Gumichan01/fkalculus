@@ -36,19 +36,24 @@ class Evaluator {
 
     private fun evaluateBinop(binop: Binop): Expression {
 
-        val operator = binop.operator
-        val expr1 = evaluate(binop.expr1)
-        val expr2 = evaluate(binop.expr2)
+        return binop.run {
 
-        return when (operator) {
-            Plus -> sum(expr1, expr2)
-            else -> throw RuntimeException("Invalid binary operator $operator")
+            val value1 = evaluate(expr1)
+            val value2 = evaluate(expr2)
+            if (value1 is Const && value2 is Const) {
+                applyBinop(operator, value1, value2)
+            } else {
+                Binop(binop.operator, value1, value2)
+            }
         }
     }
 
-    private fun sum(expr1: Expression, expr2: Expression): Expression {
-
-        return if (expr1 is Const && expr2 is Const) Const(expr1.value + expr2.value) else Binop(Plus, expr1, expr2)
+    private fun applyBinop(operator: Operator, value1: Const, value2: Const): Const {
+        return Const(when (operator) {
+            Plus -> value1.value + value2.value
+            Minus -> value1.value - value2.value
+            else -> throw RuntimeException("Unsupported operation: $operator")
+        })
     }
 
     private fun calculatePi() = asin(1.0) * 2.0
