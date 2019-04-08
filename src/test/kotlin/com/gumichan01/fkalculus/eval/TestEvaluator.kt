@@ -45,7 +45,19 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const)
+        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(Math.PI))
+        println("========")
+    }
+
+    @test
+    fun `test eval e`() {
+
+        val ast = Exp1
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(Math.E))
         println("========")
     }
 

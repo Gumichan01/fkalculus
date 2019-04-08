@@ -4,7 +4,6 @@ import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
-import kotlin.math.asin
 
 class Evaluator {
 
@@ -29,6 +28,7 @@ class Evaluator {
         return when (expression) {
             is Const, is Var -> expression
             is Pi -> Const(Math.PI)
+            is Exp1 -> Const(Math.E)
             is Binop -> evaluateBinop(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
         }
