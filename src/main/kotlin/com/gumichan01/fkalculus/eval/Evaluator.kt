@@ -28,7 +28,7 @@ class Evaluator {
     private fun evaluateExpression(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
-            is Pi -> Const(calculatePi())
+            is Pi -> Const(Math.PI)
             is Binop -> evaluateBinop(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
         }
@@ -55,6 +55,4 @@ class Evaluator {
             Pow -> Math.pow(const1.value, const2.value)
         })
     }
-
-    private fun calculatePi() = asin(1.0) * 2.0
 }
