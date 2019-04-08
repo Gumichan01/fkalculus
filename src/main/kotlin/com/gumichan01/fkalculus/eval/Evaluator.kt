@@ -51,6 +51,7 @@ class Evaluator {
             Plus -> const1.value + const2.value
             Minus -> const1.value - const2.value
             Mult -> const1.value * const2.value
+            Div -> const1.value / const2.value
             else -> throw RuntimeException("Unsupported operation: $operator")
         })
     }
