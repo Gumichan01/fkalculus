@@ -63,6 +63,19 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval multiple addition`() {
+
+        val ast = Binop(Plus,Binop(Plus, Const(2.0), Const(2.0)),Binop(Plus, Const(2.0), Const(2.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(check(result))
+        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(8.0))
+        println("========")
+    }
+
+    @test
     fun `test eval sub`() {
 
         val ast = Binop(Minus, Const(2.0), Const(2.0))
@@ -72,6 +85,19 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(check(result))
         assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(0.0))
+        println("========")
+    }
+
+    @test
+    fun `test eval multiple sub`() {
+
+        val ast = Binop(Minus, Const(6.0), Binop(Minus, Const(2.0), Const(-2.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(check(result))
+        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(2.0))
         println("========")
     }
 
