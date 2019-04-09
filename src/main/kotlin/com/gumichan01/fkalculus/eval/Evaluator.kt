@@ -4,6 +4,8 @@ import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
+import kotlin.math.E
+import kotlin.math.PI
 import kotlin.math.sqrt
 
 class Evaluator {
@@ -28,8 +30,8 @@ class Evaluator {
     private fun evaluateExpression(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
-            is Pi -> Const(Math.PI)
-            is Exp1 -> Const(Math.E)
+            is Pi -> Const(PI)
+            is Exp1 -> Const(E)
             is Binop -> evaluateBinop(expression)
             is Sqrt -> evaluateSqrt(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")

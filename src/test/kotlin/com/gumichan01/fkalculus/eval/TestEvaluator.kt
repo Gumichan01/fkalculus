@@ -4,6 +4,8 @@ import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.math.E
+import kotlin.math.PI
 import org.junit.jupiter.api.Test as test
 
 class TestEvaluator {
@@ -45,7 +47,7 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(Math.PI))
+        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(PI))
         println("========")
     }
 
@@ -57,7 +59,7 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(Math.E))
+        assertTrue(result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value == Const(E))
         println("========")
     }
 
