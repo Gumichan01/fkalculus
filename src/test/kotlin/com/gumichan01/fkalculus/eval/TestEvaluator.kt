@@ -69,21 +69,21 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(4.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(4.0))
         println("========")
     }
 
     @test
     fun `test eval multiple addition`() {
 
-        val ast = Binop(Plus,Binop(Plus, Const(2.0), Const(2.0)),Binop(Plus, Const(2.0), Const(2.0)))
+        val ast = Binop(Plus, Binop(Plus, Const(2.0), Const(2.0)), Binop(Plus, Const(2.0), Const(2.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(8.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(8.0))
         println("========")
     }
 
@@ -95,8 +95,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(0.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.0))
         println("========")
     }
 
@@ -108,8 +108,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(2.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(2.0))
         println("========")
     }
 
@@ -121,8 +121,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(4.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(4.0))
         println("========")
     }
 
@@ -134,8 +134,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(16.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(16.0))
         println("========")
     }
 
@@ -147,8 +147,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(1.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0))
         println("========")
     }
 
@@ -160,8 +160,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(8.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(8.0))
         println("========")
     }
 
@@ -173,8 +173,8 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(32.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(32.0))
         println("========")
     }
 
@@ -186,12 +186,25 @@ class TestEvaluator {
         println(result)
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
-        assertTrue(check(result))
-        assertTrue(result is Some && check(result) && (result.t as IdentifierValue).value == Const(2.0))
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(2.0))
         println("========")
     }
 
-    private fun check(result: Option<ResultValue>): Boolean {
+    @test
+    fun `test eval complex sqrt`() {
+
+        val ast = Sqrt(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Sqrt(Binop(Plus, Var("x"), Const(1.0))))
+        println("========")
+    }
+
+    private fun checkConst(result: Option<ResultValue>): Boolean {
 
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
