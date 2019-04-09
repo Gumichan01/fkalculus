@@ -6,6 +6,7 @@ import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.math.E
 import kotlin.math.PI
+import kotlin.math.exp
 import org.junit.jupiter.api.Test as test
 
 class TestEvaluator {
@@ -203,6 +204,32 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Sqrt(Binop(Plus, Var("x"), Const(1.0))))
+        println("========")
+    }
+
+    @test
+    fun `test eval expo`() {
+
+        val ast = Expo(Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(exp(2.0)))
+        println("========")
+    }
+
+    @test
+    fun `test eval complex expo`() {
+
+        val ast = Expo(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Expo(Binop(Plus, Var("x"), Const(1.0))))
         println("========")
     }
 

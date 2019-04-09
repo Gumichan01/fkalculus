@@ -6,6 +6,7 @@ import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import kotlin.math.E
 import kotlin.math.PI
+import kotlin.math.exp
 import kotlin.math.sqrt
 
 class Evaluator {
@@ -34,14 +35,26 @@ class Evaluator {
             is Exp1 -> Const(E)
             is Binop -> evaluateBinop(expression)
             is Sqrt -> evaluateSqrt(expression)
+            is Expo -> evaluateExpo(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
+        }
+    }
+
+    private fun evaluateExpo(expFunCall: Expo): Expression {
+        return expFunCall.run {
+            val result = evaluateExpression(this.expr)
+            if (result is Const) {
+                Const(exp(result.value))
+            } else {
+                Expo(result)
+            }
         }
     }
 
     private fun evaluateSqrt(sqrtFunCall: Sqrt): Expression {
         return sqrtFunCall.run {
             val result = evaluateExpression(this.expr)
-            if(result is Const) {
+            if (result is Const) {
                 Const(sqrt(result.value))
             } else {
                 Sqrt(result)
