@@ -4,10 +4,7 @@ import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
-import kotlin.math.E
-import kotlin.math.PI
-import kotlin.math.exp
-import kotlin.math.sqrt
+import kotlin.math.*
 
 class Evaluator {
 
@@ -36,13 +33,25 @@ class Evaluator {
             is Binop -> evaluateBinop(expression)
             is Sqrt -> evaluateSqrt(expression)
             is Expo -> evaluateExpo(expression)
+            is Ln -> evaluateLn(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
+        }
+    }
+
+    private fun evaluateLn(naturalLogFunCall: Ln): Expression {
+        return naturalLogFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(ln(result.value))
+            } else {
+                Ln(result)
+            }
         }
     }
 
     private fun evaluateExpo(expFunCall: Expo): Expression {
         return expFunCall.run {
-            val result = evaluateExpression(this.expr)
+            val result = evaluateExpression(expr)
             if (result is Const) {
                 Const(exp(result.value))
             } else {
