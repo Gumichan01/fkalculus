@@ -2,6 +2,8 @@ package com.gumichan01.fkalculus
 
 import com.gumichan01.fkalculus.ast.Expression
 import com.gumichan01.fkalculus.ast.FKalculusAST
+import com.gumichan01.fkalculus.ast.ResultValue
+import com.gumichan01.fkalculus.eval.Evaluator
 import com.gumichan01.fkalculus.parse.KalculusParser
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
@@ -20,7 +22,7 @@ class FKalculus(val arguments: Arguments) {
                 val kalculus: Option<FKalculusAST> = parse(text.t)
 
                 if (kalculus is Some) {
-                    val result: Option<Expression> = eval(kalculus.t)
+                    val result: Option<ResultValue> = eval(kalculus.t)
                     if (result is Some) {
                         print(result.t)
                     } else {
@@ -48,11 +50,11 @@ class FKalculus(val arguments: Arguments) {
         }
     }
 
-    private fun eval(ast: FKalculusAST): Option<Expression> {
-        TODO("Evaluate expression")
+    private fun eval(ast: FKalculusAST): Option<ResultValue> {
+        return Evaluator().eval(ast)
     }
 
-    private fun print(expression: Expression) {
-        TODO("print expression")
+    private fun print(result: ResultValue) {
+        TODO("print value")
     }
 }
