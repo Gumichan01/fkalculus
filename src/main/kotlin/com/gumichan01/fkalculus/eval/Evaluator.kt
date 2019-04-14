@@ -26,11 +26,12 @@ class Evaluator {
     }
 
     private fun getHelpText(): String {
-        return """ FKalculus v0.0.1-SNAPSHOT
-            |Type an expression to evaluate it
-            |Example: 2 + 3
+        return """FKalculus v0.0.1-SNAPSHOT
             |
-            | CTRL-C: Exit the program.
+            |Type an expression to evaluate it
+            |- Example: 2 + 3
+            |
+            |CTRL-C: Exit the program.
         """.trimMargin()
     }
 
@@ -45,7 +46,7 @@ class Evaluator {
             is Ln -> evaluateLn(expression)
             is Log10 -> evaluateLog10(expression)
             is Log2 -> evaluateLog2(expression)
-            else -> throw RuntimeException("Cannot evaluateExpression the expression")
+            else -> throw RuntimeException("Cannot evaluate the expression: $expression")
         }
     }
 
