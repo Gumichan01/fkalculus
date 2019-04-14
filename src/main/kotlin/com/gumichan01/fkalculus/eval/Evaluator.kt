@@ -34,7 +34,19 @@ class Evaluator {
             is Sqrt -> evaluateSqrt(expression)
             is Expo -> evaluateExpo(expression)
             is Ln -> evaluateLn(expression)
+            is Log10 -> evaluateLog10(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
+        }
+    }
+
+    private fun evaluateLog10(decimalLogFunCall: Log10): Expression {
+        return decimalLogFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(log10(result.value))
+            } else {
+                Log10(result)
+            }
         }
     }
 
