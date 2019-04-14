@@ -1,7 +1,8 @@
 package com.gumichan01.fkalculus
 
-import com.gumichan01.fkalculus.ast.Expression
 import com.gumichan01.fkalculus.ast.FKalculusAST
+import com.gumichan01.fkalculus.ast.HelpText
+import com.gumichan01.fkalculus.ast.IdentifierValue
 import com.gumichan01.fkalculus.ast.ResultValue
 import com.gumichan01.fkalculus.eval.Evaluator
 import com.gumichan01.fkalculus.parse.KalculusParser
@@ -55,6 +56,9 @@ class FKalculus(val arguments: Arguments) {
     }
 
     private fun print(result: ResultValue) {
-        TODO("print value")
+        when (result) {
+            is HelpText -> println(result.text)
+            is IdentifierValue -> result.run { println("$identifier = $value") }
+        }
     }
 }
