@@ -19,10 +19,21 @@ class Evaluator {
 
     private fun evaluateInstruction(instruction: Instruction): ResultValue {
         return when (instruction) {
-            is Help -> TODO("Display help command - not implemented")
+            is Help -> HelpText(getHelpText())
             is Expression -> IdentifierValue("v0", evaluateExpression(instruction))
             else -> throw RuntimeException("Invalid instruction")
         }
+    }
+
+    private fun getHelpText(): String {
+        //TODO("Display help command - not implemented")
+
+        return """ FKalculus v0.0.1-SNAPSHOT
+            |Type an expression to evaluate it
+            |Example: 2 + 3
+            |
+            | CTRL-C: Exit the program.
+        """.trimMargin()
     }
 
     private fun evaluateExpression(expression: Expression): Expression {
