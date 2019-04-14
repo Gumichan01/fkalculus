@@ -283,6 +283,32 @@ class TestEvaluator {
         println("========")
     }
 
+    @test
+    fun `test eval Log2`() {
+
+        val ast = Log2(Const(8.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(3.0))
+        println("========")
+    }
+
+    @test
+    fun `test eval complex Log2`() {
+
+        val ast = Log2(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Log2(Binop(Plus, Var("x"), Const(1.0))))
+        println("========")
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
 
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const

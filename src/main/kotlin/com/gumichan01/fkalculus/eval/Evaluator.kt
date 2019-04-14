@@ -35,7 +35,19 @@ class Evaluator {
             is Expo -> evaluateExpo(expression)
             is Ln -> evaluateLn(expression)
             is Log10 -> evaluateLog10(expression)
+            is Log2 -> evaluateLog2(expression)
             else -> throw RuntimeException("Cannot evaluateExpression the expression")
+        }
+    }
+
+    private fun evaluateLog2(binaryLogFunCall: Log2): Expression {
+        return binaryLogFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(log2(result.value))
+            } else {
+                Log2(result)
+            }
         }
     }
 
