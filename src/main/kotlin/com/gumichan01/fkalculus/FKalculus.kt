@@ -10,6 +10,8 @@ import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 
+// TODO 1 - Test the application and publish v0.0.1
+// TODO 1bis - Set licence and make the repository public
 class FKalculus(val arguments: Arguments) {
 
     fun start() {
@@ -43,6 +45,8 @@ class FKalculus(val arguments: Arguments) {
         return KalculusParser().parse(text)
     }
 
+    // TODO 2 - Don't accept empty lines
+    // TODO 3 - Implement a list of previous commands
     private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
