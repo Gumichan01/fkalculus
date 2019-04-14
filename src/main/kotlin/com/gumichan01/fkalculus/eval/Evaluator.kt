@@ -19,7 +19,7 @@ class Evaluator {
 
     private fun evaluateInstruction(instruction: Instruction): ResultValue {
         return when (instruction) {
-            is Help -> HelpText("TODO help")
+            is Help -> TODO("Display help command - not implemented")
             is Expression -> IdentifierValue("v0", evaluateExpression(instruction))
             else -> throw RuntimeException("Invalid instruction")
         }
