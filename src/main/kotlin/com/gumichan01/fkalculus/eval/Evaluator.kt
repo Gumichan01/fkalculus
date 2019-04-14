@@ -26,8 +26,6 @@ class Evaluator {
     }
 
     private fun getHelpText(): String {
-        //TODO("Display help command - not implemented")
-
         return """ FKalculus v0.0.1-SNAPSHOT
             |Type an expression to evaluate it
             |Example: 2 + 3
