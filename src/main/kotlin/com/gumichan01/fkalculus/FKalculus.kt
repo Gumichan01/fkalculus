@@ -22,17 +22,19 @@ class FKalculus(val arguments: Arguments) {
             val text: Option<String> = readText()
 
             if (text is Some) {
-                val kalculus: Option<FKalculusAST> = parse(text.t)
+                if (text.t.isNotBlank()) {
+                    val kalculus: Option<FKalculusAST> = parse(text.t)
 
-                if (kalculus is Some) {
-                    val result: Option<ResultValue> = eval(kalculus.t)
-                    if (result is Some) {
-                        print(result.t)
+                    if (kalculus is Some) {
+                        val result: Option<ResultValue> = eval(kalculus.t)
+                        if (result is Some) {
+                            print(result.t)
+                        } else {
+                            println("Unrecognized command, type \"help\" to get available commands.")
+                        }
                     } else {
-                        println("Unrecognized command, type \"help\" to get available commands.")
+                        println("Invalid command/expression to evaluate")
                     }
-                } else {
-                    println("Invalid command/expression to evaluate")
                 }
             } else {
                 quit = true
