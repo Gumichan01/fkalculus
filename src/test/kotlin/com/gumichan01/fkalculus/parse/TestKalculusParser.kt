@@ -836,6 +836,20 @@ class TestKalculusParser {
     }
 
     @test
+    fun `parse basic √`() {
+
+        val instructionString = "√(2)"
+        val parser = KalculusParser()
+
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+        println(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Sqrt(Const(2.0))))
+        println("========")
+    }
+
+    @test
     fun `parse sqrt of var`() {
 
         val instructionString = "sqrt(x)"

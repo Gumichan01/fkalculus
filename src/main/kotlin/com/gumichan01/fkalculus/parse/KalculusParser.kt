@@ -19,7 +19,7 @@ class KalculusParser {
         // Keywords
         val help by token("help")
         val pi by token("Pi|pi|\u03C0")
-        val sqrt by token("sqrt")
+        val sqrt by token("sqrt|√")
         val expo by token("exp")
         val ln by token("ln")
         val log10 by token("log10|lg")
