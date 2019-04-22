@@ -47,8 +47,7 @@ class FKalculus(val arguments: Arguments) {
         return KalculusParser().parse(text)
     }
 
-    // TODO 2 - Don't accept empty lines
-    // TODO 3 - Implement a list of previous commands
+    // TODO 2 - Implement a list of previous commands
     private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
