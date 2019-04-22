@@ -318,6 +318,16 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval invalid Ln`() {
+
+        val ast = Ln(Const(-2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is None)
+        println("========")
+    }
+
+    @test
     fun `test eval Log10`() {
 
         val ast = Log10(Const(2.0))
@@ -344,6 +354,16 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval invalid Log10`() {
+
+        val ast = Log10(Const(-2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is None)
+        println("========")
+    }
+
+    @test
     fun `test eval Log2`() {
 
         val ast = Log2(Const(8.0))
@@ -366,6 +386,16 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Log2(Binop(Plus, Var("x"), Const(1.0))))
+        println("========")
+    }
+
+    @test
+    fun `test eval invalid Lb`() {
+
+        val ast = Log2(Const(-2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is None)
         println("========")
     }
 

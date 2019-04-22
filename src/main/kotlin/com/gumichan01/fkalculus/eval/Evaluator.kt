@@ -50,10 +50,17 @@ class Evaluator {
         }
     }
 
+    private fun checkLogarithmArgumentOrFail(const: Const) {
+        if (const.value < 0.0) {
+            throw RuntimeException("${const.value} < 0")
+        }
+    }
+
     private fun evaluateLog2(binaryLogFunCall: Log2): Expression {
         return binaryLogFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
+                checkLogarithmArgumentOrFail(result)
                 Const(log2(result.value))
             } else {
                 Log2(result)
@@ -65,6 +72,7 @@ class Evaluator {
         return decimalLogFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
+                checkLogarithmArgumentOrFail(result)
                 Const(log10(result.value))
             } else {
                 Log10(result)
@@ -76,6 +84,7 @@ class Evaluator {
         return naturalLogFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
+                checkLogarithmArgumentOrFail(result)
                 Const(ln(result.value))
             } else {
                 Ln(result)
