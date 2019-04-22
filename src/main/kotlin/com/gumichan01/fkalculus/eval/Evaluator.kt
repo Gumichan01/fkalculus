@@ -122,7 +122,13 @@ class Evaluator {
             Plus -> const1.value + const2.value
             Minus -> const1.value - const2.value
             Mult -> const1.value * const2.value
-            Div -> const1.value / const2.value
+            Div -> {
+                if (const2.value != 0.0) {
+                    const1.value / const2.value
+                } else {
+                    throw RuntimeException("Division by 0")
+                }
+            }
             Pow -> Math.pow(const1.value, const2.value)
         })
     }

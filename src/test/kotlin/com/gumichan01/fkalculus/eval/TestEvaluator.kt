@@ -1,6 +1,7 @@
 package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
+import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -163,6 +164,15 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(8.0))
+        println("========")
+    }
+
+    @test
+    fun `test eval invalid div`() {
+        val ast = Binop(Div, Const(5.0), Const(0.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
         println("========")
     }
 
