@@ -256,6 +256,16 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval invalid sqrt`() {
+
+        val ast = Sqrt(Const(-1.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is None)
+        println("========")
+    }
+
+    @test
     fun `test eval expo`() {
 
         val ast = Expo(Const(2.0))

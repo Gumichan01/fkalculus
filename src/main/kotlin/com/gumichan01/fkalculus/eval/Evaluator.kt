@@ -98,7 +98,11 @@ class Evaluator {
         return sqrtFunCall.run {
             val result = evaluateExpression(this.expr)
             if (result is Const) {
-                Const(sqrt(result.value))
+                if (result.value > 0.0) {
+                    Const(sqrt(result.value))
+                } else {
+                    throw RuntimeException("Invalid calculus: √${result.value}")
+                }
             } else {
                 Sqrt(result)
             }
@@ -126,7 +130,7 @@ class Evaluator {
                 if (const2.value != 0.0) {
                     const1.value / const2.value
                 } else {
-                    throw RuntimeException("Division by 0")
+                    throw RuntimeException("Division by zero")
                 }
             }
             Pow -> Math.pow(const1.value, const2.value)
