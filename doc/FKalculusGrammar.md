@@ -36,9 +36,9 @@ SIMPL   : simpl
 SOLVE   : solve
 DERIVE  : derive
 INTEG   : integ
-PI      : "Pi" | "pi" | 'π'     // TODO unicode character for Pi
+PI      : "Pi" | "pi" | "π"
 EXP     : 'e'
-SQRT    : "sqrt" | "√"          // TODO unicode character for square root
+SQRT    : "sqrt" | "√"
 EXPON   : exp
 LOGN    : "ln"
 LOG10   : "lg" | "log10"
