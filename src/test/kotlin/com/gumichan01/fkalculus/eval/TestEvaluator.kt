@@ -190,6 +190,46 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval pow complex`() {
+
+        val ast = Binop(Pow, Const(2.0), Binop(Plus, Const(2.0), Const(3.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(32.0))
+        println("========")
+    }
+
+    @test
+    fun `test eval 0^0`() {
+
+        val ast = Binop(Pow, Const(0.0), Const(0.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0))
+        println("========")
+    }
+
+
+    @test
+    fun `test eval (-3)^0`() {
+
+        val ast = Binop(Pow, Const(-3.0), Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+        println(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(9.0))
+        println("========")
+    }
+
+    @test
     fun `test eval sqrt`() {
 
         val ast = Sqrt(Const(4.0))
