@@ -25,7 +25,11 @@ class Printer {
             is Var -> expression.variable
             is Identifier -> expression.name
             // TODO Deal with binop operations inside operations
-            is Binop -> stringOf(expression.expr1) + " " + stringOf(expression.operator) + " " + stringOf(expression.expr2)
+            is Binop -> {
+                val stringExpr1 = withParenthesisOrNot(expression.expr1, stringOf(expression.expr1))
+                val stringExpr2 = withParenthesisOrNot(expression.expr2, stringOf(expression.expr2))
+                stringExpr1 + " " + stringOf(expression.operator) + " " + stringExpr2
+            }
             is Sqrt -> "√(" + stringOf(expression.expr) + ")"
             is Expo -> "e(" + stringOf(expression.expr) + ")"
             is Ln -> "ln(" + stringOf(expression.expr) + ")"
@@ -33,6 +37,11 @@ class Printer {
             is Log2 -> "lb(" + stringOf(expression.expr) + ")"
             else -> TODO("Print $expression not implemented")
         }
+    }
+
+    private fun withParenthesisOrNot(expr: Expression, stringExpr: String): String {
+
+        return if (expr is Binop) "($stringExpr)" else stringExpr
     }
 
     private fun stringOf(operator: Operator): String {
