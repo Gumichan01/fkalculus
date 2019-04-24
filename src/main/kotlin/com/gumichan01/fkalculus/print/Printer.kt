@@ -13,10 +13,6 @@ class Printer {
         }
     }
 
-    fun print(expression: Expression): Unit {
-        println(stringOf(expression))
-    }
-
     private fun stringOf(expression: Expression): String {
         return when (expression) {
             is Pi -> "π"
