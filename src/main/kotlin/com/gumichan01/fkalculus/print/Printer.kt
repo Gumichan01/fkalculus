@@ -41,7 +41,6 @@ class Printer {
     private fun Operator.isSumOrDiff(): Boolean = this is Plus || this is Minus
 
     private fun withParenthesisOrNot(expr: Expression, stringExpr: String): String {
-
         return if (expr is Binop && expr.operator.isSumOrDiff()) "($stringExpr)" else stringExpr
     }
 
