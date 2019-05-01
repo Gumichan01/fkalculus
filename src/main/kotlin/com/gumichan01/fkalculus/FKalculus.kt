@@ -10,7 +10,6 @@ import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 
 // TODO 1 - Test the application and publish v0.0.1
-// TODO 1bis - Set licence and make the repository public
 class FKalculus(val arguments: Arguments) {
 
     fun start() {
