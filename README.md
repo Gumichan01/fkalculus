@@ -35,7 +35,9 @@ java -jar target/fkalculus-0.0.1-SNAPSHOT-standalone.jar
 
 ## Dependencies ##
 
-FKalculus uses JUnit 5, kotlin-argparser and better-parse.
+FKalculus uses [JUnit 5](https://github.com/junit-team/junit5/),
+[kotlin-argparser](https://github.com/xenomachina/kotlin-argparser) 
+and [better-parse](https://github.com/h0tk3y/better-parse).
 
 ## License ##
 
