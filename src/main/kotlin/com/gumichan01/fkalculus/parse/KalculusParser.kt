@@ -98,8 +98,7 @@ class KalculusParser {
         return try {
             Some(fkalculusGrammar.parseToEnd(text))
         } catch (e: Exception) {
-            println(e)
-            e.printStackTrace()
+            println(e) // NOTE TODO This call must be made in verbose mode only
             None
         }
     }
