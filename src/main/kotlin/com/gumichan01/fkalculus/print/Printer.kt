@@ -4,7 +4,7 @@ import com.gumichan01.fkalculus.ast.*
 
 class Printer {
 
-    fun print(result: ResultValue): Unit {
+    fun print(result: ResultValue) {
         when (result) {
             is HelpText -> println(result.text)
             is IdentifierValue -> result.run {
