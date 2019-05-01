@@ -1,8 +1,6 @@
 package com.gumichan01.fkalculus
 
 import com.gumichan01.fkalculus.ast.FKalculusAST
-import com.gumichan01.fkalculus.ast.HelpText
-import com.gumichan01.fkalculus.ast.IdentifierValue
 import com.gumichan01.fkalculus.ast.ResultValue
 import com.gumichan01.fkalculus.eval.Evaluator
 import com.gumichan01.fkalculus.parse.KalculusParser
