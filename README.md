@@ -18,25 +18,26 @@ Please do not use it in production.
 
 ## Build ##
 
-You need a Kotlin compiler on your machine. You just need to clone this project
-and execute the following comand.
+You need a Kotlin compiler on your machine.
+
+## With an IDE ##
+
+If you use an IDE (Eclipse, IntelliJ, ...) make sure you have
+the Kotlin plugin installed.
+
+## From scratch ##
+
+Clone this repository and execute the following comands:
 
 ```
-mvn package
+mvn clean package
+./fkalculus.sh      // Launch the program
 ```
-
-For now, the generated package(`fkalculus-0.0.1-SNAPSHOT-standalone.jar`) is 
-in the `target` directory.
-
-```
-java -jar target/fkalculus-0.0.1-SNAPSHOT-standalone.jar
-```
-
 
 ## Dependencies ##
 
 FKalculus uses [JUnit 5](https://github.com/junit-team/junit5/),
-[kotlin-argparser](https://github.com/xenomachina/kotlin-argparser) 
+[kotlin-argparser](https://github.com/xenomachina/kotlin-argparser)
 and [better-parse](https://github.com/h0tk3y/better-parse).
 
 ## License ##
