@@ -29,9 +29,18 @@ warn()
     echo "note: Please install $RLWRAP in order to get command history and line editing"
 }
 
+isSnapshot() {
+    if [[ $JAR == *"SNAPSHOT"* ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Main code
 $(checkCommand $RLWRAP)
 [ $? -eq 1 ] && warn || wrapper=$RLWRAP
-echo "FKalculus" $FKALCULUS_VERSION
+echo -n "FKalculus" $FKALCULUS_VERSION
+isSnapshot; [ $? -eq 1 ] && echo "-SNAPSHOT" || echo ""
 $wrapper $JAVA $JARGS $JAR
 echo # Just to produce new line
