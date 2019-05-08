@@ -52,7 +52,6 @@ class TestArgumentKalculusParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertFalse(arguments.verbose)
-        println("========")
     }
 
     @test
@@ -65,7 +64,6 @@ class TestArgumentKalculusParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.verbose)
-        println("========")
     }
 
     @test
@@ -78,6 +76,5 @@ class TestArgumentKalculusParser {
         args.forEach { arg -> print("$arg ") }
         println("- $arguments")
         assertTrue(arguments.verbose)
-        println("========")
     }
 }
