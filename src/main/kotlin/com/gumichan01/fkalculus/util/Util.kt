@@ -36,5 +36,6 @@ knowledge of the CeCILL license and that you accept its terms.
  */
 
 sealed class Option<out T>
+
 object None : Option<Nothing>()
 data class Some<out T>(val t: T) : Option<T>()

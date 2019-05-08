@@ -38,6 +38,7 @@ knowledge of the CeCILL license and that you accept its terms.
 // Abstract Syntax Tree (AST) of commands and expressions
 
 sealed class FKalculusAST
+
 sealed class Instruction : FKalculusAST()
 object Help : Instruction()
 data class Simpl(val expr: Expression) : Instruction()
