@@ -9,6 +9,8 @@ compile:
 
 unit_test:
   stage: test
+  before_script:
+	- mvn compile
   script:
     - mvn surefire:test
   artifacts:
