@@ -17,3 +17,47 @@ test_argumentKalculusParser:
     paths:
       - target/surefire-reports/TEST-*.xml
       - target/surefire-reports/*.txt
+
+test_arguments:
+  stage: test
+  script:
+    - mvn test -Dtest=TestArguments
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths:
+      - target/surefire-reports/TEST-*.xml
+      - target/surefire-reports/*.txt
+
+test_ast:
+  stage: test
+  script:
+    - mvn test -Dtest=TestAst
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths:
+      - target/surefire-reports/TEST-*.xml
+      - target/surefire-reports/*.txt
+
+test_evaluator:
+  stage: test
+  script:
+    - mvn test -Dtest=TestEvaluator
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths:
+      - target/surefire-reports/TEST-*.xml
+      - target/surefire-reports/*.txt
+
+test_kalculusParser:
+  stage: test
+  script:
+    - mvn test -Dtest=TestKalculusParser
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths:
+      - target/surefire-reports/TEST-*.xml
+      - target/surefire-reports/*.txt
