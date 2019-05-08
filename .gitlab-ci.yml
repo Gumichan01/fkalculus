@@ -10,7 +10,7 @@ compile:
 unit_test:
   stage: test
   script:
-    - mvn test
+    - mvn surefire:test
   artifacts:
     when: on_failure
     expire_in: 7 days
