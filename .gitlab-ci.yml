@@ -61,3 +61,13 @@ test_kalculusParser:
     paths:
       - target/surefire-reports/TEST-*.xml
       - target/surefire-reports/*.txt
+
+package:
+  stage: deploy
+  script:
+    - mvn package -Dmaven.test.skip=true
+  artifacts:
+    when: on_success
+    expire_in: 30 days
+    paths:
+      - fkalculus*standalone.jar
