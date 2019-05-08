@@ -7,12 +7,10 @@ compile:
   script:
     - mvn compile
 
-unit_test:
+test_argumentKalculusParser:
   stage: test
-  before_script:
-    - mvn compile
   script:
-    - mvn surefire:test
+    - mvn test -Dtest=TestArgumentKalculusParser
   artifacts:
     when: on_failure
     expire_in: 7 days
