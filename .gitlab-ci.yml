@@ -10,7 +10,7 @@ compile:
 unit_test:
   stage: test
   before_script:
-	- mvn compile
+    - mvn compile
   script:
     - mvn surefire:test
   artifacts:
