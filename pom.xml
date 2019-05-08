@@ -146,8 +146,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <executable>package.sh</executable>
+                    <executable>bash</executable>
                     <arguments>
+                        <argument>package.sh</argument>
                         <argument>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</argument>
                         <argument>${project.artifactId}-${project.version}-standalone.jar</argument>
                     </arguments>
