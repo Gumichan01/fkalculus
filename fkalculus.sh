@@ -4,7 +4,7 @@
 # Copyright, Luxon JEAN-PIERRE (2019)
 # luxon.jean.pierre@gmail.com
 #
-# This script is used to launch the program is a terminal properly
+# This script is used to launch the program in a terminal properly
 #
 # This script is under CeCILL v2.1 license.
 #
