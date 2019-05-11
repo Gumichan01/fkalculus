@@ -40,6 +40,8 @@ FKalculus uses [JUnit 5](https://github.com/junit-team/junit5/),
 [kotlin-argparser](https://github.com/xenomachina/kotlin-argparser)
 and [better-parse](https://github.com/h0tk3y/better-parse).
 
+The Windows packaging is done with [Launch4J](http://launch4j.sourceforge.net/).
+
 ## License ##
 
 This software is Licensed uner CeCILL v2.1.
