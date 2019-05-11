@@ -41,6 +41,6 @@ isSnapshot() {
 $(checkCommand $RLWRAP)
 [ $? -eq 1 ] && warn || wrapper=$RLWRAP
 echo -n "FKalculus" $FKALCULUS_VERSION
-isSnapshot; [ $? -eq 1 ] && echo "-SNAPSHOT" || echo ""
+isSnapshot; [ $? -eq 0 ] && echo "-SNAPSHOT" || echo ""
 $wrapper $JAVA $JARGS $JAR
 echo # Just to produce new line
