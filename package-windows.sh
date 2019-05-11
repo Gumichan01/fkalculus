@@ -12,5 +12,6 @@
 git clone https://github.com/Gumichan01/launch4j.git
 cd launch4j
 ant switch-to-maven
+mvn clean package
 cd ..
 rm -rf launch4j/
