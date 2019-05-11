@@ -90,6 +90,7 @@
                                 <directory>${basedir}</directory>
                                 <includes>
                                     <include>*.jar</include>
+                                    <include>*.exe</include>
                                 </includes>
                             </fileset>
                         </filesets>
