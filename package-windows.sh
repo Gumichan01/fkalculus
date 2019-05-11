@@ -9,11 +9,5 @@
 # This script is under CeCILL v2.1 license.
 #
 
-echo "Package windows"
-#git clone "Set repository to clone"
-#cd launch4j
-#ant switch-to-maven
-#mvn clean package
-#cp bin/bin-win32/*.exe bin/
-#cd ..
-#java -jar launch4j/
+git clone https://github.com/Gumichan01/launch4j.git
+rm -rf launch4j/
