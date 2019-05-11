@@ -1,6 +1,6 @@
 before_script:
   - apt update
-  - apt -y install maven openjdk-8-jdk openjdk-8-jre
+  - apt -y install ant maven openjdk-8-jdk openjdk-8-jre
 
 compile:
   stage: build
