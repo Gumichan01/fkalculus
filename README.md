@@ -34,6 +34,9 @@ mvn clean package
 ./fkalculus.sh      // Launch the program
 ```
 
+On Windows, an executable file is generated (`fkalculus.exe`).
+You can double-click on it in order to launch it.
+
 ## Dependencies ##
 
 FKalculus uses [JUnit 5](https://github.com/junit-team/junit5/),
