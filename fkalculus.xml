@@ -2,7 +2,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>console</headerType>
-  <jar>fkalculus-0.0.1-standalone.jar</jar>
+  <jar>fkalculus-0.1.0-SNAPSHOT-standalone.jar</jar>
   <outfile>fkalculus.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
