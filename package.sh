@@ -19,3 +19,6 @@ echo "Operating system environment:" $OS_ENV
 mv -v $JAR_WITH_DEPENDENCY $PACKAGED_JAR
 
 # TODO Generate a specific package on Windows
+if [[ $OS_ENV == *"NT-"* ]]; then
+./package-windows.sh
+fi
