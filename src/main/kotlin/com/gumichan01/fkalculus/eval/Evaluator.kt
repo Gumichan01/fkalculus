@@ -83,7 +83,19 @@ class Evaluator {
             is Log2 -> evaluateLog2(expression)
             is Cos -> evaluateCosine(expression)
             is Sin -> evaluateSine(expression)
+            is Tan -> evaluateTan(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateTan(tangentFunCall: Tan): Expression {
+        return tangentFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(Math.tan(result.value))
+            } else {
+                Const(0.0)
+            }
         }
     }
 
