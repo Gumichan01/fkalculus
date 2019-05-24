@@ -82,7 +82,19 @@ class Evaluator {
             is Log10 -> evaluateLog10(expression)
             is Log2 -> evaluateLog2(expression)
             is Cos -> evaluateCosine(expression)
+            is Sin -> evaluateSine(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateSine(sineFunCall: Sin): Expression {
+        return sineFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(Math.sin(result.value))
+            } else {
+                Sin(result)
+            }
         }
     }
 
