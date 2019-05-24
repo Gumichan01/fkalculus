@@ -44,7 +44,6 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-// TODO 1 - Test the application and publish v0.0.1
 class FKalculus(val arguments: Arguments) {
 
     fun start() {
@@ -79,8 +78,7 @@ class FKalculus(val arguments: Arguments) {
     private fun parse(text: String): Option<FKalculusAST> {
         return KalculusParser().parse(text)
     }
-
-    // TODO 2 - Implement a list of previous commands
+    
     private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
