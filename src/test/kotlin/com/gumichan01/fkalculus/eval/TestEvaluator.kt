@@ -384,6 +384,17 @@ class TestEvaluator {
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.cos(3.14)))
     }
 
+    @test
+    fun `test eval complex cos`() {
+        val ast = Cos(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Cos(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
