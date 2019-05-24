@@ -428,6 +428,17 @@ class TestEvaluator {
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.tan(3.14)))
     }
 
+    @test
+    fun `test eval complex tan`() {
+        val ast = Tan(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Tan(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }

@@ -94,7 +94,7 @@ class Evaluator {
             if (result is Const) {
                 Const(Math.tan(result.value))
             } else {
-                Const(0.0)
+                Tan(result)
             }
         }
     }
