@@ -385,7 +385,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test eval complex cos`() {
+    fun `test eval complex cosine`() {
         val ast = Cos(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
@@ -393,6 +393,28 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Cos(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test eval sine`() {
+        val ast = Sin(Const(3.14))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.sin(3.14)))
+    }
+
+    @test
+    fun `test eval complex sine`() {
+        val ast = Sin(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Sin(Binop(Plus, Var("x"), Const(1.0))))
     }
 
     private fun checkConst(result: Option<ResultValue>): Boolean {
