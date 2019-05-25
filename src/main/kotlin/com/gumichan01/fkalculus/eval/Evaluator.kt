@@ -96,12 +96,14 @@ class Evaluator {
         return cosecantFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
-                Const(1.0 / Math.sin(result.value))
+                Const(cosecant(result.value))
             } else {
                 Cosec(result)
             }
         }
     }
+
+    private fun cosecant(value: Double) = 1.0 / Math.sin(value)
 
     private fun evaluateAtan(arctanFunCall: Atan): Expression {
         return arctanFunCall.run {
