@@ -441,13 +441,21 @@ class TestEvaluator {
 
     @test
     fun `test eval arcsin`() {
-        val ast = Asin(Const(3.14))
+        val ast = Asin(Const(0.14))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(0.14)))
+    }
+
+    @test
+    fun `test eval invalid arcsin of x less than -1`() {
+        val ast = Asin(Const(-2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
     }
 
     @test
@@ -474,13 +482,13 @@ class TestEvaluator {
 
     @test
     fun `test eval arccos`() {
-        val ast = Acos(Const(3.14))
+        val ast = Acos(Const(0.14))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(0.14)))
     }
 
     @test
@@ -603,6 +611,39 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Cotan(Binop(Plus, Var("x"), Const(1.0))))
     }
+
+    /*@test
+    fun `test eval acosec`() {
+        val ast = Acosec(Const(3.14))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.(3.14)))
+    }
+
+    @test
+    fun `test eval complex acosec`() {
+        val ast = Acosec(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Atan(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test arccosecant is inverse of cosecant`() {
+        val ast = Acosec(Tan(Const(90.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(Math.tan(90.0))))
+    }*/
 
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const

@@ -146,6 +146,7 @@ class Evaluator {
         return arccosFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
+                checkCosineArgumentOrFail(result.value)
                 Const(Math.acos(result.value))
             } else {
                 Acos(result)
@@ -157,12 +158,21 @@ class Evaluator {
         return arcsinFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
+                checkSineArgumentOrFail(result.value)
                 Const(Math.asin(result.value))
             } else {
                 Asin(result)
             }
         }
     }
+
+    private fun checkSineArgumentOrFail(value: Double) {
+        if (value < -1.0 || value > 1.0) {
+            throw RuntimeException("$value not in domain [-1.0, 1.0]")
+        }
+    }
+
+    private fun checkCosineArgumentOrFail(value: Double) = checkSineArgumentOrFail(value)
 
     private fun evaluateTan(tangentFunCall: Tan): Expression {
         return tangentFunCall.run {
