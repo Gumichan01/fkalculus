@@ -88,7 +88,19 @@ class Evaluator {
             is Acos -> evaluateAcos(expression)
             is Atan -> evaluateAtan(expression)
             is Cosec -> evaluateCosec(expression)
+            is Sec -> evaluateSec(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateSec(secantFunCall: Sec): Expression {
+        return secantFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(secant(result.value))
+            } else {
+                Sec(result)
+            }
         }
     }
 
@@ -104,6 +116,7 @@ class Evaluator {
     }
 
     private fun cosecant(value: Double) = 1.0 / Math.sin(value)
+    private fun secant(value: Double) = 1.0 / Math.cos(value)
 
     private fun evaluateAtan(arctanFunCall: Atan): Expression {
         return arctanFunCall.run {
