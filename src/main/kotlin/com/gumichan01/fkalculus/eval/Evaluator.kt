@@ -87,7 +87,19 @@ class Evaluator {
             is Asin -> evaluateAsin(expression)
             is Acos -> evaluateAcos(expression)
             is Atan -> evaluateAtan(expression)
+            is Cosec -> evaluateCosec(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateCosec(cosecantFunCall: Cosec): Expression {
+        return cosecantFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(1.0 / Math.sin(result.value))
+            } else {
+                Cosec(result)
+            }
         }
     }
 

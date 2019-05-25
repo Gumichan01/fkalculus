@@ -538,6 +538,28 @@ class TestEvaluator {
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(Math.tan(90.0))))
     }
 
+    @test
+    fun `test eval cosec`() {
+        val ast = Cosec(Const(3.14))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / Math.sin(3.14)))
+    }
+
+    @test
+    fun `test eval complex sec`() {
+        val ast = Cosec(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Cosec(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
