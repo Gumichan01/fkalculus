@@ -136,8 +136,27 @@ class Evaluator {
 
         return 1.0 / sinValue
     }
-    private fun secant(value: Double) = 1.0 / Math.cos(value)
-    private fun cotan(value: Double) = 1.0 / Math.tan(value)
+
+    private fun secant(value: Double): Double {
+        val epsilon = 10e-15
+        val cosValue = Math.cos(value)
+        if (Math.abs(cosValue - 0.0) < epsilon) {
+            throw RuntimeException("Division by zero")
+        }
+
+        return 1.0 / cosValue
+    }
+
+    private fun cotan(value: Double): Double {
+        val epsilon = 10e-15
+        val tanValue = Math.tan(value)
+
+        if (Math.abs(tanValue - 0.0) < epsilon) {
+            throw RuntimeException("Division by zero")
+        }
+
+        return 1.0 / tanValue
+    }
 
     private fun evaluateAtan(arctanFunCall: Atan): Expression {
         return arctanFunCall.run {
