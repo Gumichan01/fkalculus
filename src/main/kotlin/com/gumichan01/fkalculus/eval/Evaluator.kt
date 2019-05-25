@@ -85,7 +85,31 @@ class Evaluator {
             is Sin -> evaluateSine(expression)
             is Tan -> evaluateTan(expression)
             is Asin -> evaluateAsin(expression)
+            is Acos -> evaluateAcos(expression)
+            is Atan -> evaluateAtan(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateAtan(arctanFunCall: Atan): Expression {
+        return arctanFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(Math.atan(result.value))
+            } else {
+                Atan(result)
+            }
+        }
+    }
+
+    private fun evaluateAcos(arccosFunCall: Acos): Expression {
+        return arccosFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(Math.acos(result.value))
+            } else {
+                Acos(result)
+            }
         }
     }
 
