@@ -429,7 +429,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test eval complex tan`() {
+    fun `test eval complex tangent`() {
         val ast = Tan(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
@@ -437,6 +437,28 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Tan(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test eval arcsin`() {
+        val ast = Asin(Const(3.14))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(3.14)))
+    }
+
+    @test
+    fun `test eval complex arcsin`() {
+        val ast = Asin(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Asin(Binop(Plus, Var("x"), Const(1.0))))
     }
 
     private fun checkConst(result: Option<ResultValue>): Boolean {

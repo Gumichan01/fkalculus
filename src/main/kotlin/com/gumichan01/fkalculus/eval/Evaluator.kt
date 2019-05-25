@@ -84,7 +84,19 @@ class Evaluator {
             is Cos -> evaluateCosine(expression)
             is Sin -> evaluateSine(expression)
             is Tan -> evaluateTan(expression)
+            is Asin -> evaluateAsin(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateAsin(arcsinFunCall: Asin): Expression {
+        return arcsinFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(Math.asin(result.value))
+            } else {
+                Asin(result)
+            }
         }
     }
 
