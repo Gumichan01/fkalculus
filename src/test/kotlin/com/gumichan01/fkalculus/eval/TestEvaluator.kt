@@ -558,6 +558,14 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval invalid cosec of π divided by 2`() {
+        val ast = Cosec(Const(Math.PI))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
     fun `test eval complex cosec`() {
         val ast = Cosec(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)

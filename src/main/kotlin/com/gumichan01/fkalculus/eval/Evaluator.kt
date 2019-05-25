@@ -127,7 +127,15 @@ class Evaluator {
         }
     }
 
-    private fun cosecant(value: Double) = 1.0 / Math.sin(value)
+    private fun cosecant(value: Double): Double {
+        val epsilon = 10e-15
+        val sinValue = Math.sin(value)
+        if (Math.abs(sinValue - 0.0) < epsilon) {
+            throw RuntimeException("Division by zero")
+        }
+
+        return 1.0 / sinValue
+    }
     private fun secant(value: Double) = 1.0 / Math.cos(value)
     private fun cotan(value: Double) = 1.0 / Math.tan(value)
 
