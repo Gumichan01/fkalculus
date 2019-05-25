@@ -582,6 +582,28 @@ class TestEvaluator {
                 && (result.t as IdentifierValue).value == Sec(Binop(Plus, Var("x"), Const(1.0))))
     }
 
+    @test
+    fun `test eval cotan`() {
+        val ast = Cotan(Const(3.14))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / Math.tan(3.14)))
+    }
+
+    @test
+    fun `test eval complex cotan`() {
+        val ast = Cotan(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Cotan(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
