@@ -693,6 +693,28 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval acosec of 1`() {
+        val ast = Acosec(Const(1.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(1.0)))
+    }
+
+    @test
+    fun `test eval acosec of -1`() {
+        val ast = Acosec(Const(-1.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(-1.0)))
+    }
+
+    @test
     fun `test eval complex acosec`() {
         val ast = Acosec(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
@@ -747,6 +769,27 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(1.0 / 2.0)))
+    }
+
+    @test
+    fun `test eval asec of 1`() {
+        val ast = Asec(Const(1.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.0))
+    }
+
+    @test
+    fun `test eval asec of -1`() {
+        val ast = Asec(Const(-1.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && (result.t as IdentifierValue).value == Pi)
     }
 
     @test

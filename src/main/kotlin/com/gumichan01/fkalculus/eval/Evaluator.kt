@@ -111,11 +111,17 @@ class Evaluator {
 
     private fun evaluateAsec(arcsecantFunCall: Asec): Expression {
         return arcsecantFunCall.run {
-            val result = evaluateExpression(expr)
-            if (result is Const) {
-                Const(arcsecant(result.value))
-            } else {
-                Asec(result)
+            when (expr) {
+                Const(1.0) -> Const(0.0)
+                Const(-1.0) -> Pi
+                else -> {
+                    val result = evaluateExpression(expr)
+                    if (result is Const) {
+                        Const(arcsecant(result.value))
+                    } else {
+                        Asec(result)
+                    }
+                }
             }
         }
     }
@@ -142,8 +148,7 @@ class Evaluator {
     }
 
     private fun arccosecant(value: Double): Double {
-        val domain = -1.0..1.0
-        if (value in domain) {
+        if ( -1.0 < value && value < 1.0) {
             throw RuntimeException("$value not in domain ]-∞, -1.0] ∪ [1.0, +∞[")
         }
         return Math.asin(1.0 / value)
@@ -265,7 +270,7 @@ class Evaluator {
     private fun evaluateSine(sineFunCall: Sin): Expression {
         return sineFunCall.run {
 
-            // The value of is an approximative value, so the result of sin(Pi) may not be 0
+            // The value of Pi is an approximative value, so the result of sin(Pi) may not be 0
             if (expr is Pi) {
                 Const(0.0)
             } else {
@@ -282,6 +287,8 @@ class Evaluator {
     private fun evaluateCosine(cosineFunCall: Cos): Expression {
         return cosineFunCall.run {
             val ninetyDegreesInRadian = Binop(Div, Pi, Const(2.0))
+
+            // The value of Pi/2 is an approximative value, so the result of sin(Pi/2) may not be 0
             if (expr == ninetyDegreesInRadian) {
                 Const(0.0)
             } else {
