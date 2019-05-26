@@ -381,7 +381,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.cos(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(cos(3.14)))
     }
 
     @test
@@ -414,7 +414,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.sin(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(sin(3.14)))
     }
 
     @test
@@ -447,7 +447,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.tan(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(tan(3.14)))
     }
 
     @test
@@ -471,7 +471,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(0.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(asin(0.14)))
     }
 
     @test
@@ -509,7 +509,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(Math.sin(90.0))))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(asin(sin(90.0))))
     }
 
     @test
@@ -520,7 +520,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(0.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(acos(0.14)))
     }
 
     @test
@@ -558,7 +558,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(Math.cos(90.0))))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(acos(cos(90.0))))
     }
 
     @test
@@ -569,7 +569,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(atan(3.14)))
     }
 
     @test
@@ -591,7 +591,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(Math.tan(90.0))))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(atan(tan(90.0))))
     }
 
     @test
@@ -602,12 +602,12 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / Math.sin(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / sin(3.14)))
     }
 
     @test
     fun `test eval invalid cosec of Pi`() {
-        val ast = Cosec(Const(Math.PI))
+        val ast = Cosec(Const(PI))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
     }
@@ -631,12 +631,12 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / Math.cos(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / cos(3.14)))
     }
 
     @test
     fun `test eval invalid secant of Pi divided by 2`() {
-        val ast = Sec(Const(Math.PI / 2.0))
+        val ast = Sec(Const(PI / 2.0))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
     }
@@ -660,12 +660,12 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / Math.tan(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0 / tan(3.14)))
     }
 
     @test
     fun `test eval invalid cotan of Pi`() {
-        val ast = Cotan(Const(Math.PI))
+        val ast = Cotan(Const(PI))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
     }
@@ -689,7 +689,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(1.0 / 2.0)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(asin(1.0 / 2.0)))
     }
 
     @test
@@ -700,7 +700,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(1.0)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(asin(1.0)))
     }
 
     @test
@@ -711,7 +711,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(-1.0)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(asin(-1.0)))
     }
 
     @test
@@ -768,7 +768,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(1.0 / 2.0)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(acos(1.0 / 2.0)))
     }
 
     @test
@@ -846,7 +846,7 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(1.0 / 2.0)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(atan(1.0 / 2.0)))
     }
 
     @test

@@ -137,21 +137,21 @@ class Evaluator {
         }
     }
 
-    private fun arccotan(value: Double): Double = Math.atan(1.0 / value)
+    private fun arccotan(value: Double): Double = atan(1.0 / value)
 
     private fun arcsecant(value: Double): Double {
         val domain = -1.0..1.0
         if (value in domain) {
             throw RuntimeException("$value not in domain ]-∞, -1.0] ∪ [1.0, +∞[")
         }
-        return Math.acos(1.0 / value)
+        return acos(1.0 / value)
     }
 
     private fun arccosecant(value: Double): Double {
         if (-1.0 < value && value < 1.0) {
             throw RuntimeException("$value not in domain ]-∞, -1.0] ∪ [1.0, +∞[")
         }
-        return Math.asin(1.0 / value)
+        return asin(1.0 / value)
     }
 
     private fun evaluateCotan(cotangentFunCall: Cotan): Expression {
@@ -188,26 +188,26 @@ class Evaluator {
     }
 
     private fun cosecant(value: Double): Double {
-        val sinValue = Math.sin(value)
+        val sinValue = sin(value)
         checkNotZero(sinValue)
         return 1.0 / sinValue
     }
 
     private fun secant(value: Double): Double {
-        val cosValue = Math.cos(value)
+        val cosValue = cos(value)
         checkNotZero(cosValue)
         return 1.0 / cosValue
     }
 
     private fun cotan(value: Double): Double {
-        val tanValue = Math.tan(value)
+        val tanValue = tan(value)
         checkNotZero(tanValue)
         return 1.0 / tanValue
     }
 
     private fun checkNotZero(value: Double) {
         val epsilon = 10e-15
-        if (Math.abs(value - 0.0) < epsilon) {
+        if (abs(value - 0.0) < epsilon) {
             throw DivisionByZeroException()
         }
     }
@@ -216,7 +216,7 @@ class Evaluator {
         return arctanFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
-                Const(Math.atan(result.value))
+                Const(atan(result.value))
             } else {
                 Atan(result)
             }
@@ -228,7 +228,7 @@ class Evaluator {
             val result = evaluateExpression(expr)
             if (result is Const) {
                 checkCosineArgumentOrFail(result.value)
-                Const(Math.acos(result.value))
+                Const(acos(result.value))
             } else {
                 Acos(result)
             }
@@ -240,7 +240,7 @@ class Evaluator {
             val result = evaluateExpression(expr)
             if (result is Const) {
                 checkSineArgumentOrFail(result.value)
-                Const(Math.asin(result.value))
+                Const(asin(result.value))
             } else {
                 Asin(result)
             }
@@ -260,7 +260,7 @@ class Evaluator {
         return tangentFunCall.run {
             val result = evaluateExpression(expr)
             if (result is Const) {
-                Const(Math.tan(result.value))
+                Const(tan(result.value))
             } else {
                 Tan(result)
             }
@@ -276,7 +276,7 @@ class Evaluator {
             } else {
                 val result = evaluateExpression(expr)
                 if (result is Const) {
-                    Const(Math.sin(result.value))
+                    Const(sin(result.value))
                 } else {
                     Sin(result)
                 }
@@ -294,7 +294,7 @@ class Evaluator {
             } else {
                 val result = evaluateExpression(expr)
                 if (result is Const) {
-                    Const(Math.cos(result.value))
+                    Const(cos(result.value))
                 } else {
                     Cos(result)
                 }
@@ -394,7 +394,7 @@ class Evaluator {
                     throw DivisionByZeroException()
                 }
             }
-            Pow -> Math.pow(const1.value, const2.value)
+            Pow -> const1.value.pow(const2.value)
         })
     }
 }
