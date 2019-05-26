@@ -62,7 +62,7 @@ class Evaluator {
     }
 
     private fun getHelpText(): String {
-        return """FKalculus v0.1.00.1-SNAPSHOT
+        return """FKalculus v0.1.0-SNAPSHOT
             |
             |Type an expression to evaluate it
             |- Example: 2 + 3
@@ -91,8 +91,24 @@ class Evaluator {
             is Cosec -> evaluateCosec(expression)
             is Sec -> evaluateSec(expression)
             is Cotan -> evaluateCotan(expression)
+            is Acosec -> evaluateAcosec(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
         }
+    }
+
+    private fun evaluateAcosec(arccosecantFunCall: Acosec): Expression {
+        return arccosecantFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(arccosecant(result.value))
+            } else {
+                Acosec(result)
+            }
+        }
+    }
+
+    private fun arccosecant(value: Double): Double {
+        return Math.asin(1.0 / value)
     }
 
     private fun evaluateCotan(cotangentFunCall: Cotan): Expression {

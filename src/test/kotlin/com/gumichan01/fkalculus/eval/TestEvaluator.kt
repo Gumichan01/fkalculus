@@ -439,6 +439,8 @@ class TestEvaluator {
                 && (result.t as IdentifierValue).value == Tan(Binop(Plus, Var("x"), Const(1.0))))
     }
 
+    // See this link: https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+
     @test
     fun `test eval arcsin`() {
         val ast = Asin(Const(0.14))
@@ -657,18 +659,18 @@ class TestEvaluator {
                 && (result.t as IdentifierValue).value == Cotan(Binop(Plus, Var("x"), Const(1.0))))
     }
 
-    /*@test
+    @test
     fun `test eval acosec`() {
-        val ast = Acosec(Const(3.14))
+        val ast = Acosec(Const(2.0))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.(3.14)))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(1.0 / 2.0)))
     }
 
-    @test
+    /*@test
     fun `test eval complex acosec`() {
         val ast = Acosec(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
