@@ -937,7 +937,7 @@ class TestKalculusParser {
         assertTrue(ast is Some && ast.t == (Cos(Binop(Plus, Var("x"), Const(1.0)))))
     }
 
-    /*@test
+    @test
     fun `parse basic Tan`() {
         val instructionString = "tan(2)"
         val parser = KalculusParser()
@@ -967,7 +967,7 @@ class TestKalculusParser {
         assertTrue(ast is Some && ast.t == (Tan(Binop(Plus, Var("x"), Const(1.0)))))
     }
 
-    @test
+    /*@test
     fun `parse basic arcsin`() {
         val instructionString = "arcsin(2)"
         val parser = KalculusParser()

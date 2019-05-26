@@ -61,6 +61,7 @@ class KalculusParser {
         val log2 by token("log2|lb")
         val sine by token("sin")
         val cosine by token("cos")
+        val tangent by token("tan")
         val e by token("e")
 
         // Basic tokens
@@ -89,7 +90,7 @@ class KalculusParser {
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val mathFun by sqrt or expo or ln or log10 or log2 or sine or cosine
+        val mathFun by sqrt or expo or ln or log10 or log2 or sine or cosine or tangent
         val highPriorityexpressionRule by skip(lparen) and parser { expr } and skip(rparen)
         val term: Parser<Expression> by simpleExpr or highPriorityexpressionRule
         val funCall: Parser<Expression> by mathFun and highPriorityexpressionRule use { produceFunCall(t1, t2) }
@@ -110,6 +111,7 @@ class KalculusParser {
                 log2 -> Log2(argument)
                 sine -> Sin(argument)
                 cosine -> Cos(argument)
+                tangent -> Tan(argument)
                 else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
             }
         }
