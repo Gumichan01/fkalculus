@@ -1287,9 +1287,29 @@ class TestKalculusParser {
         assertTrue(ast is Some && ast.t == (Acosec(Binop(Plus, Var("x"), Const(1.0)))))
     }
 
-    /*@test
+    @test
     fun `parse basic arccotan`() {
         val instructionString = "arccotan(2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Acotan(Const(2.0))))
+    }
+
+    @test
+    fun `parse 1st alternative arccotan - acotan`() {
+        val instructionString = "acotan(2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Acotan(Const(2.0))))
+    }
+
+    @test
+    fun `parse 2dn alternative arccotan - arccot`() {
+        val instructionString = "arccot(2)"
         val parser = KalculusParser()
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
@@ -1315,5 +1335,5 @@ class TestKalculusParser {
 
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == (Acotan(Binop(Plus, Var("x"), Const(1.0)))))
-    }*/
+    }
 }

@@ -61,6 +61,7 @@ class KalculusParser {
         val log2 by token("log2|lb")
         val arcsecant by token("arcsec|asec")
         val arccosecant by token("arccosec|arccsc|acsc")
+        val arccotangent by token("arccotan|arccot|acotan")
         val arcsin by token("arcsin|asin")
         val arccos by token("arccos|acos")
         val arctan by token("arctan|atan")
@@ -98,7 +99,7 @@ class KalculusParser {
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val mathFun by sqrt or expo or ln or log10 or log2 or sine or cosine or tangent or arcsin or arccos or arctan or secant or cosecant or cotangent or arcsecant or arccosecant
+        val mathFun by sqrt or expo or ln or log10 or log2 or sine or cosine or tangent or arcsin or arccos or arctan or secant or cosecant or cotangent or arcsecant or arccosecant or arccotangent
         val highPriorityexpressionRule by skip(lparen) and parser { expr } and skip(rparen)
         val term: Parser<Expression> by simpleExpr or highPriorityexpressionRule
         val funCall: Parser<Expression> by mathFun and highPriorityexpressionRule use { produceFunCall(t1, t2) }
@@ -128,6 +129,7 @@ class KalculusParser {
                 cotangent -> Cotan(argument)
                 arcsecant -> Asec(argument)
                 arccosecant -> Acosec(argument)
+                arccotangent -> Acotan(argument)
                 else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
             }
         }
