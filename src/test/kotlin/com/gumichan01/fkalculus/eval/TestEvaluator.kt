@@ -396,6 +396,17 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval sine of Pi divided by2`() {
+        val ast = Cos(Binop(Div, Pi, Const(2.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.0))
+    }
+
+    @test
     fun `test eval sine`() {
         val ast = Sin(Const(3.14))
         val result: Option<ResultValue> = Evaluator().eval(ast)

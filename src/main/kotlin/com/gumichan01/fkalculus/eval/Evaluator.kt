@@ -281,11 +281,16 @@ class Evaluator {
 
     private fun evaluateCosine(cosineFunCall: Cos): Expression {
         return cosineFunCall.run {
-            val result = evaluateExpression(expr)
-            if (result is Const) {
-                Const(Math.cos(result.value))
+            val ninetyDegreesInRadian = Binop(Div, Pi, Const(2.0))
+            if (expr == ninetyDegreesInRadian) {
+                Const(0.0)
             } else {
-                Cos(result)
+                val result = evaluateExpression(expr)
+                if (result is Const) {
+                    Const(Math.cos(result.value))
+                } else {
+                    Cos(result)
+                }
             }
         }
     }
