@@ -1,6 +1,7 @@
 package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
+import com.gumichan01.fkalculus.util.DivisionByZeroException
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
@@ -148,7 +149,7 @@ class Evaluator {
     private fun checkNotZero(value: Double) {
         val epsilon = 10e-15
         if (Math.abs(value - 0.0) < epsilon) {
-            throw RuntimeException("Division by zero")
+            throw DivisionByZeroException()
         }
     }
 
@@ -317,7 +318,7 @@ class Evaluator {
                 if (const2.value != 0.0) {
                     const1.value / const2.value
                 } else {
-                    throw RuntimeException("Division by zero")
+                    throw DivisionByZeroException()
                 }
             }
             Pow -> Math.pow(const1.value, const2.value)
