@@ -407,6 +407,17 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval sine of Pi`() {
+        val ast = Sin(Pi)
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.0))
+    }
+
+    @test
     fun `test eval complex sine`() {
         val ast = Sin(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)

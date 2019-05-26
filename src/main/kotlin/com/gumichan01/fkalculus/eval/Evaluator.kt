@@ -264,11 +264,17 @@ class Evaluator {
 
     private fun evaluateSine(sineFunCall: Sin): Expression {
         return sineFunCall.run {
-            val result = evaluateExpression(expr)
-            if (result is Const) {
-                Const(Math.sin(result.value))
+
+            // The value of is an approximative value, so the result of sin(Pi) may not be 0
+            if (expr is Pi) {
+                Const(0.0)
             } else {
-                Sin(result)
+                val result = evaluateExpression(expr)
+                if (result is Const) {
+                    Const(Math.sin(result.value))
+                } else {
+                    Sin(result)
+                }
             }
         }
     }
