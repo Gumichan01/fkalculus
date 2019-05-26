@@ -1007,9 +1007,19 @@ class TestKalculusParser {
         assertTrue(ast is Some && ast.t == (Asin(Binop(Plus, Var("x"), Const(1.0)))))
     }
 
-    /*@test
+    @test
     fun `parse basic arccos`() {
         val instructionString = "arccos(2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == (Acos(Const(2.0))))
+    }
+
+    @test
+    fun `parse basic alternative arccos`() {
+        val instructionString = "acos(2)"
         val parser = KalculusParser()
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
@@ -1029,7 +1039,7 @@ class TestKalculusParser {
 
     @test
     fun `parse complex arccos`() {
-        val instructionString = "arcsin(x + 1)"
+        val instructionString = "arccos(x + 1)"
         val parser = KalculusParser()
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
@@ -1037,7 +1047,7 @@ class TestKalculusParser {
         assertTrue(ast is Some && ast.t == (Acos(Binop(Plus, Var("x"), Const(1.0)))))
     }
 
-    @test
+    /*@test
     fun `parse basic arctan`() {
         val instructionString = "arctan(2)"
         val parser = KalculusParser()
