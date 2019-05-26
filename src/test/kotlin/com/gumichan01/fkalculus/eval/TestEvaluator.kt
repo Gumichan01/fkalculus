@@ -670,7 +670,7 @@ class TestEvaluator {
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.asin(1.0 / 2.0)))
     }
 
-    /*@test
+    @test
     fun `test eval complex acosec`() {
         val ast = Acosec(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
@@ -678,10 +678,10 @@ class TestEvaluator {
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
-                && (result.t as IdentifierValue).value == Atan(Binop(Plus, Var("x"), Const(1.0))))
+                && (result.t as IdentifierValue).value == Acosec(Binop(Plus, Var("x"), Const(1.0))))
     }
 
-    @test
+    /*@test
     fun `test arccosecant is inverse of cosecant`() {
         val ast = Acosec(Tan(Const(90.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
