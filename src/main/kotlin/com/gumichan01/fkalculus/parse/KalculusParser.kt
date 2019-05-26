@@ -59,7 +59,7 @@ class KalculusParser {
         val ln by token("ln")
         val log10 by token("log10|lg")
         val log2 by token("log2|lb")
-        val sinus by token("sin")
+        val sine by token("sin")
         val e by token("e")
 
         // Basic tokens
