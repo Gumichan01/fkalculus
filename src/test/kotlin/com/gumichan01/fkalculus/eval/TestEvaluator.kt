@@ -558,7 +558,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test eval invalid cosec of π`() {
+    fun `test eval invalid cosec of Pi`() {
         val ast = Cosec(Const(Math.PI))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
@@ -587,7 +587,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test eval invalid secant of π divided by 2`() {
+    fun `test eval invalid secant of Pi divided by 2`() {
         val ast = Sec(Const(Math.PI / 2.0))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
@@ -616,7 +616,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test eval invalid cotan of π`() {
+    fun `test eval invalid cotan of Pi`() {
         val ast = Cotan(Const(Math.PI))
         val result: Option<ResultValue> = Evaluator().eval(ast)
         assertTrue(result is None)
