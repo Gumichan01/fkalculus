@@ -459,6 +459,14 @@ class TestEvaluator {
     }
 
     @test
+    fun `test eval invalid arcsin of x greater than 1`() {
+        val ast = Asin(Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
     fun `test eval complex arcsin`() {
         val ast = Asin(Binop(Plus, Var("x"), Const(1.0)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
@@ -500,6 +508,22 @@ class TestEvaluator {
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(result is Some && result.t is IdentifierValue
                 && (result.t as IdentifierValue).value == Acos(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test eval invalid arccos of x less than -1`() {
+        val ast = Acos(Const(-2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
+    fun `test eval invalid arccos of x greater than 1`() {
+        val ast = Acos(Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
     }
 
     @test
