@@ -681,16 +681,16 @@ class TestEvaluator {
                 && (result.t as IdentifierValue).value == Acosec(Binop(Plus, Var("x"), Const(1.0))))
     }
 
-    /*@test
+    @test
     fun `test arccosecant is inverse of cosecant`() {
-        val ast = Acosec(Tan(Const(90.0)))
+        val ast = Acosec(Cosec(Const(0.5)))
         val result: Option<ResultValue> = Evaluator().eval(ast)
 
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is IdentifierValue)
         assertTrue(checkConst(result))
-        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(Math.tan(90.0))))
-    }*/
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.5))
+    }
 
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
