@@ -108,6 +108,9 @@ class Evaluator {
     }
 
     private fun arccosecant(value: Double): Double {
+        if (value in -1.0..1.0) {
+            throw RuntimeException("$value not in domain ]-∞, -1.0] [1.0, +∞[")
+        }
         return Math.asin(1.0 / value)
     }
 

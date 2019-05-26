@@ -692,6 +692,30 @@ class TestEvaluator {
         assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.5))
     }
 
+    @test
+    fun `test eval invalid arccosecant of x equal to 0`() {
+        val ast = Acosec(Const(0.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
+    fun `test eval invalid arccosecant of x between -1 and 0`() {
+        val ast = Acosec(Const(-0.5))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
+    fun `test eval invalid arccosecant of x between 0 and 1`() {
+        val ast = Acosec(Const(0.5))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
