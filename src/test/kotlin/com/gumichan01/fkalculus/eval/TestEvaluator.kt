@@ -716,6 +716,63 @@ class TestEvaluator {
         assertTrue(result is None)
     }
 
+    @test
+    fun `test eval asec`() {
+        val ast = Asec(Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.acos(1.0 / 2.0)))
+    }
+
+    @test
+    fun `test eval complex asec`() {
+        val ast = Asec(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Asec(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test arcsecant is inverse of secant`() {
+        val ast = Asec(Sec(Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(1.0))
+    }
+
+    @test
+    fun `test eval invalid arcsecant of x equal to 0`() {
+        val ast = Asec(Const(0.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
+    fun `test eval invalid arcsecant of x between -1 and 0`() {
+        val ast = Asec(Const(-0.5))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
+    @test
+    fun `test eval invalid arcsecant of x between 0 and 1`() {
+        val ast = Asec(Const(0.5))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is None)
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
