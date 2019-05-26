@@ -61,11 +61,9 @@ class FKalculus(val arguments: Arguments) {
                         val result: Option<ResultValue> = eval(kalculus.t)
                         if (result is Some) {
                             print(result.t)
-                        } else {
-                            println("Unrecognized command, type \"help\" to get available commands.")
                         }
                     } else {
-                        println("Invalid command/expression to evaluate")
+                        println("Invalid command, type \"help\" to get available commands.")
                     }
                 }
             } else {
