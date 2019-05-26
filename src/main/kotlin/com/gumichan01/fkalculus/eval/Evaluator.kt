@@ -128,34 +128,28 @@ class Evaluator {
     }
 
     private fun cosecant(value: Double): Double {
-        val epsilon = 10e-15
         val sinValue = Math.sin(value)
-        if (Math.abs(sinValue - 0.0) < epsilon) {
-            throw RuntimeException("Division by zero")
-        }
-
+        checkNotZero(sinValue)
         return 1.0 / sinValue
     }
 
     private fun secant(value: Double): Double {
-        val epsilon = 10e-15
         val cosValue = Math.cos(value)
-        if (Math.abs(cosValue - 0.0) < epsilon) {
-            throw RuntimeException("Division by zero")
-        }
-
+        checkNotZero(cosValue)
         return 1.0 / cosValue
     }
 
     private fun cotan(value: Double): Double {
-        val epsilon = 10e-15
         val tanValue = Math.tan(value)
+        checkNotZero(tanValue)
+        return 1.0 / tanValue
+    }
 
-        if (Math.abs(tanValue - 0.0) < epsilon) {
+    private fun checkNotZero(value: Double) {
+        val epsilon = 10e-15
+        if (Math.abs(value - 0.0) < epsilon) {
             throw RuntimeException("Division by zero")
         }
-
-        return 1.0 / tanValue
     }
 
     private fun evaluateAtan(arctanFunCall: Atan): Expression {
