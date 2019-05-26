@@ -62,7 +62,7 @@ class Evaluator {
     }
 
     private fun getHelpText(): String {
-        return """FKalculus v0.0.1-SNAPSHOT
+        return """FKalculus v0.1.00.1-SNAPSHOT
             |
             |Type an expression to evaluate it
             |- Example: 2 + 3
