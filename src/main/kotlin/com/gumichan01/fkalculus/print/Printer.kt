@@ -65,7 +65,18 @@ class Printer {
             is Ln -> "ln(" + stringOf(expression.expr) + ")"
             is Log10 -> "lg(" + stringOf(expression.expr) + ")"
             is Log2 -> "lb(" + stringOf(expression.expr) + ")"
-            else -> TODO("Print $expression not implemented")
+            is Cos -> "cos(" + stringOf(expression.expr) + ")"
+            is Sin -> "sin(" + stringOf(expression.expr) + ")"
+            is Tan -> "tan(" + stringOf(expression.expr) + ")"
+            is Acos -> "arccos(" + stringOf(expression.expr) + ")"
+            is Asin -> "arcsin(" + stringOf(expression.expr) + ")"
+            is Atan -> "arctan(" + stringOf(expression.expr) + ")"
+            is Sec -> "sec(" + stringOf(expression.expr) + ")"
+            is Cosec -> "csc(" + stringOf(expression.expr) + ")"
+            is Cotan -> "cot(" + stringOf(expression.expr) + ")"
+            is Asec -> "arcsec(" + stringOf(expression.expr) + ")"
+            is Acosec -> "arccsc(" + stringOf(expression.expr) + ")"
+            is Acotan -> "arccot(" + stringOf(expression.expr) + ")"
         }
     }
 
