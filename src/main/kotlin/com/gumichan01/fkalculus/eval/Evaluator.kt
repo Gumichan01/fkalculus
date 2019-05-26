@@ -142,13 +142,13 @@ class Evaluator {
     private fun arcsecant(value: Double): Double {
         val domain = -1.0..1.0
         if (value in domain) {
-            throw RuntimeException("$value not in domain ]-∞, -1.0] [1.0, +∞[")
+            throw RuntimeException("$value not in domain ]-∞, -1.0] ∪ [1.0, +∞[")
         }
         return Math.acos(1.0 / value)
     }
 
     private fun arccosecant(value: Double): Double {
-        if ( -1.0 < value && value < 1.0) {
+        if (-1.0 < value && value < 1.0) {
             throw RuntimeException("$value not in domain ]-∞, -1.0] ∪ [1.0, +∞[")
         }
         return Math.asin(1.0 / value)
