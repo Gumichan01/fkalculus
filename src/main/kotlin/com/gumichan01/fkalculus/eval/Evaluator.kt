@@ -93,7 +93,19 @@ class Evaluator {
             is Cotan -> evaluateCotan(expression)
             is Acosec -> evaluateAcosec(expression)
             is Asec -> evaluateAsec(expression)
+            is Acotan -> evaluateAcotan(expression)
             else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+        }
+    }
+
+    private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {
+        return arccotanFunCall.run {
+            val result = evaluateExpression(expr)
+            if (result is Const) {
+                Const(arccotan(result.value))
+            } else {
+                Acotan(result)
+            }
         }
     }
 
@@ -118,6 +130,8 @@ class Evaluator {
             }
         }
     }
+
+    private fun arccotan(value: Double): Double = Math.atan(1.0 / value)
 
     private fun arcsecant(value: Double): Double {
         val domain = -1.0..1.0

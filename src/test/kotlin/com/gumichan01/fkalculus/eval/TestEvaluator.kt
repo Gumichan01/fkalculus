@@ -773,6 +773,39 @@ class TestEvaluator {
         assertTrue(result is None)
     }
 
+    @test
+    fun `test eval acotan`() {
+        val ast = Acotan(Const(2.0))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(Math.atan(1.0 / 2.0)))
+    }
+
+    @test
+    fun `test eval complex acotan`() {
+        val ast = Acotan(Binop(Plus, Var("x"), Const(1.0)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(result is Some && result.t is IdentifierValue
+                && (result.t as IdentifierValue).value == Acotan(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test arccotan is inverse of cotan`() {
+        val ast = Acotan(Cotan(Const(0.5)))
+        val result: Option<ResultValue> = Evaluator().eval(ast)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is IdentifierValue)
+        assertTrue(checkConst(result))
+        assertTrue(result is Some && checkConst(result) && (result.t as IdentifierValue).value == Const(0.5))
+    }
+
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
