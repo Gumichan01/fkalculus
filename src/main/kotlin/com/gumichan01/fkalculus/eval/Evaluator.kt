@@ -123,8 +123,12 @@ class Evaluator {
             is Acosec -> evaluateAcosec(expression)
             is Asec -> evaluateAsec(expression)
             is Acotan -> evaluateAcotan(expression)
-            else -> throw RuntimeException("Cannot evaluate the expression: $expression")
+            is Identifier -> eveluateIdentifier(expression)
         }
+    }
+
+    private fun eveluateIdentifier(identifier: Identifier): Expression {
+        return Const(42.0)
     }
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {

@@ -5,6 +5,7 @@ import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.Double.Companion.NaN
 import kotlin.math.*
 import org.junit.jupiter.api.Test as test
 
@@ -874,4 +875,39 @@ class TestEvaluator {
     private fun checkConst(result: Option<ResultValue>): Boolean {
         return result is Some && result.t is IdentifierValue && (result.t as IdentifierValue).value is Const
     }
+
+    @test
+    fun `test evaluate constant value and try to get its value from the identifier`() {
+
+        val interpreter = Evaluator()
+        val resultConst = interpreter.eval(Const(42.0))
+        val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
+        val resultVar = interpreter.eval(Identifier(idString))
+
+        assertTrue(resultVar is Some)
+    }
+
+    /*@test
+    fun `test evaluate constant value and get its value later`() {
+
+        val interpreter = Evaluator()
+        val resultConst = interpreter.eval(Const(42.0))
+        val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
+        val resultVar = interpreter.eval(Identifier(idString))
+        val (varString, value) = extractIdentifierOrFail(resultVar)
+
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
+        assertTrue(value == Const(42.0))
+    }
+
+    private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
+        return result.run {
+            if (this is Some && t is IdentifierValue) {
+                val id = (t as IdentifierValue)
+                Pair(id.identifier, id.value)
+            } else throw AssertionError("Not an Identifier")
+        }
+    }*/
 }
