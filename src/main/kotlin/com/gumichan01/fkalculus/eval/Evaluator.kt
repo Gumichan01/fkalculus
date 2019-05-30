@@ -45,6 +45,7 @@ knowledge of the CeCILL license and that you accept its terms.
 class Evaluator {
 
     private var count: Int = 0
+    private var environment: List<Pair<String, Expression>> = emptyList()
 
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
@@ -58,7 +59,12 @@ class Evaluator {
     private fun evaluateInstruction(instruction: Instruction): ResultValue {
         return when (instruction) {
             is Help -> HelpText(getHelpText())
-            is Expression -> IdentifierValue(freshIdentifier(), evaluateExpression(instruction))
+            is Expression -> {
+                val freshId = freshIdentifier()
+                val resultExpression = evaluateExpression(instruction)
+                environment = (environment + Pair(freshId, resultExpression))
+                IdentifierValue(freshId, resultExpression)
+            }
             else -> throw RuntimeException("Invalid instruction")
         }
     }
@@ -129,12 +135,13 @@ class Evaluator {
             is Acosec -> evaluateAcosec(expression)
             is Asec -> evaluateAsec(expression)
             is Acotan -> evaluateAcotan(expression)
-            is Identifier -> eveluateIdentifier(expression)
+            is Identifier -> evaluateIdentifier(expression)
         }
     }
 
-    private fun eveluateIdentifier(identifier: Identifier): Expression {
-        return if (identifier.name == "v0") Const(1.0) else Cos(Var("x"))
+    private fun evaluateIdentifier(identifier: Identifier): Expression {
+        val id = identifier.name
+        return environment.find { (v, _) -> v == id }?.second ?: throw RuntimeException("Invalid identifier: $id")
     }
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {

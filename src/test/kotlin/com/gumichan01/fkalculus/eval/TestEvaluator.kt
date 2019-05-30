@@ -929,6 +929,30 @@ class TestEvaluator {
         assertTrue(value == expectedValue)
     }
 
+    // It is not really a pure unit test
+    @test
+    fun `test evaluate several expressions and get a random variable`() {
+        val interpreter = Evaluator()
+        val expressions = listOf(Const(3.14), Var("x"), Binop(Plus, Const(0.0), Const(0.0)), Cos(Var("x")), Const(42.0))
+
+        expressions.map { x -> interpreter.eval(x) }
+
+        val index = (0 until expressions.size).random()
+        val id = "v$index"
+        val resultValue = interpreter.eval(Identifier(id))
+        val (varString, value) = extractIdentifierOrFail(resultValue)
+        val expectedId = "v" + expressions.size
+        val expectedValue = expressions[index]
+
+        println("index : $index")
+        println("expected (id, value): ($expectedId, $expectedValue)")
+        println("got (id, value): ($varString, $value)")
+
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
+    }
+
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
             if (this is Some && t is IdentifierValue) {
