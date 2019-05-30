@@ -5,7 +5,6 @@ import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
-import kotlin.Double.Companion.NaN
 import kotlin.math.*
 import org.junit.jupiter.api.Test as test
 
@@ -878,7 +877,6 @@ class TestEvaluator {
 
     @test
     fun `test evaluate an expression and try to get its value from the identifier`() {
-
         val interpreter = Evaluator()
         val resultConst = interpreter.eval(Const(42.0))
         val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
@@ -889,7 +887,6 @@ class TestEvaluator {
 
     @test
     fun `test evaluate an expression, get its value, and retrieve the variable`() {
-
         val interpreter = Evaluator()
         val resultConst = interpreter.eval(Const(42.0))
         val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
@@ -903,7 +900,6 @@ class TestEvaluator {
 
     @test
     fun `test evaluate an expression and get its value later`() {
-
         val interpreter = Evaluator()
         val resultConst = interpreter.eval(Const(1.0))
         val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
@@ -914,6 +910,23 @@ class TestEvaluator {
         assertTrue(idString == "v0")
         assertTrue(varString == "v1")
         assertTrue(value == Const(1.0))
+    }
+
+    @test
+    fun `test evaluate several exxpressions and getthe variable v3`() {
+        val id = "v3"
+        val expectedValue = Cos(Var("x"))
+
+        val interpreter = Evaluator()
+        val expressions = listOf(Pi, Exp1, Binop(Plus, Const(0.0), Const(0.0)), expectedValue, Const(42.0))
+        expressions.map { x -> interpreter.eval(x) }
+        val resultValue = interpreter.eval(Identifier(id))
+        val (varString, value) = extractIdentifierOrFail(resultValue)
+        val expectedId = "v" + expressions.size
+
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
     }
 
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
