@@ -44,6 +44,8 @@ knowledge of the CeCILL license and that you accept its terms.
 
 class Evaluator {
 
+    private var count: Int = 0
+
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
             Some(evaluateInstruction(ast as Instruction))
@@ -56,9 +58,13 @@ class Evaluator {
     private fun evaluateInstruction(instruction: Instruction): ResultValue {
         return when (instruction) {
             is Help -> HelpText(getHelpText())
-            is Expression -> IdentifierValue("v0", evaluateExpression(instruction))
+            is Expression -> IdentifierValue(freshIdentifier(), evaluateExpression(instruction))
             else -> throw RuntimeException("Invalid instruction")
         }
+    }
+
+    private fun freshIdentifier(): String {
+        return "v" + count++
     }
 
     private fun getHelpText(): String {
