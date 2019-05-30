@@ -913,7 +913,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test evaluate several exxpressions and getthe variable v3`() {
+    fun `test evaluate several exxpressions and get the variable v3`() {
         val id = "v3"
         val expectedValue = Cos(Var("x"))
 
