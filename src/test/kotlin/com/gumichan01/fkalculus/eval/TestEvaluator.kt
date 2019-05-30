@@ -932,7 +932,7 @@ class TestEvaluator {
     @test
     fun `test evaluate several expressions and get a random variable`() {
         val interpreter = Evaluator()
-        val expressions = listOf(Const(3.14), Var("x"), Binop(Plus, Const(0.0), Const(0.0)), Cos(Var("x")), Const(42.0))
+        val expressions = listOf(Const(3.14), Var("x"), Binop(Plus, Var("x"), Const(0.0)), Cos(Var("x")), Const(42.0))
 
         expressions.map { x -> interpreter.eval(x) }
 
