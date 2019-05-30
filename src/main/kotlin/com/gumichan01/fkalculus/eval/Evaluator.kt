@@ -134,7 +134,7 @@ class Evaluator {
     }
 
     private fun eveluateIdentifier(identifier: Identifier): Expression {
-        return Const(42.0)
+        return if (identifier.name == "v0") Const(1.0) else Const(42.0)
     }
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {

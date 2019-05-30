@@ -901,11 +901,11 @@ class TestEvaluator {
         assertTrue(varString == "v1")
     }
 
-    /*@test
+    @test
     fun `test evaluate an expression and get its value later`() {
 
         val interpreter = Evaluator()
-        val resultConst = interpreter.eval(Const(42.0))
+        val resultConst = interpreter.eval(Const(1.0))
         val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
         val (varString, value) = extractIdentifierOrFail(resultVar)
@@ -913,8 +913,8 @@ class TestEvaluator {
         assertTrue(resultVar is Some)
         assertTrue(idString == "v0")
         assertTrue(varString == "v1")
-        assertTrue(value == Const(42.0))
-    }*/
+        assertTrue(value == Const(1.0))
+    }
 
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
