@@ -60,7 +60,7 @@ class Printer {
                 val stringExpr2 = withParenthesisOrNot(expression.expr2, stringOf(expression.expr2))
                 stringExpr1 + stringOf(expression.operator) + stringExpr2
             }
-            is Sqrt -> "√(" + stringOf(expression.expr) + ")"
+            is Sqrt -> "sqrt(" + stringOf(expression.expr) + ")"
             is Expo -> "e(" + stringOf(expression.expr) + ")"
             is Ln -> "ln(" + stringOf(expression.expr) + ")"
             is Log10 -> "lg(" + stringOf(expression.expr) + ")"
