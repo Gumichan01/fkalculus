@@ -65,7 +65,7 @@ class Printer {
             is Ln -> "ln(" + stringOf(expression.expr) + ")"
             is Log10 -> "lg(" + stringOf(expression.expr) + ")"
             is Log2 -> "lb(" + stringOf(expression.expr) + ")"
-            is Cos -> "cos(" + stringOf(expression.expr) + ")"
+            is Cos -> "cos( " + stringOf(expression.expr) + ")"
             is Sin -> "sin(" + stringOf(expression.expr) + ")"
             is Tan -> "tan(" + stringOf(expression.expr) + ")"
             is Acos -> "arccos(" + stringOf(expression.expr) + ")"
