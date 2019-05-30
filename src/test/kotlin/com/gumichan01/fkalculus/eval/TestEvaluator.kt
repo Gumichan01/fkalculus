@@ -877,7 +877,7 @@ class TestEvaluator {
     }
 
     @test
-    fun `test evaluate constant value and try to get its value from the identifier`() {
+    fun `test evaluate an expression and try to get its value from the identifier`() {
 
         val interpreter = Evaluator()
         val resultConst = interpreter.eval(Const(42.0))
@@ -887,8 +887,22 @@ class TestEvaluator {
         assertTrue(resultVar is Some)
     }
 
+    @test
+    fun `test evaluate an expression, get its value, and retrieve the variable`() {
+
+        val interpreter = Evaluator()
+        val resultConst = interpreter.eval(Const(42.0))
+        val idString = if (resultConst is Some && checkConst(resultConst)) (resultConst.t as IdentifierValue).identifier else ""
+        val resultVar = interpreter.eval(Identifier(idString))
+        val (varString, _) = extractIdentifierOrFail(resultVar)
+
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
+    }
+
     /*@test
-    fun `test evaluate constant value and get its value later`() {
+    fun `test evaluate an expression and get its value later`() {
 
         val interpreter = Evaluator()
         val resultConst = interpreter.eval(Const(42.0))
@@ -900,7 +914,7 @@ class TestEvaluator {
         assertTrue(idString == "v0")
         assertTrue(varString == "v1")
         assertTrue(value == Const(42.0))
-    }
+    }*/
 
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
@@ -909,5 +923,5 @@ class TestEvaluator {
                 Pair(id.identifier, id.value)
             } else throw AssertionError("Not an Identifier")
         }
-    }*/
+    }
 }
