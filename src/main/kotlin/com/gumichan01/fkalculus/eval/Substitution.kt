@@ -26,6 +26,9 @@ class Substitution {
             is Cos -> Cos(substitute(expr.expr, variable, expr1))
             is Sin -> Sin(substitute(expr.expr, variable, expr1))
             is Tan -> Tan(substitute(expr.expr, variable, expr1))
+            is Acos -> Acos(substitute(expr.expr, variable, expr1))
+            is Asin -> Asin(substitute(expr.expr, variable, expr1))
+            is Atan -> Atan(substitute(expr.expr, variable, expr1))
             else -> TODO("This is my job")
         }
     }

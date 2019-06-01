@@ -183,8 +183,28 @@ class TestSubstitution {
     }
     @test
     fun `test substitution - tan`() {
-        val ast = Subst(Tan(Var("x")), "x", Const(2.0))
+        val ast = Subst(Atan(Var("x")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
-        assert(result == Tan(Const(2.0)))
+        assert(result == Atan(Const(2.0)))
     }
+
+    @test
+    fun `test substitution - acos`() {
+        val ast = Subst(Acos(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Acos(Const(2.0)))
+    }
+    @test
+    fun `test substitution - asin`() {
+        val ast = Subst(Asin(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Asin(Const(2.0)))
+    }
+    @test
+    fun `test substitution - atan`() {
+        val ast = Subst(Atan(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Atan(Const(2.0)))
+    }
+
 }
