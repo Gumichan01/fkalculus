@@ -2,7 +2,6 @@ package com.gumichan01.fkalculus
 
 import com.gumichan01.fkalculus.ast.FKalculusAST
 import com.gumichan01.fkalculus.ast.ResultValue
-import com.gumichan01.fkalculus.eval.Evaluator
 import com.gumichan01.fkalculus.eval.Normalizer
 import com.gumichan01.fkalculus.parse.KalculusParser
 import com.gumichan01.fkalculus.print.Printer
@@ -47,6 +46,8 @@ knowledge of the CeCILL license and that you accept its terms.
 
 class FKalculus(val arguments: Arguments) {
 
+    private val normalizer = Normalizer()
+
     fun start() {
         var quit = false
 
@@ -77,7 +78,7 @@ class FKalculus(val arguments: Arguments) {
     private fun parse(text: String): Option<FKalculusAST> {
         return KalculusParser().parse(text)
     }
-    
+
     private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
@@ -87,7 +88,7 @@ class FKalculus(val arguments: Arguments) {
     }
 
     private fun eval(ast: FKalculusAST): Option<ResultValue> {
-        return Normalizer().eval(ast)
+        return normalizer.eval(ast)
     }
 
     private fun print(result: ResultValue) {
