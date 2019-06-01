@@ -3,7 +3,7 @@ package com.gumichan01.fkalculus.eval
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TestNormalizer {
@@ -18,8 +18,8 @@ class TestNormalizer {
         val ast = Help
         val result: Option<ResultValue> = Normalizer().eval(ast)
 
-        Assertions.assertTrue(result is Some)
-        Assertions.assertTrue(result is Some && result.t is HelpText)
+        assertTrue(result is Some)
+        assertTrue(result is Some && result.t is HelpText)
     }
 
     @Test
@@ -29,7 +29,7 @@ class TestNormalizer {
         val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
 
-        Assertions.assertTrue(resultVar is Some)
+        assertTrue(resultVar is Some)
     }
 
     @Test
@@ -40,9 +40,9 @@ class TestNormalizer {
         val resultVar = interpreter.eval(Identifier(idString))
         val (varString, _) = extractIdentifierOrFail(resultVar)
 
-        Assertions.assertTrue(resultVar is Some)
-        Assertions.assertTrue(idString == "v0")
-        Assertions.assertTrue(varString == "v1")
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
     }
 
     @Test
@@ -53,10 +53,10 @@ class TestNormalizer {
         val resultVar = interpreter.eval(Identifier(idString))
         val (varString, value) = extractIdentifierOrFail(resultVar)
 
-        Assertions.assertTrue(resultVar is Some)
-        Assertions.assertTrue(idString == "v0")
-        Assertions.assertTrue(varString == "v1")
-        Assertions.assertTrue(value == Const(1.0))
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
+        assertTrue(value == Const(1.0))
     }
 
     @Test
@@ -71,9 +71,9 @@ class TestNormalizer {
         val (varString, value) = extractIdentifierOrFail(resultValue)
         val expectedId = "v" + expressions.size
 
-        Assertions.assertTrue(resultValue is Some)
-        Assertions.assertTrue(varString == expectedId)
-        Assertions.assertTrue(value == expectedValue)
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
     }
 
     @Test
@@ -94,9 +94,9 @@ class TestNormalizer {
         println("expected (id, value): ($expectedId, $expectedValue)")
         println("got (id, value): ($varString, $value)")
 
-        Assertions.assertTrue(resultValue is Some)
-        Assertions.assertTrue(varString == expectedId)
-        Assertions.assertTrue(value == expectedValue)
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
     }
 
     @Test
@@ -115,9 +115,20 @@ class TestNormalizer {
         println("expected (id, value): ($expectedId, $expectedValue)")
         println("got (id, value): ($varString, $value)")
 
-        Assertions.assertTrue(resultValue is Some)
-        Assertions.assertTrue(varString == expectedId)
-        Assertions.assertTrue(value == expectedValue)
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
+    }
+
+
+    @Test
+    fun `test execute substitution`() {
+        val interpreter = Normalizer()
+        val substitution = Subst(Ln(Var("x")), "x", Sin(Pi))
+        val result = interpreter.eval(substitution)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && (result.t as IdentifierValue).value == Ln(Sin(Pi)))
     }
 
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
