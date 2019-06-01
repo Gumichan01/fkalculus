@@ -140,4 +140,11 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Sqrt(Const(2.0)))
     }
+
+    @test
+    fun `test substitution - expo`() {
+        val ast = Subst(Expo(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Expo(Const(2.0)))
+    }
 }

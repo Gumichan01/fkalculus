@@ -19,6 +19,7 @@ class Substitution {
                 Binop(expr.operator, e1, e2)
             }
             is Sqrt -> Sqrt(substitute(expr.expr, variable, expr1))
+            is Expo -> Expo(substitute(expr.expr, variable, expr1))
             else -> TODO("This is my job")
         }
     }
