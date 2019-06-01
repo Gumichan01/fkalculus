@@ -60,7 +60,7 @@ class TestNormalizer {
     }
 
     @Test
-    fun `test evaluate several exxpressions and get the variable v3`() {
+    fun `test evaluate several expressions and get the variable v3`() {
         val id = "v3"
         val expectedValue = Cos(Var("x"))
 
@@ -120,7 +120,6 @@ class TestNormalizer {
         assertTrue(value == expectedValue)
     }
 
-
     @Test
     fun `test execute substitution`() {
         val interpreter = Normalizer()
@@ -131,12 +130,25 @@ class TestNormalizer {
         assertTrue(result is Some && (result.t as IdentifierValue).value == Ln(Sin(Pi)))
     }
 
+    @Test
+    fun `test execute substitution, get its value, and retrieve the variable`() {
+        val interpreter = Normalizer()
+        val resultConst = interpreter.eval(Subst(Const(42.0), "x", Const(0.0)))
+        val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
+        val resultVar = interpreter.eval(Identifier(idString))
+        val (varString, _) = extractIdentifierOrFail(resultVar)
+
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
+    }
+
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
             if (this is Some && t is IdentifierValue) {
                 val id = (t as IdentifierValue)
                 Pair(id.identifier, id.value)
-            } else throw AssertionError("Not an Identifier")
+            } else throw AssertionError("$this is not an Identifier")
         }
     }
 }

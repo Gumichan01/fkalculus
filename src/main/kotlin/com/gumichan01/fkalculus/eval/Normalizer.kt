@@ -22,7 +22,12 @@ class Normalizer {
     private fun evalAST(ast: FKalculusAST): ResultValue {
         return when (ast) {
             is Help -> HelpText(getHelpText())
-            is Subst -> IdentifierValue("", Substitution().subst(ast))
+            is Subst -> {
+                val freshId = freshIdentifier()
+                val resultExpression = Substitution().subst(ast)
+                environment = (environment + Pair(freshId, resultExpression))
+                IdentifierValue(freshId, resultExpression)
+            }
             is Expression -> {
                 val freshId = freshIdentifier()
                 val resultExpression = Evaluator(environment).calculate(ast)
