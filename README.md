@@ -7,13 +7,12 @@ Please do not use it in production.
 
 ## Features ##
 
-- Basic calculation expressions - WIP
-- Variable substitution - TODO
+- Basic calculation expressions
+- Variable substitution - WIP
 - Simplify expressions - TODO
 - Calculate derivative of a function - TODO
 - Primitive integral of a function - TODO
 - Resolve simple equations - TODO
-- Conversion to Latex?
 
 
 ## Build ##
