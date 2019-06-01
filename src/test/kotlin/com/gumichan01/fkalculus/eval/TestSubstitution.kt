@@ -98,4 +98,39 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Var("x"))
     }
+
+    @test
+    fun `test simple substitution - plus`() {
+        val ast = Subst(Binop(Plus, Var("x"), Var("y")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Binop(Plus, Const(2.0), Var("y")))
+    }
+
+    @test
+    fun `test simple substitution - minus`() {
+        val ast = Subst(Binop(Minus, Var("x"), Var("y")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Binop(Minus, Const(2.0), Var("y")))
+    }
+
+    @test
+    fun `test simple substitution - mult`() {
+        val ast = Subst(Binop(Mult, Var("x"), Var("y")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Binop(Mult, Const(2.0), Var("y")))
+    }
+
+    @test
+    fun `test simple substitution - div`() {
+        val ast = Subst(Binop(Div, Var("x"), Var("y")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Binop(Div, Const(2.0), Var("y")))
+    }
+
+    @test
+    fun `test simple substitution - pow`() {
+        val ast = Subst(Binop(Pow, Var("x"), Var("y")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Binop(Pow, Const(2.0), Var("y")))
+    }
 }
