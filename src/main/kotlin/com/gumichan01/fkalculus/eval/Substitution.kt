@@ -23,6 +23,9 @@ class Substitution {
             is Ln -> Ln(substitute(expr.expr, variable, expr1))
             is Log10 -> Log10(substitute(expr.expr, variable, expr1))
             is Log2 -> Log2(substitute(expr.expr, variable, expr1))
+            is Cos -> Cos(substitute(expr.expr, variable, expr1))
+            is Sin -> Sin(substitute(expr.expr, variable, expr1))
+            is Tan -> Tan(substitute(expr.expr, variable, expr1))
             else -> TODO("This is my job")
         }
     }

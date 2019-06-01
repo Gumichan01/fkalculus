@@ -168,4 +168,23 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Log2(Const(2.0)))
     }
+
+    @test
+    fun `test substitution - cos`() {
+        val ast = Subst(Cos(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cos(Const(2.0)))
+    }
+    @test
+    fun `test substitution - sin`() {
+        val ast = Subst(Sin(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Sin(Const(2.0)))
+    }
+    @test
+    fun `test substitution - tan`() {
+        val ast = Subst(Tan(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Tan(Const(2.0)))
+    }
 }
