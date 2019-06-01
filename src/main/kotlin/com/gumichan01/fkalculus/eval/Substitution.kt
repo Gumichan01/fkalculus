@@ -11,7 +11,7 @@ class Substitution {
 
     private fun substituteComplexExpression(expr: Expression, variable: String, expr1: Expression): Expression {
         return when (expr) {
-            is Pi, is Exp1, is Const -> expr
+            is Pi, is Exp1, is Const, is Identifier -> expr
             is Var -> if (expr.variable == variable) expr1 else expr
             else -> TODO("This is my job")
         }

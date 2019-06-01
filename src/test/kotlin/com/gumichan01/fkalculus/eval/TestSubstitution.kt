@@ -72,6 +72,20 @@ class TestSubstitution {
     }
 
     @test
+    fun `test simple substitution - identifier x`() {
+        val ast = Subst(Identifier("x"), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Identifier("x"))
+    }
+
+    @test
+    fun `test simple substitution - identifier y`() {
+        val ast = Subst(Identifier("y"), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Identifier("y"))
+    }
+
+    @test
     fun `test simple substitution - bound variable`() {
         val ast = Subst(Var("x"), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
