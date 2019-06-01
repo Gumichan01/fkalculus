@@ -20,6 +20,9 @@ class Substitution {
             }
             is Sqrt -> Sqrt(substitute(expr.expr, variable, expr1))
             is Expo -> Expo(substitute(expr.expr, variable, expr1))
+            is Ln -> Ln(substitute(expr.expr, variable, expr1))
+            is Log10 -> Log10(substitute(expr.expr, variable, expr1))
+            is Log2 -> Log2(substitute(expr.expr, variable, expr1))
             else -> TODO("This is my job")
         }
     }

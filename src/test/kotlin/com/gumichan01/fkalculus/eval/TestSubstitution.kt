@@ -147,4 +147,25 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Expo(Const(2.0)))
     }
+
+    @test
+    fun `test substitution - ln`() {
+        val ast = Subst(Ln(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Ln(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - log`() {
+        val ast = Subst(Log10(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Log10(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - lb`() {
+        val ast = Subst(Log2(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Log2(Const(2.0)))
+    }
 }
