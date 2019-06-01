@@ -53,6 +53,7 @@ class KalculusParser {
         /** Tokens */
         // Keywords
         val help by token("help")
+        val subst by token("subst")
         val pi by token("Pi|pi|\u03C0")
         val sqrt by token("sqrt|√")
         val expo by token("exp")
@@ -76,6 +77,7 @@ class KalculusParser {
         // Basic tokens
         val lparen by token("\\(")
         val rparen by token("\\)")
+        val comma by token(",")
         val identifier by token("v[0-9]+")
         val positiveInteger by token("[0-9]+")
         val lowercaseLetter by token("[a-z]")
@@ -110,6 +112,8 @@ class KalculusParser {
         val divParser by leftAssociative(multParser, div) { left, op, right -> produceBinop(op, left, right) }
         val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> produceBinop(op, left, right) }
         val arithmmeticParser by sumDiffParser
+
+        val substParser by subst and skip(lparen) and arithmmeticParser and skip(comma) and lowercaseLetter and skip(comma) and arithmmeticParser and skip(rparen) use { Subst(t2, t3.text, t4) }
 
         private fun produceFunCall(function: TokenMatch, argument: Expression): Expression {
             return when (function.type) {
@@ -150,7 +154,7 @@ class KalculusParser {
         }
 
         val expr by arithmmeticParser
-        override val rootParser by expr or helpParser
+        override val rootParser by helpParser or substParser or expr
     }
 
     fun parse(text: String): Option<FKalculusAST> {

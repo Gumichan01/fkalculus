@@ -1336,4 +1336,14 @@ class TestKalculusParser {
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == (Acotan(Binop(Plus, Var("x"), Const(1.0)))))
     }
+
+    @test
+    fun `parse simple substitution command`() {
+        val instructionString = "subst(x, x, 2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Subst(Var("x"), "x", Const(2.0)))
+    }
 }
