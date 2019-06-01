@@ -100,7 +100,7 @@ class TestNormalizer {
     }
 
     @Test
-    fun `test evaluate several expressions that uses identifiers and get a random variable`() {
+    fun `test evaluate several expressions that uses identifiers and get an identifier`() {
         val interpreter = Normalizer()
         val expressions = listOf(Const(3.14), Binop(Plus, Var("x"), Identifier("v0")), Cos(Identifier("v1")), Const(42.0))
 
