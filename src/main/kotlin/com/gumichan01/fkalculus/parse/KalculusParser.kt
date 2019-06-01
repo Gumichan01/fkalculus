@@ -6,6 +6,7 @@ import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.lexer.TokenMatch
 import com.github.h0tk3y.betterParse.parser.Parser
+import com.github.h0tk3y.betterParse.utils.Tuple3
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
@@ -116,7 +117,12 @@ class KalculusParser {
         val sumDiffParser by leftAssociative(divParser, plus or minus) { left, op, right -> produceBinop(op, left, right) }
         val arithmmeticParser by sumDiffParser
 
-        val substParser by subst and skip(lparen) and arithmmeticParser and skip(comma) and lowercaseLetter and skip(comma) and arithmmeticParser and skip(rparen) use { Subst(t2, t3.text, t4) }
+        val substParameter by arithmmeticParser and skip(comma) and lowercaseLetter and skip(comma) and arithmmeticParser
+        val substParser by subst and skip(lparen) and substParameter and skip(rparen) use { produceSubstFunCall(t2) }
+
+        private fun produceSubstFunCall(substParam: Tuple3<Expression, TokenMatch, Expression>): Instruction {
+            return Subst(substParam.t1, substParam.t2.text, substParam.t3)
+        }
 
         private fun produceFunCall(function: TokenMatch, argument: Expression): Expression {
             return when (function.type) {
