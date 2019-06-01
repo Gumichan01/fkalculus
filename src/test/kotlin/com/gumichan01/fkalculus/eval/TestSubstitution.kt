@@ -51,86 +51,93 @@ class TestSubstitution {
     }
 
     @test
-    fun `test simple substitution - Pi`() {
+    fun `test substitution - Pi`() {
         val ast = Subst(Pi, "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Pi)
     }
 
     @test
-    fun `test simple substitution - e`() {
+    fun `test substitution - e`() {
         val ast = Subst(Exp1, "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Exp1)
     }
 
     @test
-    fun `test simple substitution - constant value`() {
+    fun `test substitution - constant value`() {
         val ast = Subst(Const(1.0), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Const(1.0))
     }
 
     @test
-    fun `test simple substitution - identifier x`() {
+    fun `test substitution - identifier x`() {
         val ast = Subst(Identifier("x"), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Identifier("x"))
     }
 
     @test
-    fun `test simple substitution - identifier y`() {
+    fun `test substitution - identifier y`() {
         val ast = Subst(Identifier("y"), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Identifier("y"))
     }
 
     @test
-    fun `test simple substitution - bound variable`() {
+    fun `test substitution - bound variable`() {
         val ast = Subst(Var("x"), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Const(2.0))
     }
 
     @test
-    fun `test simple substitution - free variable`() {
+    fun `test substitution - free variable`() {
         val ast = Subst(Var("x"), "y", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Var("x"))
     }
 
     @test
-    fun `test simple substitution - plus`() {
+    fun `test substitution - plus`() {
         val ast = Subst(Binop(Plus, Var("x"), Var("y")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Binop(Plus, Const(2.0), Var("y")))
     }
 
     @test
-    fun `test simple substitution - minus`() {
+    fun `test substitution - minus`() {
         val ast = Subst(Binop(Minus, Var("x"), Var("y")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Binop(Minus, Const(2.0), Var("y")))
     }
 
     @test
-    fun `test simple substitution - mult`() {
+    fun `test substitution - mult`() {
         val ast = Subst(Binop(Mult, Var("x"), Var("y")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Binop(Mult, Const(2.0), Var("y")))
     }
 
     @test
-    fun `test simple substitution - div`() {
+    fun `test substitution - div`() {
         val ast = Subst(Binop(Div, Var("x"), Var("y")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Binop(Div, Const(2.0), Var("y")))
     }
 
     @test
-    fun `test simple substitution - pow`() {
+    fun `test substitution - pow`() {
         val ast = Subst(Binop(Pow, Var("x"), Var("y")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Binop(Pow, Const(2.0), Var("y")))
+    }
+
+    @test
+    fun `test substitution - sqrt`() {
+        val ast = Subst(Sqrt(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Sqrt(Const(2.0)))
     }
 }

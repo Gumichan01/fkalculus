@@ -18,6 +18,7 @@ class Substitution {
                 var e2 = substitute(expr.expr2, variable, expr1)
                 Binop(expr.operator, e1, e2)
             }
+            is Sqrt -> Sqrt(substitute(expr.expr, variable, expr1))
             else -> TODO("This is my job")
         }
     }
