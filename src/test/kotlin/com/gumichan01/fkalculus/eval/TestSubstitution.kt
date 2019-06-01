@@ -45,6 +45,11 @@ knowledge of the CeCILL license and that you accept its terms.
 
 class TestSubstitution {
 
+    @org.junit.jupiter.api.Test
+    fun `test init class`() {
+        Substitution()
+    }
+
     @test
     fun `test evaluate simple substitution`() {
         assertTrue(true)
