@@ -27,7 +27,7 @@ class Normalizer {
         val resultExpression = when (ast) {
             is Subst -> Substitution().subst(ast)
             is Expression -> Evaluator(environment).calculate(ast)
-            else -> TODO("This is my job")
+            else -> throw UnsupportedOperationException("Not implemented yet")
         }
 
         val freshId = freshIdentifier()
