@@ -39,14 +39,14 @@ knowledge of the CeCILL license and that you accept its terms.
 
 sealed class FKalculusAST
 
-sealed class Instruction : FKalculusAST()
-object Help : Instruction()
-data class Simpl(val expr: Expression) : Instruction()
-data class Subst(val expr: Expression, val variable: String, val expr1: Expression) : Instruction()
-data class Solve(val expr: Expression, val variable: String) : Instruction()
-data class Derive(val expr: Expression, val variable: String) : Instruction()
-data class Integ(val expr: Expression, val variable: String, val min: Expression, val max: Expression) : Instruction()
-sealed class Expression : Instruction()
+sealed class Command : FKalculusAST()
+object Help : Command()
+data class Simpl(val expr: Expression) : Command()
+data class Subst(val expr: Expression, val variable: String, val expr1: Expression) : Command()
+data class Solve(val expr: Expression, val variable: String) : Command()
+data class Derive(val expr: Expression, val variable: String) : Command()
+data class Integ(val expr: Expression, val variable: String, val min: Expression, val max: Expression) : Command()
+sealed class Expression : FKalculusAST()
 
 object Pi : Expression()
 object Exp1 : Expression()
@@ -59,10 +59,10 @@ data class Expo(val expr: Expression) : Expression()
 /* Natural Logarithm */
 data class Ln(val expr: Expression) : Expression()
 
-/* ∀x > 0, y ∈ ℝ, log₁₀(x) = y ↔ 10^ʸ = x; ISO 80000-2 notation: lg */
+/* ∀x > 0, y ∈ ℝ, log₁₀(x) = y ↔ 10ʸ = x; ISO 80000-2 notation: lg */
 data class Log10(val expr: Expression) : Expression()
 
-/* ∀x > 0, y ∈ ℝ, log₂(x) = y ↔ 2^ʸ = x; ISO 80000-2 notation: lb */
+/* ∀x > 0, y ∈ ℝ, log₂(x) = y ↔ 2ʸ = x; ISO 80000-2 notation: lb */
 data class Log2(val expr: Expression) : Expression()
 
 data class Sin(val expr: Expression) : Expression()

@@ -120,7 +120,7 @@ class KalculusParser {
         val substParameter by arithmmeticParser and skip(comma) and lowercaseLetter and skip(comma) and arithmmeticParser
         val substParser by subst and skip(lparen) and substParameter and skip(rparen) use { produceSubstFunCall(t2) }
 
-        private fun produceSubstFunCall(substParam: Tuple3<Expression, TokenMatch, Expression>): Instruction {
+        private fun produceSubstFunCall(substParam: Tuple3<Expression, TokenMatch, Expression>): Command {
             return Subst(substParam.t1, substParam.t2.text, substParam.t3)
         }
 

@@ -12,23 +12,23 @@ class Normalizer {
 
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
-            Some(evaluateInstruction(ast as Instruction))
+            Some(evalAST(ast))
         } catch (e: RuntimeException) {
             println("Failed to evaluate the following instruction: ${e.message}")
             None
         }
     }
 
-    private fun evaluateInstruction(instruction: Instruction): ResultValue {
-        return when (instruction) {
+    private fun evalAST(ast: FKalculusAST): ResultValue {
+        return when (ast) {
             is Help -> HelpText(getHelpText())
             is Expression -> {
                 val freshId = freshIdentifier()
-                val resultExpression = Evaluator(environment).calculate(instruction)
+                val resultExpression = Evaluator(environment).calculate(ast)
                 environment = (environment + Pair(freshId, resultExpression))
                 IdentifierValue(freshId, resultExpression)
             }
-            else -> throw RuntimeException("Invalid instruction")
+            else -> throw RuntimeException("Invalid ast")
         }
     }
 

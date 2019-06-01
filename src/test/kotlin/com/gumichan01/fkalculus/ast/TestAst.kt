@@ -72,34 +72,34 @@ class TestAst {
 
     @test
     fun `test simpl instruction`() {
-        val expression: Instruction = Simpl(Identifier("v0"))
+        val expression: Command = Simpl(Identifier("v0"))
         assertTrue(expression is Simpl)
 
     }
 
     @test
     fun `test subst instruction`() {
-        val expression: Instruction = Subst(Var("x"), "x", Const(5.0))
+        val expression: Command = Subst(Var("x"), "x", Const(5.0))
         assertTrue(expression is Subst)
 
     }
 
     @test
     fun `test solve instruction`() {
-        val expression: Instruction = Solve(Binop(Plus, Var("x"), Const(5.0)), "x")
+        val expression: Command = Solve(Binop(Plus, Var("x"), Const(5.0)), "x")
         assertTrue(expression is Solve)
     }
 
     @test
     fun `test derive instruction`() {
-        val expression: Instruction = Derive(Var("x"), "x")
+        val expression: Command = Derive(Var("x"), "x")
         assertTrue(expression is Derive)
 
     }
 
     @test
     fun `test integration instruction`() {
-        val expression: Instruction = Integ(Var("x"), "x", Const(5.0), Const(10.0))
+        val expression: Command = Integ(Var("x"), "x", Const(5.0), Const(10.0))
         assertTrue(expression is Integ)
 
     }
