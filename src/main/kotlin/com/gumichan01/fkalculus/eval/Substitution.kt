@@ -29,7 +29,12 @@ class Substitution {
             is Acos -> Acos(substitute(expr.expr, variable, expr1))
             is Asin -> Asin(substitute(expr.expr, variable, expr1))
             is Atan -> Atan(substitute(expr.expr, variable, expr1))
-            else -> TODO("This is my job")
+            is Sec -> Sec(substitute(expr.expr, variable, expr1))
+            is Cosec -> Cosec(substitute(expr.expr, variable, expr1))
+            is Cotan -> Cotan(substitute(expr.expr, variable, expr1))
+            is Asec -> Asec(substitute(expr.expr, variable, expr1))
+            is Acosec -> Acosec(substitute(expr.expr, variable, expr1))
+            is Acotan -> Acotan(substitute(expr.expr, variable, expr1))
         }
     }
 }

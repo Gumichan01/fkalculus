@@ -1,11 +1,6 @@
 package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
-import com.gumichan01.fkalculus.util.None
-import com.gumichan01.fkalculus.util.Option
-import com.gumichan01.fkalculus.util.Some
-import org.junit.jupiter.api.Assertions.assertTrue
-import kotlin.math.*
 import org.junit.jupiter.api.Test as test
 
 /**
@@ -175,12 +170,14 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Cos(Const(2.0)))
     }
+
     @test
     fun `test substitution - sin`() {
         val ast = Subst(Sin(Var("x")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Sin(Const(2.0)))
     }
+
     @test
     fun `test substitution - tan`() {
         val ast = Subst(Atan(Var("x")), "x", Const(2.0))
@@ -194,17 +191,61 @@ class TestSubstitution {
         val result: Expression = Substitution().subst(ast)
         assert(result == Acos(Const(2.0)))
     }
+
     @test
     fun `test substitution - asin`() {
         val ast = Subst(Asin(Var("x")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Asin(Const(2.0)))
     }
+
     @test
     fun `test substitution - atan`() {
         val ast = Subst(Atan(Var("x")), "x", Const(2.0))
         val result: Expression = Substitution().subst(ast)
         assert(result == Atan(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - cosec`() {
+        val ast = Subst(Cosec(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cosec(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - sec`() {
+        val ast = Subst(Sec(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Sec(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - cotan`() {
+        val ast = Subst(Cotan(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cotan(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - acosec`() {
+        val ast = Subst(Acosec(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Acosec(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - asec`() {
+        val ast = Subst(Asec(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Asec(Const(2.0)))
+    }
+
+    @test
+    fun `test substitution - acotan`() {
+        val ast = Subst(Acotan(Var("x")), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Acotan(Const(2.0)))
     }
 
 }
