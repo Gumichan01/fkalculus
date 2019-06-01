@@ -8,10 +8,10 @@ import com.gumichan01.fkalculus.ast.Var
 class Substitution {
     fun subst(substitution: Subst): Expression {
         return substitution.run {
-            if (expr == Var("x")) {
+            if (expr is Var && expr.variable == variable) {
                 expr1
             } else {
-                Const(42.0)
+                expr
             }
         }
     }
