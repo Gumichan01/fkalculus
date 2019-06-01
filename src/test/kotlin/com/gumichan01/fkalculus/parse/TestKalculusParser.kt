@@ -1,6 +1,7 @@
 package com.gumichan01.fkalculus.parse
 
 import com.gumichan01.fkalculus.ast.*
+import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -1345,5 +1346,42 @@ class TestKalculusParser {
 
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == Subst(Var("x"), "x", Const(2.0)))
+    }
+
+    @test
+    fun `parse expression substitution command`() {
+        val instructionString = "subst(cos(x + 1), x, 2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Subst(Cos(Binop(Plus, Var("x"), Const(1.0))), "x", Const(2.0)))
+    }
+
+    @test
+    fun `parse bad substitution - syntax 1`() {
+        val instructionString = "subst(, x, 2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is None)
+    }
+
+    @test
+    fun `parse bad substitution - syntax 2`() {
+        val instructionString = "subst(x, , 2)"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is None)
+    }
+
+    @test
+    fun `parse bad substitution - syntax 3`() {
+        val instructionString = "subst(x, x, )"
+        val parser = KalculusParser()
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is None)
     }
 }
