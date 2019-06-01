@@ -143,6 +143,27 @@ class TestNormalizer {
         assertTrue(varString == "v1")
     }
 
+    @Test
+    fun `test execute several substitutions and get a random variable`() {
+        val interpreter = Normalizer()
+        val expressions = listOf(Subst(Const(42.0), "x", Const(42.0)), Subst(Var("x"), "x", Const(42.0)))
+
+        expressions.map { x -> interpreter.eval(x) }
+
+        val index = (0 until expressions.size).random()
+        val id = "v$index"
+        val resultValue = interpreter.eval(Identifier(id))
+        val (varString, value) = extractIdentifierOrFail(resultValue)
+        val expectedId = "v" + expressions.size
+
+        println("index : $index")
+        println("expected (id, value): ($expectedId, ${Const(42.0)})")
+        println("got (id, value): ($varString, $value)")
+
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+    }
+
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
             if (this is Some && t is IdentifierValue) {
