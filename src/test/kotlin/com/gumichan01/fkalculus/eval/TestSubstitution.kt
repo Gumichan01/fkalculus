@@ -51,12 +51,37 @@ class TestSubstitution {
     }
 
     @test
-    fun `test evaluate simple substitution`() {
-        assertTrue(true)
-        /*val ast = Subst(Var("x"), "x", Const(2.0))
-        val result: Option<ResultValue> = Substitution().subst(ast)
+    fun `test simple substitution`() {
+        val ast = Subst(Var("x"), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Const(2.0))
+    }
 
-        assertTrue(result is Some)
-        assertTrue(result is Some && (result.t as IdentifierValue).value == Const(2.0))*/
+    @test
+    fun `test simple substitution - free variable`() {
+        val ast = Subst(Var("x"), "y", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Var("x"))
+    }
+
+    @test
+    fun `test less simple substitution`() {
+        val ast = Subst(Cos(Binop(Plus, Var("x"), Const(1.0))), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cos(Binop(Plus, Const(2.0), Const(1.0))))
+    }
+
+    @test
+    fun `test bad substitution`() {
+        val ast = Subst(Cos(Binop(Plus, Var("x"), Const(1.0))), "1.0", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cos(Binop(Plus, Var("x"), Const(1.0))))
+    }
+
+    @test
+    fun `test another less simple substitution`() {
+        val ast = Subst(Ln(Binop(Plus, Var("x"), Var("y"))), "x", Const(2.0))
+        val result: Expression = Substitution().subst(ast)
+        assert(result == Cos(Binop(Plus, Const(2.0), Var("y"))))
     }
 }
