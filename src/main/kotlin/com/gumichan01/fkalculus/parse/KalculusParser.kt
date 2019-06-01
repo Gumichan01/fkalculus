@@ -101,7 +101,10 @@ class KalculusParser {
         val integerParser by positiveIntegerParser or negativeIntegerParser
         val simpleExpr by piParser or eParser or identifierParser or integerParser or variableParser
 
-        val mathFun by sqrt or expo or ln or log10 or log2 or sine or cosine or tangent or arcsin or arccos or arctan or secant or cosecant or cotangent or arcsecant or arccosecant or arccotangent
+        val logarithmFun by ln or log10 or log2
+        val arcusFun by arcsin or arccos or arctan or arcsecant or arccosecant or arccotangent
+        val trigoFun by sine or cosine or tangent or secant or cosecant or cotangent
+        val mathFun by sqrt or expo or logarithmFun or trigoFun or arcusFun
         val highPriorityexpressionRule by skip(lparen) and parser { expr } and skip(rparen)
         val term: Parser<Expression> by simpleExpr or highPriorityexpressionRule
         val funCall: Parser<Expression> by mathFun and highPriorityexpressionRule use { produceFunCall(t1, t2) }
