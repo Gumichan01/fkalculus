@@ -2,9 +2,6 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.DivisionByZeroException
-import com.gumichan01.fkalculus.util.None
-import com.gumichan01.fkalculus.util.Option
-import com.gumichan01.fkalculus.util.Some
 import kotlin.math.*
 
 /**
@@ -42,77 +39,9 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class Evaluator {
+class Evaluator(private val environment: List<Pair<String, Expression>>) {
 
-    private var count: Int = 0
-    private var environment: List<Pair<String, Expression>> = emptyList()
-
-    fun eval(ast: FKalculusAST): Option<ResultValue> {
-        return try {
-            Some(evaluateInstruction(ast as Instruction))
-        } catch (e: RuntimeException) {
-            println("Failed to evaluate the following instruction: ${e.message}")
-            None
-        }
-    }
-
-    private fun evaluateInstruction(instruction: Instruction): ResultValue {
-        return when (instruction) {
-            is Help -> HelpText(getHelpText())
-            is Expression -> {
-                val freshId = freshIdentifier()
-                val resultExpression = evaluateExpression(instruction)
-                environment = (environment + Pair(freshId, resultExpression))
-                IdentifierValue(freshId, resultExpression)
-            }
-            else -> throw RuntimeException("Invalid instruction")
-        }
-    }
-
-    private fun freshIdentifier(): String {
-        return "v" + count++
-    }
-
-    private fun getHelpText(): String {
-        return """FKalculus v0.1.0-SNAPSHOT
-            |
-            |Type an expression in order to evaluate it
-            |- Example: 2 + 3
-            |
-            |
-            |Terms and math function:
-            |
-            |Pi | pi | π    Pi number
-            |e              e number, exp(1) = e
-            |
-            |
-            |List of mathematical functions with their associated keywords:
-            |
-            |sqrt | √                   Square root
-            |exp                        Exponential function
-            |ln                         Natural logarithm
-            |log10 | lg                 Decimal logarithm
-            |log2 | lb                  Binary logarithm
-            |sin                        Sine
-            |cos                        Cosine
-            |tan                        Tangent
-            |arcsin | asin              Arcsine
-            |arccos | acos              Arccosine
-            |arctan |atan               Arctangent
-            |sec                        Secant
-            |cosec | csc                Cosecant
-            |cotan | cot                Cotangent
-            |arcsec | asec              Arcsecant
-            |arccosec | arccsc | acsc   Arccosecant
-            |arccotan | arccot | acotan Arccotangent
-            |
-            |
-            |
-            |CTRL-C: Exit the program.
-        """.trimMargin()
-    }
-
-    private fun evaluateExpression(expression: Expression): Expression {
+    fun calculate(expression: Expression): Expression {
         return when (expression) {
             is Const, is Var -> expression
             is Pi -> Const(PI)
@@ -146,7 +75,7 @@ class Evaluator {
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {
         return arccotanFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(arccotan(result.value))
             } else {
@@ -161,7 +90,7 @@ class Evaluator {
                 Const(1.0) -> Const(0.0)
                 Const(-1.0) -> Pi
                 else -> {
-                    val result = evaluateExpression(expr)
+                    val result = calculate(expr)
                     if (result is Const) {
                         Const(arcsecant(result.value))
                     } else {
@@ -174,7 +103,7 @@ class Evaluator {
 
     private fun evaluateAcosec(arccosecantFunCall: Acosec): Expression {
         return arccosecantFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(arccosecant(result.value))
             } else {
@@ -202,7 +131,7 @@ class Evaluator {
 
     private fun evaluateCotan(cotangentFunCall: Cotan): Expression {
         return cotangentFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(cotan(result.value))
             } else {
@@ -213,7 +142,7 @@ class Evaluator {
 
     private fun evaluateSec(secantFunCall: Sec): Expression {
         return secantFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(secant(result.value))
             } else {
@@ -224,7 +153,7 @@ class Evaluator {
 
     private fun evaluateCosec(cosecantFunCall: Cosec): Expression {
         return cosecantFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(cosecant(result.value))
             } else {
@@ -260,7 +189,7 @@ class Evaluator {
 
     private fun evaluateAtan(arctanFunCall: Atan): Expression {
         return arctanFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(atan(result.value))
             } else {
@@ -271,7 +200,7 @@ class Evaluator {
 
     private fun evaluateAcos(arccosFunCall: Acos): Expression {
         return arccosFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 checkCosineArgumentOrFail(result.value)
                 Const(acos(result.value))
@@ -283,7 +212,7 @@ class Evaluator {
 
     private fun evaluateAsin(arcsinFunCall: Asin): Expression {
         return arcsinFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 checkSineArgumentOrFail(result.value)
                 Const(asin(result.value))
@@ -304,7 +233,7 @@ class Evaluator {
 
     private fun evaluateTan(tangentFunCall: Tan): Expression {
         return tangentFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(tan(result.value))
             } else {
@@ -320,7 +249,7 @@ class Evaluator {
             if (expr is Pi) {
                 Const(0.0)
             } else {
-                val result = evaluateExpression(expr)
+                val result = calculate(expr)
                 if (result is Const) {
                     Const(sin(result.value))
                 } else {
@@ -338,7 +267,7 @@ class Evaluator {
             if (expr == ninetyDegreesInRadian) {
                 Const(0.0)
             } else {
-                val result = evaluateExpression(expr)
+                val result = calculate(expr)
                 if (result is Const) {
                     Const(cos(result.value))
                 } else {
@@ -356,7 +285,7 @@ class Evaluator {
 
     private fun evaluateLog2(binaryLogFunCall: Log2): Expression {
         return binaryLogFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 checkLogarithmArgumentOrFail(result)
                 Const(log2(result.value))
@@ -368,7 +297,7 @@ class Evaluator {
 
     private fun evaluateLog10(decimalLogFunCall: Log10): Expression {
         return decimalLogFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 checkLogarithmArgumentOrFail(result)
                 Const(log10(result.value))
@@ -380,7 +309,7 @@ class Evaluator {
 
     private fun evaluateLn(naturalLogFunCall: Ln): Expression {
         return naturalLogFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 checkLogarithmArgumentOrFail(result)
                 Const(ln(result.value))
@@ -392,7 +321,7 @@ class Evaluator {
 
     private fun evaluateExpo(expFunCall: Expo): Expression {
         return expFunCall.run {
-            val result = evaluateExpression(expr)
+            val result = calculate(expr)
             if (result is Const) {
                 Const(exp(result.value))
             } else {
@@ -403,7 +332,7 @@ class Evaluator {
 
     private fun evaluateSqrt(sqrtFunCall: Sqrt): Expression {
         return sqrtFunCall.run {
-            val result = evaluateExpression(this.expr)
+            val result = calculate(this.expr)
             if (result is Const) {
                 if (result.value > 0.0) {
                     Const(sqrt(result.value))
@@ -418,8 +347,8 @@ class Evaluator {
 
     private fun evaluateBinop(binop: Binop): Expression {
         return binop.run {
-            val value1 = evaluateExpression(expr1)
-            val value2 = evaluateExpression(expr2)
+            val value1 = calculate(expr1)
+            val value2 = calculate(expr2)
             if (value1 is Const && value2 is Const) {
                 applyBinop(operator, value1, value2)
             } else {

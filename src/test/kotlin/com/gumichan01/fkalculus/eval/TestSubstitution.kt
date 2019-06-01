@@ -1,14 +1,12 @@
-package com.gumichan01.fkalculus
+package com.gumichan01.fkalculus.eval
 
-import com.gumichan01.fkalculus.ast.FKalculusAST
-import com.gumichan01.fkalculus.ast.ResultValue
-import com.gumichan01.fkalculus.eval.Evaluator
-import com.gumichan01.fkalculus.eval.Normalizer
-import com.gumichan01.fkalculus.parse.KalculusParser
-import com.gumichan01.fkalculus.print.Printer
+import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
+import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.math.*
+import org.junit.jupiter.api.Test as test
 
 /**
 Copyright, Luxon JEAN-PIERRE (2019)
@@ -45,52 +43,15 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class FKalculus(val arguments: Arguments) {
+class TestSubstitution {
 
-    fun start() {
-        var quit = false
+    @test
+    fun `test evaluate simple substitution`() {
+        assertTrue(true)
+        /*val ast = Subst(Var("x"), "x", Const(2.0))
+        val result: Option<ResultValue> = Substitution().subst(ast)
 
-        while (!quit) {
-            print("fkalculus > ")
-            val text: Option<String> = readText()
-
-            if (text is Some) {
-                if (text.t.isNotBlank()) {
-                    val kalculus: Option<FKalculusAST> = parse(text.t)
-
-                    if (kalculus is Some) {
-                        val result: Option<ResultValue> = eval(kalculus.t)
-                        if (result is Some) {
-                            print(result.t)
-                        }
-                    } else {
-                        println("Invalid command, type \"help\" to get available commands.")
-                    }
-                }
-            } else {
-                quit = true
-                println("Exit.")
-            }
-        }
-    }
-
-    private fun parse(text: String): Option<FKalculusAST> {
-        return KalculusParser().parse(text)
-    }
-    
-    private fun readText(): Option<String> {
-        return try {
-            Some(readLine()!!)
-        } catch (e: NullPointerException) {
-            None
-        }
-    }
-
-    private fun eval(ast: FKalculusAST): Option<ResultValue> {
-        return Normalizer().eval(ast)
-    }
-
-    private fun print(result: ResultValue) {
-        Printer().print(result)
+        assertTrue(result is Some)
+        assertTrue(result is Some && (result.t as IdentifierValue).value == Const(2.0))*/
     }
 }
