@@ -3,6 +3,7 @@ package com.gumichan01.fkalculus.eval
 import com.gumichan01.fkalculus.ast.Const
 import com.gumichan01.fkalculus.ast.Expression
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class TestEnvironment {
 
@@ -42,5 +43,18 @@ class TestEnvironment {
         val retrievedExpression: Expression = newEnvironment.find(identifier)
 
         assert(retrievedExpression == expectedExpression)
+    }
+
+    @Test
+    fun `test update environment once and get the value of the identifier from the old environment`() {
+        val environment = Environment()
+        val identifier = "v1"
+        val expectedExpression = Const(42.0)
+
+        environment.update(identifier, expectedExpression)
+        assertThrows<RuntimeException> {
+            val retrievedExpression: Expression = environment.find(identifier)
+            println("WTF $retrievedExpression")
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.Const
 import com.gumichan01.fkalculus.ast.Expression
-import com.gumichan01.fkalculus.ast.Pi
 
 class Environment {
 
@@ -25,6 +24,6 @@ class Environment {
     }
 
     fun find(identifier: String): Expression {
-        return if (identifier == "v1") Const(42.0) else Pi
+        return if (identifier == id) Const(42.0) else throw RuntimeException("Identifier not foundin environment")
     }
 }
