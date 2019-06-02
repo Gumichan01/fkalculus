@@ -1,7 +1,6 @@
 package com.gumichan01.fkalculus.eval
 
-import com.gumichan01.fkalculus.ast.Const
-import com.gumichan01.fkalculus.ast.Expression
+import com.gumichan01.fkalculus.ast.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -46,7 +45,7 @@ class TestEnvironment {
     }
 
     @Test
-    fun `test update environment once and get the value of the identifier tha is not in the new environment`() {
+    fun `test update environment once and get the value of the identifier that is not in the new environment`() {
         val environment = Environment()
         val identifier = "v1"
         val badIdentifier = "v2"
@@ -70,5 +69,24 @@ class TestEnvironment {
             val retrievedExpression: Expression = environment.find(identifier)
             println("WTF $retrievedExpression")
         }
+    }
+
+    @Test
+    fun `test update environment with several values and get a specific value of the identifier from the new environment`() {
+        val identifiers = listOf("v0", "v1", "v2", "v3", "v4")
+        val expectedExpressions = listOf(Const(42.0), Cos(Pi), Exp1, Const(1024.0), Const(1.0))
+        val envs = ArrayList<Environment>()
+        envs.add(Environment())
+
+        for (i in 0 until identifiers.size) {
+            envs.add(envs.last().update(identifiers[i], expectedExpressions[i]))
+        }
+
+        val index = (0 until identifiers.size).random()
+        val identifier = identifiers[index]
+        val expectedExpression = expectedExpressions[index]
+        val retrievedExpression: Expression = envs.last().find(identifier)
+
+        assert(retrievedExpression == expectedExpression)
     }
 }
