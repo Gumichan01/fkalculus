@@ -2,7 +2,7 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
 
-class Substitution(val env: Environment) {
+class Substitution(private val env: Environment) {
     fun subst(substitution: Subst): Expression {
         return substitution.run {
             substitute(expr, variable, expr1)
