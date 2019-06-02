@@ -46,6 +46,20 @@ class TestEnvironment {
     }
 
     @Test
+    fun `test update environment once and get the value of the identifier tha is not in the new environment`() {
+        val environment = Environment()
+        val identifier = "v1"
+        val badIdentifier = "v2"
+        val expression = Const(42.0)
+
+        val newEnvironment: Environment = environment.update(identifier, expression)
+        assertThrows<RuntimeException> {
+            val retrievedExpression: Expression = newEnvironment.find(badIdentifier)
+            println("WTF $retrievedExpression")
+        }
+    }
+
+    @Test
     fun `test update environment once and get the value of the identifier from the old environment`() {
         val environment = Environment()
         val identifier = "v1"
