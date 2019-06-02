@@ -2,7 +2,7 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
 
-class Substitution {
+class Substitution(val env: Environment) {
     fun subst(substitution: Subst): Expression {
         return substitution.run {
             substitute(expr, variable, expr1)
@@ -11,7 +11,8 @@ class Substitution {
 
     private fun substitute(expr: Expression, variable: String, expr1: Expression): Expression {
         return when (expr) {
-            is Pi, is Exp1, is Const, is Identifier -> expr
+            is Pi, is Exp1, is Const -> expr
+            is Identifier -> substitute(env.find(expr.name), variable, expr1)
             is Var -> if (expr.variable == variable) expr1 else expr
             is Binop -> {
                 val e1 = substitute(expr.expr1, variable, expr1)

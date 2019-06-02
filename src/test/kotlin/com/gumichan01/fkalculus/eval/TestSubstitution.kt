@@ -42,209 +42,220 @@ class TestSubstitution {
 
     @org.junit.jupiter.api.Test
     fun `test init class`() {
-        Substitution()
+        Substitution(Environment())
     }
 
     @test
     fun `test substitution - Pi`() {
         val ast = Subst(Pi, "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Pi)
     }
 
     @test
     fun `test substitution - e`() {
         val ast = Subst(Exp1, "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Exp1)
     }
 
     @test
     fun `test substitution - constant value`() {
         val ast = Subst(Const(1.0), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Const(1.0))
     }
 
     @test
-    fun `test substitution - identifier x`() {
-        val ast = Subst(Identifier("x"), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
-        assert(result == Identifier("x"))
+    fun `test substitution - identifier v0`() {
+
+        val ast = Subst(Identifier("v0"), "x", Const(2.0))
+        val env = Environment().update("v0", Const(42.0))
+        val result: Expression = Substitution(env).subst(ast)
+        assert(result == Const(42.0))
     }
 
     @test
-    fun `test substitution - identifier y`() {
-        val ast = Subst(Identifier("y"), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
-        assert(result == Identifier("y"))
+    fun `test substitution - identifier v0 again`() {
+        val ast = Subst(Identifier("v0"), "x", Const(2.0))
+        val env = Environment().update("v0", Var("x"))
+        val result: Expression = Substitution(env).subst(ast)
+        assert(result == Const(2.0))
+    }
+
+    @test
+    fun `test substitution - identifier v0 again 2`() {
+        val ast = Subst(Identifier("v0"), "y", Const(2.0))
+        val env = Environment().update("v0", Var("x"))
+        val result: Expression = Substitution(env).subst(ast)
+        assert(result == Var("x"))
     }
 
     @test
     fun `test substitution - bound variable`() {
         val ast = Subst(Var("x"), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Const(2.0))
     }
 
     @test
     fun `test substitution - free variable`() {
         val ast = Subst(Var("x"), "y", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Var("x"))
     }
 
     @test
     fun `test substitution - plus`() {
         val ast = Subst(Binop(Plus, Var("x"), Var("y")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Binop(Plus, Const(2.0), Var("y")))
     }
 
     @test
     fun `test substitution - minus`() {
         val ast = Subst(Binop(Minus, Var("x"), Var("y")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Binop(Minus, Const(2.0), Var("y")))
     }
 
     @test
     fun `test substitution - mult`() {
         val ast = Subst(Binop(Mult, Var("x"), Var("y")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Binop(Mult, Const(2.0), Var("y")))
     }
 
     @test
     fun `test substitution - div`() {
         val ast = Subst(Binop(Div, Var("x"), Var("y")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Binop(Div, Const(2.0), Var("y")))
     }
 
     @test
     fun `test substitution - pow`() {
         val ast = Subst(Binop(Pow, Var("x"), Var("y")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Binop(Pow, Const(2.0), Var("y")))
     }
 
     @test
     fun `test substitution - sqrt`() {
         val ast = Subst(Sqrt(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Sqrt(Const(2.0)))
     }
 
     @test
     fun `test substitution - expo`() {
         val ast = Subst(Expo(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Expo(Const(2.0)))
     }
 
     @test
     fun `test substitution - ln`() {
         val ast = Subst(Ln(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Ln(Const(2.0)))
     }
 
     @test
     fun `test substitution - log`() {
         val ast = Subst(Log10(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Log10(Const(2.0)))
     }
 
     @test
     fun `test substitution - lb`() {
         val ast = Subst(Log2(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Log2(Const(2.0)))
     }
 
     @test
     fun `test substitution - cos`() {
         val ast = Subst(Cos(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Cos(Const(2.0)))
     }
 
     @test
     fun `test substitution - sin`() {
         val ast = Subst(Sin(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Sin(Const(2.0)))
     }
 
     @test
     fun `test substitution - tan`() {
         val ast = Subst(Atan(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Atan(Const(2.0)))
     }
 
     @test
     fun `test substitution - acos`() {
         val ast = Subst(Acos(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Acos(Const(2.0)))
     }
 
     @test
     fun `test substitution - asin`() {
         val ast = Subst(Asin(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Asin(Const(2.0)))
     }
 
     @test
     fun `test substitution - atan`() {
         val ast = Subst(Atan(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Atan(Const(2.0)))
     }
 
     @test
     fun `test substitution - cosec`() {
         val ast = Subst(Cosec(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Cosec(Const(2.0)))
     }
 
     @test
     fun `test substitution - sec`() {
         val ast = Subst(Sec(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Sec(Const(2.0)))
     }
 
     @test
     fun `test substitution - cotan`() {
         val ast = Subst(Cotan(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Cotan(Const(2.0)))
     }
 
     @test
     fun `test substitution - acosec`() {
         val ast = Subst(Acosec(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Acosec(Const(2.0)))
     }
 
     @test
     fun `test substitution - asec`() {
         val ast = Subst(Asec(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Asec(Const(2.0)))
     }
 
     @test
     fun `test substitution - acotan`() {
         val ast = Subst(Acotan(Var("x")), "x", Const(2.0))
-        val result: Expression = Substitution().subst(ast)
+        val result: Expression = Substitution(Environment()).subst(ast)
         assert(result == Acotan(Const(2.0)))
     }
 

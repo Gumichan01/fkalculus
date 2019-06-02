@@ -25,7 +25,7 @@ class Normalizer {
         }
 
         val resultExpression = when (ast) {
-            is Subst -> Substitution().subst(ast)
+            is Subst -> Substitution(environment).subst(ast)
             is Expression -> Evaluator(environment).calculate(ast)
             else -> throw UnsupportedOperationException("Not implemented yet")
         }
