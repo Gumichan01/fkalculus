@@ -84,6 +84,17 @@ test_normalizer:
       - target/surefire-reports/TEST-*.xml
       - target/surefire-reports/*.txt
 
+test_env:
+  stage: test
+  script:
+    - mvn test -Dtest=TestEnvironment
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths:
+      - target/surefire-reports/TEST-*.xml
+      - target/surefire-reports/*.txt
+
 package:
   stage: deploy
   script:
