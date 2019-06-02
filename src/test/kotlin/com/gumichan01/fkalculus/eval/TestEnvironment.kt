@@ -1,5 +1,6 @@
 package com.gumichan01.fkalculus.eval
 
+import com.gumichan01.fkalculus.ast.Const
 import org.junit.jupiter.api.Test
 
 class TestEnvironment {
@@ -19,4 +20,14 @@ class TestEnvironment {
         assert(env1 == env2)
     }
 
+    @Test
+    fun `test update environment and check new envrironment`() {
+        val environment = Environment()
+        val identifier = "v1"
+        val expression = Const(42.0)
+
+        val newEnvironment : Environment = environment.update(identifier, expression)
+
+        assert(newEnvironment != environment)
+    }
 }
