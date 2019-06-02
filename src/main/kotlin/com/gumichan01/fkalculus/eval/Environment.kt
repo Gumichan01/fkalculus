@@ -10,15 +10,8 @@ class Environment {
         env = emptyList()
     }
 
-    private constructor(env: List<Pair<String, Expression>> = emptyList()) {
+    private constructor(env: List<Pair<String, Expression>>) {
         this.env = env
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Environment -> env == other.env
-            else -> false
-        }
     }
 
     fun update(identifier: String, expression: Expression): Environment {
@@ -28,5 +21,13 @@ class Environment {
     fun find(identifier: String): Expression {
         return env.find { (id, _) -> id == identifier }?.second
                 ?: throw RuntimeException("Identifier not found in environment")
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Environment) env == other.env else false
+    }
+
+    override fun hashCode(): Int {
+        return env.hashCode()
     }
 }
