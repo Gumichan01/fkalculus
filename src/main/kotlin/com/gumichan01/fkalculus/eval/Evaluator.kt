@@ -39,7 +39,7 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class Evaluator(private val environment: List<Pair<String, Expression>>) {
+class Evaluator(private val environment: Environment) {
 
     fun calculate(expression: Expression): Expression {
         return when (expression) {
@@ -69,8 +69,7 @@ class Evaluator(private val environment: List<Pair<String, Expression>>) {
     }
 
     private fun evaluateIdentifier(identifier: Identifier): Expression {
-        val id = identifier.name
-        return environment.find { (v, _) -> v == id }?.second ?: throw RuntimeException("Invalid identifier: $id")
+        return environment.find(identifier.name)
     }
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {

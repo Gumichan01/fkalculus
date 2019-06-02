@@ -8,7 +8,7 @@ import com.gumichan01.fkalculus.util.Some
 class Normalizer {
 
     private var count: Int = 0
-    private var environment: List<Pair<String, Expression>> = emptyList()
+    private var environment: Environment = Environment()
 
     fun eval(ast: FKalculusAST): Option<ResultValue> {
         return try {
@@ -31,7 +31,7 @@ class Normalizer {
         }
 
         val freshId = freshIdentifier()
-        environment = (environment + Pair(freshId, resultExpression))
+        environment = environment.update(freshId, resultExpression)
         return IdentifierValue(freshId, resultExpression)
     }
 
