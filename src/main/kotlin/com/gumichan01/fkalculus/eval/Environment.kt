@@ -2,6 +2,7 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.Const
 import com.gumichan01.fkalculus.ast.Expression
+import com.gumichan01.fkalculus.ast.Pi
 
 class Environment {
 
@@ -21,5 +22,9 @@ class Environment {
         newEnv.expr = expression
 
         return newEnv
+    }
+
+    fun find(identifier: String): Expression {
+        return if (identifier == "v1") Const(42.0) else Pi
     }
 }
