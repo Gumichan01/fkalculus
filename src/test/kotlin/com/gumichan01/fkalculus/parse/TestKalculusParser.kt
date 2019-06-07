@@ -47,7 +47,7 @@ class TestKalculusParser {
     @test
     fun `parse Help command`() {
         val instructionString = "help"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -57,7 +57,7 @@ class TestKalculusParser {
     @test
     fun `parse Pi`() {
         val instructionString = "Pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -68,7 +68,7 @@ class TestKalculusParser {
     @test
     fun `parse pi`() {
         val instructionString = "pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -78,7 +78,7 @@ class TestKalculusParser {
     @test
     fun `parse π`() {
         val instructionString = "π"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -88,7 +88,7 @@ class TestKalculusParser {
     @test
     fun `parse π - alternative`() {
         val instructionString = "\u03C0"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -98,7 +98,7 @@ class TestKalculusParser {
     @test
     fun `parse exp1`() {
         val instructionString = "e"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -109,7 +109,7 @@ class TestKalculusParser {
     @test
     fun `parse identifier 0`() {
         val instructionString = "v0"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -119,7 +119,7 @@ class TestKalculusParser {
     @test
     fun `parse identifier 1`() {
         val instructionString = "v1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -129,7 +129,7 @@ class TestKalculusParser {
     @test
     fun `parse identifier 8`() {
         val instructionString = "v8"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -139,7 +139,7 @@ class TestKalculusParser {
     @test
     fun `parse identifier 42`() {
         val instructionString = "v42"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -149,7 +149,7 @@ class TestKalculusParser {
     @test
     fun `parse identifier 999`() {
         val instructionString = "v999"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -159,7 +159,7 @@ class TestKalculusParser {
     @test
     fun `parse const`() {
         val instructionString = "42"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -169,7 +169,7 @@ class TestKalculusParser {
     @test
     fun `parse negative const`() {
         val instructionString = "-64"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -179,7 +179,7 @@ class TestKalculusParser {
     @test
     fun `parse Var`() {
         val instructionString = "x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -189,7 +189,7 @@ class TestKalculusParser {
     @test
     fun `parse number addition 0`() {
         val instructionString = "4+2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -199,7 +199,7 @@ class TestKalculusParser {
     @test
     fun `parse number addition`() {
         val instructionString = "4 + 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -209,7 +209,7 @@ class TestKalculusParser {
     @test
     fun `parse number + var`() {
         val instructionString = "4 + x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -219,7 +219,7 @@ class TestKalculusParser {
     @test
     fun `parse number complex addition`() {
         val instructionString = "4 + x + e + Pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -229,7 +229,7 @@ class TestKalculusParser {
     @test
     fun `parse -`() {
         val instructionString = "4 - 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -239,7 +239,7 @@ class TestKalculusParser {
     @test
     fun `parse number - variable`() {
         val instructionString = "4 - x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -249,7 +249,7 @@ class TestKalculusParser {
     @test
     fun `parse number complex sub`() {
         val instructionString = "4 - x - e - Pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -259,7 +259,7 @@ class TestKalculusParser {
     @test
     fun `parse add and sub same priority`() {
         val instructionString = "4 + 2 - 3" // (4 + 2) - 3
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -269,7 +269,7 @@ class TestKalculusParser {
     @test
     fun `parse sub and add same priority`() {
         val instructionString = "4 - 2 + 3" // (4 - 2) + 3
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -279,7 +279,7 @@ class TestKalculusParser {
     @test
     fun `parse add negative value`() {
         val instructionString = "4 + -2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -289,7 +289,7 @@ class TestKalculusParser {
     @test
     fun `parse add negative value (again)`() {
         val instructionString = "-2 + 4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -299,7 +299,7 @@ class TestKalculusParser {
     @test
     fun `parse add negative values`() {
         val instructionString = "-2 + -4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -309,7 +309,7 @@ class TestKalculusParser {
     @test
     fun `parse add negative values (tricky)`() {
         val instructionString = "-2+-4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -319,7 +319,7 @@ class TestKalculusParser {
     @test
     fun `parse sub negative value`() {
         val instructionString = "4 - -2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -329,7 +329,7 @@ class TestKalculusParser {
     @test
     fun `parse sub negative value (again)`() {
         val instructionString = "-2 - 4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -339,7 +339,7 @@ class TestKalculusParser {
     @test
     fun `parse sub negative value (tricky)`() {
         val instructionString = "-2 -4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -349,7 +349,7 @@ class TestKalculusParser {
     @test
     fun `parse number multiply`() {
         val instructionString = "4 * 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -359,7 +359,7 @@ class TestKalculusParser {
     @test
     fun `parse number * var`() {
         val instructionString = "4 * x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -369,7 +369,7 @@ class TestKalculusParser {
     @test
     fun `parse mult negative value `() {
         val instructionString = "-2 * -4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -379,7 +379,7 @@ class TestKalculusParser {
     @test
     fun `parse mult negative value again`() {
         val instructionString = "2 * -4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -389,7 +389,7 @@ class TestKalculusParser {
     @test
     fun `parse mult add value`() {
         val instructionString = "2 + -4 * 1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -399,7 +399,7 @@ class TestKalculusParser {
     @test
     fun `parse mult sub value`() {
         val instructionString = "2 - 4 * 1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -409,7 +409,7 @@ class TestKalculusParser {
     @test
     fun `parse mult sub value (tricky)`() {
         val instructionString = "2-4*1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -419,7 +419,7 @@ class TestKalculusParser {
     @test
     fun `parse number complex multiplication`() {
         val instructionString = "4 * x * e * Pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -429,7 +429,7 @@ class TestKalculusParser {
     @test
     fun `parse number div`() {
         val instructionString = "4 / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -439,7 +439,7 @@ class TestKalculusParser {
     @test
     fun `parse number div var`() {
         val instructionString = "4 / x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -449,7 +449,7 @@ class TestKalculusParser {
     @test
     fun `parse number complex div`() {
         val instructionString = "4 / x / e / Pi"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -459,7 +459,7 @@ class TestKalculusParser {
     @test
     fun `parse number pow`() {
         val instructionString = "4^2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -469,7 +469,7 @@ class TestKalculusParser {
     @test
     fun `parse number pow var`() {
         val instructionString = "4^x"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -480,7 +480,7 @@ class TestKalculusParser {
     @test
     fun `parse number complex pow`() {
         val instructionString = "4^x^e^Pi" // ((4^x)^e)^π
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -490,7 +490,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op + *`() {
         val instructionString = "2*x + 1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -500,7 +500,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op - *`() {
         val instructionString = "2*x - 1"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -510,7 +510,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op div *`() {
         val instructionString = "4 * 2 / 3"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -520,7 +520,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op div * (2)`() {
         val instructionString = "2 / 3 * 4" // 2 / (3 * 4)
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -530,7 +530,7 @@ class TestKalculusParser {
     @test
     fun `parse operation, paren 1`() {
         val instructionString = "(2 + 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -540,7 +540,7 @@ class TestKalculusParser {
     @test
     fun `parse operation, paren 2`() {
         val instructionString = "(2 - 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -551,7 +551,7 @@ class TestKalculusParser {
     @test
     fun `parse operation, paren 3`() {
         val instructionString = "(2 * 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -561,7 +561,7 @@ class TestKalculusParser {
     @test
     fun `parse operation, paren 4`() {
         val instructionString = "(2 / 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -571,7 +571,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op div * (3)`() {
         val instructionString = "4 * (2 / 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -581,7 +581,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op div * (4)`() {
         val instructionString = "(2 / 3) * 4"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -591,7 +591,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op ^ +`() {
         val instructionString = "4^2 + 3"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -601,7 +601,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op ^ + (2)`() {
         val instructionString = "4^(2 / 3)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -611,7 +611,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op ^ + (3)`() {
         val instructionString = "3 + 4^2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -621,7 +621,7 @@ class TestKalculusParser {
     @test
     fun `parse priority op ^ + (4)`() {
         val instructionString = "(3 + 4)^2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -631,7 +631,7 @@ class TestKalculusParser {
     @test
     fun `parse basic sqrt`() {
         val instructionString = "sqrt(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -641,7 +641,7 @@ class TestKalculusParser {
     @test
     fun `parse basic √`() {
         val instructionString = "√(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -651,7 +651,7 @@ class TestKalculusParser {
     @test
     fun `parse sqrt of var`() {
         val instructionString = "sqrt(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -661,7 +661,7 @@ class TestKalculusParser {
     @test
     fun `parse complex sqrt`() {
         val instructionString = "sqrt(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -671,7 +671,7 @@ class TestKalculusParser {
     @test
     fun `parse sqrt tricky`() {
         val instructionString = "sqrt(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -681,7 +681,7 @@ class TestKalculusParser {
     @test
     fun `parse basic expo`() {
         val instructionString = "exp(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -691,7 +691,7 @@ class TestKalculusParser {
     @test
     fun `parse expo of var`() {
         val instructionString = "exp(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -701,7 +701,7 @@ class TestKalculusParser {
     @test
     fun `parse complex expo`() {
         val instructionString = "exp(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -711,7 +711,7 @@ class TestKalculusParser {
     @test
     fun `parse expo tricky`() {
         val instructionString = "exp(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -721,7 +721,7 @@ class TestKalculusParser {
     @test
     fun `parse basic ln`() {
         val instructionString = "ln(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -731,7 +731,7 @@ class TestKalculusParser {
     @test
     fun `parse ln of var`() {
         val instructionString = "ln(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -741,7 +741,7 @@ class TestKalculusParser {
     @test
     fun `parse complex ln`() {
         val instructionString = "ln(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -751,7 +751,7 @@ class TestKalculusParser {
     @test
     fun `parse ln tricky`() {
         val instructionString = "ln(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -761,7 +761,7 @@ class TestKalculusParser {
     @test
     fun `parse basic log10`() {
         val instructionString = "log10(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -771,7 +771,7 @@ class TestKalculusParser {
     @test
     fun `parse basic normalized notation, lg = log10`() {
         val instructionString = "lg(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -781,7 +781,7 @@ class TestKalculusParser {
     @test
     fun `parse log10 of var`() {
         val instructionString = "log10(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -791,7 +791,7 @@ class TestKalculusParser {
     @test
     fun `parse complex log10`() {
         val instructionString = "log10(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -801,7 +801,7 @@ class TestKalculusParser {
     @test
     fun `parse log10 tricky`() {
         val instructionString = "log10(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -811,7 +811,7 @@ class TestKalculusParser {
     @test
     fun `parse log10 alternative tricky`() {
         val instructionString = "lg(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -821,7 +821,7 @@ class TestKalculusParser {
     @test
     fun `parse basic log2`() {
         val instructionString = "log2(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -831,7 +831,7 @@ class TestKalculusParser {
     @test
     fun `parse basic normalized notation, lb = log2`() {
         val instructionString = "lb(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -841,7 +841,7 @@ class TestKalculusParser {
     @test
     fun `parse log2 of var`() {
         val instructionString = "log2(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -851,7 +851,7 @@ class TestKalculusParser {
     @test
     fun `parse complex log2`() {
         val instructionString = "log2(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -861,7 +861,7 @@ class TestKalculusParser {
     @test
     fun `parse log2 tricky`() {
         val instructionString = "log2(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -871,7 +871,7 @@ class TestKalculusParser {
     @test
     fun `parse lb tricky`() {
         val instructionString = "lb(x + 1) / 2"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -881,7 +881,7 @@ class TestKalculusParser {
     @test
     fun `parse basic Sin`() {
         val instructionString = "sin(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -891,7 +891,7 @@ class TestKalculusParser {
     @test
     fun `parse Sin of var`() {
         val instructionString = "sin(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -901,7 +901,7 @@ class TestKalculusParser {
     @test
     fun `parse complex Sin`() {
         val instructionString = "sin(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -911,7 +911,7 @@ class TestKalculusParser {
     @test
     fun `parse basic Cos`() {
         val instructionString = "cos(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -921,7 +921,7 @@ class TestKalculusParser {
     @test
     fun `parse Cos of var`() {
         val instructionString = "cos(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -931,7 +931,7 @@ class TestKalculusParser {
     @test
     fun `parse complex Cos`() {
         val instructionString = "cos(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -941,7 +941,7 @@ class TestKalculusParser {
     @test
     fun `parse basic Tan`() {
         val instructionString = "tan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -951,7 +951,7 @@ class TestKalculusParser {
     @test
     fun `parse Tan of var`() {
         val instructionString = "tan(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -961,7 +961,7 @@ class TestKalculusParser {
     @test
     fun `parse complex Tan`() {
         val instructionString = "tan(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -971,7 +971,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arcsin`() {
         val instructionString = "arcsin(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -981,7 +981,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative arcsin`() {
         val instructionString = "asin(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -991,7 +991,7 @@ class TestKalculusParser {
     @test
     fun `parse arcsin of var`() {
         val instructionString = "arcsin(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1001,7 +1001,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arcsin`() {
         val instructionString = "arcsin(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1011,7 +1011,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arccos`() {
         val instructionString = "arccos(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1021,7 +1021,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative arccos`() {
         val instructionString = "acos(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1031,7 +1031,7 @@ class TestKalculusParser {
     @test
     fun `parse arccos of var`() {
         val instructionString = "arccos(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1041,7 +1041,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arccos`() {
         val instructionString = "arccos(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1051,7 +1051,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arctan`() {
         val instructionString = "arctan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1061,7 +1061,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative arctan`() {
         val instructionString = "atan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1071,7 +1071,7 @@ class TestKalculusParser {
     @test
     fun `parse arctan of var`() {
         val instructionString = "arctan(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1081,7 +1081,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arctan`() {
         val instructionString = "arctan(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1091,7 +1091,7 @@ class TestKalculusParser {
     @test
     fun `parse basic sec`() {
         val instructionString = "sec(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1101,7 +1101,7 @@ class TestKalculusParser {
     @test
     fun `parse sec of var`() {
         val instructionString = "sec(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1111,7 +1111,7 @@ class TestKalculusParser {
     @test
     fun `parse complex sec`() {
         val instructionString = "sec(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1121,7 +1121,7 @@ class TestKalculusParser {
     @test
     fun `parse basic cosec`() {
         val instructionString = "cosec(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1131,7 +1131,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative cosec - csc`() {
         val instructionString = "csc(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1141,7 +1141,7 @@ class TestKalculusParser {
     @test
     fun `parse cosec of var`() {
         val instructionString = "cosec(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1151,7 +1151,7 @@ class TestKalculusParser {
     @test
     fun `parse complex cosec`() {
         val instructionString = "cosec(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1161,7 +1161,7 @@ class TestKalculusParser {
     @test
     fun `parse basic cotan`() {
         val instructionString = "cotan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1171,7 +1171,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative cotan - cot`() {
         val instructionString = "cot(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1181,7 +1181,7 @@ class TestKalculusParser {
     @test
     fun `parse cotan of var`() {
         val instructionString = "cotan(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1191,7 +1191,7 @@ class TestKalculusParser {
     @test
     fun `parse complex cotan`() {
         val instructionString = "cotan(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1201,7 +1201,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arcsec`() {
         val instructionString = "arcsec(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1211,7 +1211,7 @@ class TestKalculusParser {
     @test
     fun `parse basic alternative arcsec - asec`() {
         val instructionString = "asec(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1221,7 +1221,7 @@ class TestKalculusParser {
     @test
     fun `parse arcsec of var`() {
         val instructionString = "arcsec(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1231,7 +1231,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arcsec`() {
         val instructionString = "arcsec(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1241,7 +1241,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arccosec`() {
         val instructionString = "arccosec(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1251,7 +1251,7 @@ class TestKalculusParser {
     @test
     fun `parse 1st alternative arccosec - arccsc`() {
         val instructionString = "arccsc(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1261,7 +1261,7 @@ class TestKalculusParser {
     @test
     fun `parse 2nd alternative arccosec - acsc`() {
         val instructionString = "acsc(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1271,7 +1271,7 @@ class TestKalculusParser {
     @test
     fun `parse arccosec of var`() {
         val instructionString = "arccosec(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1281,7 +1281,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arccosec`() {
         val instructionString = "arccosec(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1291,7 +1291,7 @@ class TestKalculusParser {
     @test
     fun `parse basic arccotan`() {
         val instructionString = "arccotan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1301,7 +1301,7 @@ class TestKalculusParser {
     @test
     fun `parse 1st alternative arccotan - acotan`() {
         val instructionString = "acotan(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1311,7 +1311,7 @@ class TestKalculusParser {
     @test
     fun `parse 2dn alternative arccotan - arccot`() {
         val instructionString = "arccot(2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1321,7 +1321,7 @@ class TestKalculusParser {
     @test
     fun `parse arccotan of var`() {
         val instructionString = "arccotan(x)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1331,7 +1331,7 @@ class TestKalculusParser {
     @test
     fun `parse complex arccotan`() {
         val instructionString = "arccotan(x + 1)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1341,7 +1341,7 @@ class TestKalculusParser {
     @test
     fun `parse simple substitution command`() {
         val instructionString = "subst(x, x, 2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1351,7 +1351,7 @@ class TestKalculusParser {
     @test
     fun `parse expression substitution command`() {
         val instructionString = "subst(cos(x + 1), x, 2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is Some)
@@ -1361,7 +1361,7 @@ class TestKalculusParser {
     @test
     fun `parse bad substitution - syntax 1`() {
         val instructionString = "subst(, x, 2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is None)
@@ -1370,7 +1370,7 @@ class TestKalculusParser {
     @test
     fun `parse bad substitution - syntax 2`() {
         val instructionString = "subst(x, , 2)"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is None)
@@ -1379,7 +1379,7 @@ class TestKalculusParser {
     @test
     fun `parse bad substitution - syntax 3`() {
         val instructionString = "subst(x, x, )"
-        val parser = KalculusParser()
+        val parser = KalculusParser(true)
         val ast: Option<FKalculusAST> = parser.parse(instructionString)
 
         assertTrue(ast is None)

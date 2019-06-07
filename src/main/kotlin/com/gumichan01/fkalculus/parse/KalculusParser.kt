@@ -171,6 +171,7 @@ class KalculusParser(private val verbose: Boolean) {
         return try {
             Some(fkalculusGrammar.parseToEnd(text))
         } catch (e: Exception) {
+            println(e.message)
             SimpleKlogger(verbose).print(e)
             None
         }
