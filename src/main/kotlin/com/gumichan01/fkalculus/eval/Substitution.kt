@@ -13,8 +13,8 @@ class Substitution(private val env: Environment, private val verbose: Boolean) {
     }
 
     private fun substitute(expr: Expression, variable: String, expr1: Expression): Expression {
-        val textExpression = Printer().stringOf(expr)
-        val replacementExpression = Printer().stringOf(expr1)
+        val textExpression = stringOf(expr)
+        val replacementExpression = stringOf(expr1)
         printStep("replace every occurrences of $variable in $textExpression with $replacementExpression")
         return when (expr) {
             is Pi, is Exp1, is Const -> expr
