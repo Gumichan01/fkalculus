@@ -48,7 +48,7 @@ class Printer {
         }
     }
 
-    private fun stringOf(expression: Expression): String {
+    fun stringOf(expression: Expression): String {
         return when (expression) {
             is Pi -> "π"
             is Exp1 -> "e"
