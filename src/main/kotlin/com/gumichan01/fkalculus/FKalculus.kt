@@ -7,6 +7,7 @@ import com.gumichan01.fkalculus.parse.KalculusParser
 import com.gumichan01.fkalculus.print.Printer
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
+import com.gumichan01.fkalculus.util.SimpleKlogger
 import com.gumichan01.fkalculus.util.Some
 
 /**
@@ -44,11 +45,10 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class FKalculus(val arguments: Arguments) {
-
-    private val normalizer = Normalizer()
+class FKalculus(private val arguments: Arguments) {
 
     fun start() {
+        val normalizer = Normalizer()
         var quit = false
 
         while (!quit) {
@@ -57,10 +57,10 @@ class FKalculus(val arguments: Arguments) {
 
             if (text is Some) {
                 if (text.t.isNotBlank()) {
-                    val kalculus: Option<FKalculusAST> = parse(text.t)
+                    val kalculus: Option<FKalculusAST> = KalculusParser().parse(text.t)
 
                     if (kalculus is Some) {
-                        val result: Option<ResultValue> = eval(kalculus.t)
+                        val result: Option<ResultValue> = normalizer.eval(kalculus.t)
                         if (result is Some) {
                             print(result.t)
                         }
@@ -75,20 +75,13 @@ class FKalculus(val arguments: Arguments) {
         }
     }
 
-    private fun parse(text: String): Option<FKalculusAST> {
-        return KalculusParser().parse(text)
-    }
-
     private fun readText(): Option<String> {
         return try {
             Some(readLine()!!)
         } catch (e: NullPointerException) {
+            SimpleKlogger(arguments.verbose).print(e.message)
             None
         }
-    }
-
-    private fun eval(ast: FKalculusAST): Option<ResultValue> {
-        return normalizer.eval(ast)
     }
 
     private fun print(result: ResultValue) {

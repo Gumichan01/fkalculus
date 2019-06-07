@@ -41,3 +41,12 @@ object None : Option<Nothing>()
 data class Some<out T>(val t: T) : Option<T>()
 
 class DivisionByZeroException : RuntimeException("Division by zero")
+
+class SimpleKlogger(private val verbose : Boolean) {
+
+    fun print(msg: String?) {
+        if (verbose) {
+            println(msg)
+        }
+    }
+}
