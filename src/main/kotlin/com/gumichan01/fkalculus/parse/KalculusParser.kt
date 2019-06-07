@@ -10,6 +10,7 @@ import com.github.h0tk3y.betterParse.utils.Tuple3
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
+import com.gumichan01.fkalculus.util.SimpleKlogger
 import com.gumichan01.fkalculus.util.Some
 
 /**
@@ -47,7 +48,7 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class KalculusParser {
+class KalculusParser(private val verbose: Boolean) {
 
     private val fkalculusGrammar = object : Grammar<FKalculusAST>() {
 
@@ -143,7 +144,7 @@ class KalculusParser {
                 arcsecant -> Asec(argument)
                 arccosecant -> Acosec(argument)
                 arccotangent -> Acotan(argument)
-                else -> throw RuntimeException("Internal error in parser - invalid operator : $function")
+                else -> throw RuntimeException("Invalid function : $function")
             }
         }
 
@@ -158,7 +159,7 @@ class KalculusParser {
                 mult -> Mult
                 div -> Div
                 pow -> Pow
-                else -> throw RuntimeException("Internal error in parser - invalid operator: $op")
+                else -> throw RuntimeException("Invalid operator: $op")
             }
         }
 
@@ -170,7 +171,7 @@ class KalculusParser {
         return try {
             Some(fkalculusGrammar.parseToEnd(text))
         } catch (e: Exception) {
-            println(e) // NOTE TODO This call must be made in verbose mode only
+            SimpleKlogger(verbose).print(e)
             None
         }
     }

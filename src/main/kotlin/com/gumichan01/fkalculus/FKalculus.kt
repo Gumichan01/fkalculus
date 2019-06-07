@@ -57,7 +57,7 @@ class FKalculus(private val arguments: Arguments) {
 
             if (text is Some) {
                 if (text.t.isNotBlank()) {
-                    val kalculus: Option<FKalculusAST> = KalculusParser().parse(text.t)
+                    val kalculus: Option<FKalculusAST> = KalculusParser(arguments.verbose).parse(text.t)
 
                     if (kalculus is Some) {
                         val result: Option<ResultValue> = normalizer.eval(kalculus.t)
