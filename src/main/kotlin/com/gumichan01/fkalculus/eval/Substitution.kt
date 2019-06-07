@@ -1,32 +1,35 @@
 package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
-import com.gumichan01.fkalculus.print.Printer
 import com.gumichan01.fkalculus.util.SimpleKlogger
 
 class Substitution(private val env: Environment, private val verbose: Boolean) {
 
     fun subst(substitution: Subst): Expression {
         return substitution.run {
-            substitute(expr, variable, expr1)
+            val result = substitute(expr, variable, expr1)
+            printStep("the result is ${stringOf(result)}")
+            result
         }
     }
 
     private fun substitute(expr: Expression, variable: String, expr1: Expression): Expression {
-        val textExpression = stringOf(expr)
-        val replacementExpression = stringOf(expr1)
-        printStep("replace every occurrences of $variable in $textExpression with $replacementExpression")
+        printStep("replace every occurrences of $variable in ${stringOf(expr)} with ${stringOf(expr1)}")
         return when (expr) {
             is Pi, is Exp1, is Const -> expr
             is Identifier -> {
-                printStep("replace ${expr.name} by its value")
-                substitute(env.find(expr.name), variable, expr1)
+                val value = env.find(expr.name)
+                printStep("identifier lookup { ${expr.name} := ${stringOf(value)} }")
+                substitute(value, variable, expr1)
             }
             is Var -> {
-                printStep("replace ${expr.variable} by its value")
-                if (expr.variable == variable) expr1 else expr
+                if (expr.variable == variable) {
+                    printStep("apply substitution { ${expr.variable} := ${stringOf(expr1)} }")
+                    expr1
+                } else expr
             }
             is Binop -> {
+                printStep("check ${stringOf(expr.expr1)} and ${stringOf(expr.expr2)}")
                 val e1 = substitute(expr.expr1, variable, expr1)
                 val e2 = substitute(expr.expr2, variable, expr1)
                 Binop(expr.operator, e1, e2)
