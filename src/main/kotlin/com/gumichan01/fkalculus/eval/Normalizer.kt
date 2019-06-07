@@ -5,7 +5,7 @@ import com.gumichan01.fkalculus.util.None
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
 
-class Normalizer {
+class Normalizer(private val verbose: Boolean) {
 
     private var count: Int = 0
     private var environment: Environment = Environment()
@@ -25,7 +25,7 @@ class Normalizer {
         }
 
         val resultExpression = when (ast) {
-            is Subst -> Substitution(environment).subst(ast)
+            is Subst -> Substitution(environment, verbose).subst(ast)
             is Expression -> Evaluator(environment).calculate(ast)
             else -> throw UnsupportedOperationException("Not implemented yet")
         }

@@ -48,7 +48,7 @@ knowledge of the CeCILL license and that you accept its terms.
 class FKalculus(private val arguments: Arguments) {
 
     fun start() {
-        val normalizer = Normalizer()
+        val normalizer = Normalizer(arguments.verbose)
         var quit = false
 
         while (!quit) {

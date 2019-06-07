@@ -10,13 +10,13 @@ class TestNormalizer {
 
     @Test
     fun `test init class`() {
-        Normalizer()
+        Normalizer(true)
     }
 
     @Test
     fun `test eval help`() {
         val ast = Help
-        val result: Option<ResultValue> = Normalizer().eval(ast)
+        val result: Option<ResultValue> = Normalizer(true).eval(ast)
 
         assertTrue(result is Some)
         assertTrue(result is Some && result.t is HelpText)
@@ -24,7 +24,7 @@ class TestNormalizer {
 
     @Test
     fun `test evaluate an expression and try to get its value from the identifier`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val resultConst = interpreter.eval(Const(42.0))
         val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
@@ -34,7 +34,7 @@ class TestNormalizer {
 
     @Test
     fun `test evaluate an expression, get its value, and retrieve the variable`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val resultConst = interpreter.eval(Const(42.0))
         val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
@@ -47,7 +47,7 @@ class TestNormalizer {
 
     @Test
     fun `test evaluate an expression and get its value later`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val resultConst = interpreter.eval(Const(1.0))
         val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
@@ -64,7 +64,7 @@ class TestNormalizer {
         val id = "v3"
         val expectedValue = Cos(Var("x"))
 
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val expressions = listOf(Pi, Exp1, Binop(Plus, Const(0.0), Const(0.0)), expectedValue, Const(42.0))
         expressions.map { x -> interpreter.eval(x) }
         val resultValue = interpreter.eval(Identifier(id))
@@ -78,7 +78,7 @@ class TestNormalizer {
 
     @Test
     fun `test evaluate several expressions and get a random variable`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val expressions = listOf(Const(3.14), Var("x"), Binop(Plus, Var("x"), Const(0.0)), Cos(Var("x")), Const(42.0))
 
         expressions.map { x -> interpreter.eval(x) }
@@ -101,7 +101,7 @@ class TestNormalizer {
 
     @Test
     fun `test evaluate several expressions that uses identifiers and get an identifier`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val expressions = listOf(Const(3.14), Binop(Plus, Var("x"), Identifier("v0")), Cos(Identifier("v1")), Const(42.0))
 
         expressions.map { x -> interpreter.eval(x) }
@@ -122,7 +122,7 @@ class TestNormalizer {
 
     @Test
     fun `test execute substitution`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val substitution = Subst(Ln(Var("x")), "x", Sin(Pi))
         val result = interpreter.eval(substitution)
 
@@ -132,7 +132,7 @@ class TestNormalizer {
 
     @Test
     fun `test execute substitution, get its value, and retrieve the variable`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val resultConst = interpreter.eval(Subst(Const(42.0), "x", Const(0.0)))
         val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
         val resultVar = interpreter.eval(Identifier(idString))
@@ -145,7 +145,7 @@ class TestNormalizer {
 
     @Test
     fun `test execute several substitutions and get a random variable`() {
-        val interpreter = Normalizer()
+        val interpreter = Normalizer(true)
         val expressions = listOf(Subst(Const(42.0), "x", Const(42.0)), Subst(Var("x"), "x", Const(42.0)))
 
         expressions.map { x -> interpreter.eval(x) }
