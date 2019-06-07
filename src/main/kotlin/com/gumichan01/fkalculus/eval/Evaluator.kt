@@ -69,7 +69,7 @@ class Evaluator(private val environment: Environment) {
     }
 
     private fun evaluateIdentifier(identifier: Identifier): Expression {
-        return environment.find(identifier.name)
+        return calculate(environment.find(identifier.name))
     }
 
     private fun evaluateAcotan(arccotanFunCall: Acotan): Expression {

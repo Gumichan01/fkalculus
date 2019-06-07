@@ -2,6 +2,8 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.DivisionByZeroException
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows
 import kotlin.math.*
@@ -696,5 +698,15 @@ class TestEvaluator {
         val result: Expression = Evaluator(Environment()).calculate(ast)
 
         assertTrue(result == Const(0.5))
+    }
+
+    @test
+    fun `test identifier`() {
+        val id = Identifier("v0")
+        val fakeEnvironment = mock<Environment> { on { find(id.name) } doReturn Cos(Binop(Div, Pi, Const(2.0))) }
+
+        val result: Expression = Evaluator(fakeEnvironment).calculate(id)
+
+        assertTrue(result == Const(0.0))
     }
 }
