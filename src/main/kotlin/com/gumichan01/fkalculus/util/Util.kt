@@ -51,6 +51,8 @@ class SimpleKlogger(private val verbose: Boolean) {
     }
 
     fun print(e: Exception) {
-        e.printStackTrace()
+        if (verbose) {
+            e.printStackTrace()
+        }
     }
 }
