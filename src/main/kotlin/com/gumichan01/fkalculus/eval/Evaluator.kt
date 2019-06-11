@@ -2,6 +2,7 @@ package com.gumichan01.fkalculus.eval
 
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.DivisionByZeroException
+import com.gumichan01.fkalculus.util.SimpleKlogger
 import kotlin.math.*
 
 /**
@@ -39,10 +40,16 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
  */
 
-class Evaluator(private val environment: Environment) {
+class Evaluator(private val environment: Environment, private val verbose: Boolean) {
 
     fun calculate(expression: Expression): Expression {
-        return when (expression) {
+        val logger = SimpleKlogger(verbose)
+
+        if (expression !is Const) {
+            logger.print("Calculate ${stringOf(expression)}")
+        }
+
+        val result = when (expression) {
             is Const, is Var -> expression
             is Pi -> Const(PI)
             is Exp1 -> Const(E)
@@ -66,6 +73,11 @@ class Evaluator(private val environment: Environment) {
             is Acotan -> evaluateAcotan(expression)
             is Identifier -> evaluateIdentifier(expression)
         }
+
+        if (expression !is Const) {
+            logger.print("${stringOf(expression)} = ${stringOf(result)}")
+        }
+        return result
     }
 
     private fun evaluateIdentifier(identifier: Identifier): Expression {
