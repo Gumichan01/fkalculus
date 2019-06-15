@@ -14,6 +14,7 @@ JAVA="java"
 JARGS="-jar"
 JAR="*-standalone.jar"
 FKALCULUS_VERSION=`echo $JAR | cut -d '-' -f2`
+FKALCULUS_ARGS=$*
 wrapper=
 
 checkCommand()
@@ -42,5 +43,5 @@ $(checkCommand $RLWRAP)
 [ $? -eq 1 ] && warn || wrapper=$RLWRAP
 echo -n "FKalculus" $FKALCULUS_VERSION
 isSnapshot; [ $? -eq 0 ] && echo "-SNAPSHOT" || echo ""
-$wrapper $JAVA $JARGS $JAR
+$wrapper $JAVA $JARGS $JAR $FKALCULUS_ARGS
 echo # Just to produce new line
