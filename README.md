@@ -8,7 +8,7 @@ Please do not use it in production.
 ## Features ##
 
 - Basic calculation expressions
-- Variable substitution - WIP
+- Variable substitution
 - Simplify expressions - TODO
 - Calculate derivative of a function - TODO
 - Primitive integral of a function - TODO
