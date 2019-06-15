@@ -48,7 +48,7 @@ class TestAst {
 
     @test
     fun `test simple expression`() {
-        val expression: Expression = Const(5.0)
+        Const(5.0)
     }
 
     @test
