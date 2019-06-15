@@ -46,4 +46,4 @@ The Windows packaging is done with [Launch4J](http://launch4j.sourceforge.net/).
 
 ## License ##
 
-This software is Licensed uner CeCILL v2.1.
+This software is Licensed under the CeCILL v2.1 license.
