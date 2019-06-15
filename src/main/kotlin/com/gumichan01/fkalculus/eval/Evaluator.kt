@@ -46,7 +46,7 @@ class Evaluator(private val environment: Environment, private val verbose: Boole
         val logger = SimpleKlogger(verbose)
 
         if (expression !is Const) {
-            logger.print("Calculate ${stringOf(expression)}")
+            logger.print("=> Calculate ${stringOf(expression)}")
         }
 
         val result = when (expression) {
@@ -75,7 +75,7 @@ class Evaluator(private val environment: Environment, private val verbose: Boole
         }
 
         if (expression !is Const) {
-            logger.print("${stringOf(expression)} = ${stringOf(result)}")
+            logger.print("=> ${stringOf(expression)} = ${stringOf(result)}")
         }
         return result
     }
