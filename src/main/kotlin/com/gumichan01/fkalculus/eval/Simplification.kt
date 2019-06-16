@@ -28,7 +28,6 @@ class Simplification(private val environment: Environment) {
             is Asec -> simplify(expression.expr)
             is Acosec -> simplify(expression.expr)
             is Acotan -> simplify(expression.expr)
-            else -> throw UnsupportedOperationException("${stringOf(expression)} is not implemented yet")
         }
     }
 
