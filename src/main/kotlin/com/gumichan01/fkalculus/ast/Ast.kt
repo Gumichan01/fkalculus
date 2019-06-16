@@ -54,32 +54,36 @@ data class Const(val value: Double) : Expression()
 data class Var(val variable: String) : Expression()
 data class Identifier(val name: String) : Expression()
 data class Binop(val operator: Operator, val expr1: Expression, val expr2: Expression) : Expression()
-data class Sqrt(val expr: Expression) : Expression()
-data class Expo(val expr: Expression) : Expression()
+sealed class FunCall : Expression() {
+    abstract val expr: Expression
+}
+
+data class Sqrt(override val expr: Expression) : FunCall()
+data class Expo(override val expr: Expression) : FunCall()
 /* Natural Logarithm */
-data class Ln(val expr: Expression) : Expression()
+data class Ln(override val expr: Expression) : FunCall()
 
 /* ∀x > 0, y ∈ ℝ, log₁₀(x) = y ↔ 10ʸ = x; ISO 80000-2 notation: lg */
-data class Log10(val expr: Expression) : Expression()
+data class Log10(override val expr: Expression) : FunCall()
 
 /* ∀x > 0, y ∈ ℝ, log₂(x) = y ↔ 2ʸ = x; ISO 80000-2 notation: lb */
-data class Log2(val expr: Expression) : Expression()
+data class Log2(override val expr: Expression) : FunCall()
 
-data class Sin(val expr: Expression) : Expression()
-data class Cos(val expr: Expression) : Expression()
-data class Tan(val expr: Expression) : Expression()
+data class Sin(override val expr: Expression) : FunCall()
+data class Cos(override val expr: Expression) : FunCall()
+data class Tan(override val expr: Expression) : FunCall()
 
 /* Every A{cos/sine/tan} are inverse functions of cos/sin/tan */
-data class Asin(val expr: Expression) : Expression()
+data class Asin(override val expr: Expression) : FunCall()
 
-data class Acos(val expr: Expression) : Expression()
-data class Atan(val expr: Expression) : Expression()
-data class Sec(val expr: Expression) : Expression()     /* Reciprocal function of Cosine */
-data class Cosec(val expr: Expression) : Expression()   /* Reciprocal function of Sine */
-data class Cotan(val expr: Expression) : Expression()   /* Reciprocal function of Tan */
-data class Asec(val expr: Expression) : Expression()    /* Every A{sec/cosec/cottan} are inverse functions of sec/cosec/cotan */
-data class Acosec(val expr: Expression) : Expression()
-data class Acotan(val expr: Expression) : Expression()
+data class Acos(override val expr: Expression) : FunCall()
+data class Atan(override val expr: Expression) : FunCall()
+data class Sec(override val expr: Expression) : FunCall()     /* Reciprocal function of Cosine */
+data class Cosec(override val expr: Expression) : FunCall()   /* Reciprocal function of Sine */
+data class Cotan(override val expr: Expression) : FunCall()   /* Reciprocal function of Tan */
+data class Asec(override val expr: Expression) : FunCall()    /* Every A{sec/cosec/cottan} are inverse functions of sec/cosec/cotan */
+data class Acosec(override val expr: Expression) : FunCall()
+data class Acotan(override val expr: Expression) : FunCall()
 
 sealed class Operator
 object Plus : Operator()
