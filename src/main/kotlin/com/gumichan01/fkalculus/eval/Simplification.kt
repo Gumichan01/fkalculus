@@ -37,8 +37,8 @@ class Simplification(private val environment: Environment) {
         val simplifiedExpression2 = simplify(expr2)
 
         return when {
-            expr1 == Const(0.0) -> simplifiedExpression2
-            expr2 == Const(0.0) -> simplifiedExpression1
+            simplifiedExpression1== Const(0.0) -> simplifiedExpression2
+            simplifiedExpression2 == Const(0.0) -> simplifiedExpression1
             else -> Binop(Plus, simplifiedExpression1, simplifiedExpression2)
         }
     }
