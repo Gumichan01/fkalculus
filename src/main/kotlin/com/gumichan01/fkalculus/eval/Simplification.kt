@@ -24,8 +24,9 @@ class Simplification(private val environment: Environment) {
 
     private fun simplifyBinop(binop: Binop): Expression {
         return binop.run {
-            when(operator) {
+            when (operator) {
                 is Plus -> simplifyPlus(expr1, expr2)
+                is Minus -> simplifyMinus(expr1, expr2)
                 else -> throw UnsupportedOperationException("${stringOf(this)} is not implemented yet")
             }
         }
@@ -39,6 +40,17 @@ class Simplification(private val environment: Environment) {
             expr1 == Const(0.0) -> simplifiedExpression2
             expr2 == Const(0.0) -> simplifiedExpression1
             else -> Binop(Plus, simplifiedExpression1, simplifiedExpression2)
+        }
+    }
+
+    private fun simplifyMinus(expr1: Expression, expr2: Expression): Expression {
+        val simplifiedExpression1 = simplify(expr1)
+        val simplifiedExpression2 = simplify(expr2)
+
+        return when {
+            simplifiedExpression2 == Const(0.0) -> simplifiedExpression1
+            simplifiedExpression1 == Const(0.0) && simplifiedExpression2 is Const -> Const(-simplifiedExpression2.value)
+            else -> Binop(Minus, simplifiedExpression1, simplifiedExpression2)
         }
     }
 }
