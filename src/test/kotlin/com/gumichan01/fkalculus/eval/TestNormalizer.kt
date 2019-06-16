@@ -190,33 +190,6 @@ class TestNormalizer {
         assertTrue(varString == "v1")
     }
 
-    @Test
-    fun `test execute several simplifications and get a random variable`() {
-        val interpreter = Normalizer(true)
-        val expressions = listOf(Simpl(Const(42.0)), Simpl(Binop(Plus, Const(42.0), Const(0.0))))
-        val fakeNormalizer = mock<Normalizer> {
-            on { eval(Simpl(Const(42.0))) } doReturn Some(IdentifierValue("", Const(42.0)))
-        }
-
-        expressions.map { x -> interpreter.eval(x) }
-
-        val index = (0 until expressions.size).random()
-        val id = "v$index"
-        val resultValue = interpreter.eval(Identifier(id))
-        val (varString, value) = extractIdentifierOrFail(resultValue)
-        val expectedId = "v" + expressions.size
-        val result = fakeNormalizer.eval(expressions.get(index))
-        val (_, expectedValue) = extractIdentifierOrFail(result)
-
-        println("index : $index")
-        println("expected (id, value): ($expectedId, $expectedValue)")
-        println("got (id, value): ($varString, $value)")
-
-        assertTrue(resultValue is Some)
-        assertTrue(varString == expectedId)
-        assertTrue(value == expectedValue)
-    }
-
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
         return result.run {
             if (this is Some && t is IdentifierValue) {
