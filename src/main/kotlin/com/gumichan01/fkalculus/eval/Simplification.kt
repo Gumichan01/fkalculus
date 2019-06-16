@@ -8,7 +8,7 @@ class Simplification(private val environment: Environment) {
 
     private fun simplify(expression: Expression): Expression {
         return when (expression) {
-            is Pi, is Exp1, is Const -> expression
+            is Pi, is Exp1, is Const, is Var -> expression
             is Identifier -> simplify(environment.find(expression.name))
             is Binop -> simplifyBinop(expression)
             is Sqrt -> simplify(expression.expr)
