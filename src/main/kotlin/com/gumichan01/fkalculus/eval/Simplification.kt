@@ -11,23 +11,14 @@ class Simplification(private val environment: Environment) {
             is Pi, is Exp1, is Const, is Var -> expression
             is Identifier -> simplify(environment.find(expression.name))
             is Binop -> simplifyBinop(expression)
-            is Sqrt -> simplify(expression.expr)
-            is Expo -> simplify(expression.expr)
-            is Ln -> simplify(expression.expr)
-            is Log10 -> simplify(expression.expr)
-            is Log2 -> simplify(expression.expr)
-            is Cos -> simplify(expression.expr)
-            is Sin -> simplify(expression.expr)
-            is Tan -> simplify(expression.expr)
-            is Acos -> simplify(expression.expr)
-            is Asin -> simplify(expression.expr)
-            is Atan -> simplify(expression.expr)
-            is Sec -> simplify(expression.expr)
-            is Cosec -> simplify(expression.expr)
-            is Cotan -> simplify(expression.expr)
-            is Asec -> simplify(expression.expr)
-            is Acosec -> simplify(expression.expr)
-            is Acotan -> simplify(expression.expr)
+            is FunCall -> simplifyFunCall(expression)
+        }
+    }
+
+    private fun simplifyFunCall(mathFunCall: FunCall): Expression {
+        return when (mathFunCall) {
+            is Sqrt, is Expo, is Ln, is Log10, is Log2, is Cos, is Sin, is Tan, is Acos, is Asin, is Atan,
+            is Sec, is Cosec, is Cotan, is Asec, is Acosec, is Acotan -> simplify(mathFunCall.expr)
         }
     }
 
