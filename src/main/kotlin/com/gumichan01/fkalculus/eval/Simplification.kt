@@ -23,17 +23,21 @@ class Simplification(private val environment: Environment) {
     }
 
     private fun simplifyBinop(binop: Binop): Expression {
-        return binop.run {
-            val simplifiedExpression1 = simplify(expr1)
-            val simplifiedExpression2 = simplify(expr2)
+        return when(binop.operator) {
+            is Plus -> simplifyPlus(binop.expr1, binop.expr2)
+            else -> throw UnsupportedOperationException("${stringOf(binop)} is not implemented yet")
+        }
+    }
 
-            if (expr1 == Const(0.0)) {
-                simplifiedExpression2
-            } else if (expr2 == Const(0.0)) {
-                simplifiedExpression1
-            } else {
-                Binop(operator, simplifiedExpression1, simplifiedExpression2)
-            }
+    private fun simplifyPlus(expr1: Expression, expr2: Expression): Expression {
+        val simplifiedExpression1 = simplify(expr1)
+        val simplifiedExpression2 = simplify(expr2)
+
+        return when {
+            expr1 == Const(0.0) -> simplifiedExpression2
+            expr2 == Const(0.0) -> simplifiedExpression1
+            else -> Binop(Plus, simplifiedExpression1, simplifiedExpression2)
         }
     }
 }
+
