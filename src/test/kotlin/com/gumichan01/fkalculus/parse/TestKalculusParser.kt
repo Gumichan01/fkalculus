@@ -1414,4 +1414,13 @@ class TestKalculusParser {
         assertTrue(ast is Some)
         assertTrue(ast is Some && ast.t == Simpl(Identifier("v0")))
     }
+
+    @test
+    fun `parse bad simplification`() {
+        val instructionString = "simpl()"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is None)
+    }
 }
