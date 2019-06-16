@@ -3,6 +3,9 @@ package com.gumichan01.fkalculus.eval
 import com.gumichan01.fkalculus.ast.*
 import com.gumichan01.fkalculus.util.Option
 import com.gumichan01.fkalculus.util.Some
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
@@ -162,6 +165,56 @@ class TestNormalizer {
 
         assertTrue(resultValue is Some)
         assertTrue(varString == expectedId)
+    }
+
+    @Test
+    fun `test execute simplification`() {
+        val interpreter = Normalizer(true)
+        val simpl = Simpl(Var("x"))
+        val result = interpreter.eval(simpl)
+
+        assertTrue(result is Some)
+        assertTrue(result is Some && (result.t as IdentifierValue).value == Var("x"))
+    }
+
+    @Test
+    fun `test execute simplification, get its value, and retrieve the variable`() {
+        val interpreter = Normalizer(true)
+        val resultConst = interpreter.eval(Simpl(Const(42.0)))
+        val idString = if (resultConst is Some) (resultConst.t as IdentifierValue).identifier else ""
+        val resultVar = interpreter.eval(Identifier(idString))
+        val (varString, _) = extractIdentifierOrFail(resultVar)
+
+        assertTrue(resultVar is Some)
+        assertTrue(idString == "v0")
+        assertTrue(varString == "v1")
+    }
+
+    @Test
+    fun `test execute several simplifications and get a random variable`() {
+        val interpreter = Normalizer(true)
+        val expressions = listOf(Simpl(Const(42.0)), Simpl(Binop(Plus, Const(42.0), Const(0.0))))
+        val fakeNormalizer = mock<Normalizer> {
+            on { eval(Simpl(Const(42.0))) } doReturn Some(IdentifierValue("", Const(42.0)))
+        }
+
+        expressions.map { x -> interpreter.eval(x) }
+
+        val index = (0 until expressions.size).random()
+        val id = "v$index"
+        val resultValue = interpreter.eval(Identifier(id))
+        val (varString, value) = extractIdentifierOrFail(resultValue)
+        val expectedId = "v" + expressions.size
+        val result = fakeNormalizer.eval(expressions.get(index))
+        val (_, expectedValue) = extractIdentifierOrFail(result)
+
+        println("index : $index")
+        println("expected (id, value): ($expectedId, $expectedValue)")
+        println("got (id, value): ($varString, $value)")
+
+        assertTrue(resultValue is Some)
+        assertTrue(varString == expectedId)
+        assertTrue(value == expectedValue)
     }
 
     private fun extractIdentifierOrFail(result: Option<ResultValue>): Pair<String, Expression> {
