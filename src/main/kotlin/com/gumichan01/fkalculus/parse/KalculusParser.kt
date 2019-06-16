@@ -56,6 +56,7 @@ class KalculusParser(private val verbose: Boolean) {
         // Keywords
         val help by token("help")
         val subst by token("subst")
+        val simpl by token("simpl")
         val pi by token("Pi|pi|\u03C0")
         val sqrt by token("sqrt|√")
         val expo by token("exp")
@@ -120,6 +121,7 @@ class KalculusParser(private val verbose: Boolean) {
 
         val substParameter by arithmmeticParser and skip(comma) and lowercaseLetter and skip(comma) and arithmmeticParser
         val substParser by subst and skip(lparen) and substParameter and skip(rparen) use { produceSubstFunCall(t2) }
+        val simplParser by simpl and skip(lparen) and arithmmeticParser and skip(rparen) use { Simpl(t2) }
 
         private fun produceSubstFunCall(substParam: Tuple3<Expression, TokenMatch, Expression>): Command {
             return Subst(substParam.t1, substParam.t2.text, substParam.t3)
@@ -164,7 +166,7 @@ class KalculusParser(private val verbose: Boolean) {
         }
 
         val expr by arithmmeticParser
-        override val rootParser by helpParser or substParser or expr
+        override val rootParser by helpParser or substParser or simplParser or expr
     }
 
     fun parse(text: String): Option<FKalculusAST> {

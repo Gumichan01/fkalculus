@@ -1384,4 +1384,14 @@ class TestKalculusParser {
 
         assertTrue(ast is None)
     }
+
+    @test
+    fun `parse simple simplification of 2`() {
+        val instructionString = "simpl(2)"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Simpl(Const(2.0)))
+    }
 }
