@@ -23,9 +23,11 @@ class Simplification(private val environment: Environment) {
     }
 
     private fun simplifyBinop(binop: Binop): Expression {
-        return when(binop.operator) {
-            is Plus -> simplifyPlus(binop.expr1, binop.expr2)
-            else -> throw UnsupportedOperationException("${stringOf(binop)} is not implemented yet")
+        return binop.run {
+            when(operator) {
+                is Plus -> simplifyPlus(expr1, expr2)
+                else -> throw UnsupportedOperationException("${stringOf(this)} is not implemented yet")
+            }
         }
     }
 
