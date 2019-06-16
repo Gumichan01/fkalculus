@@ -63,8 +63,8 @@ NB: Spaces must be skipped
 
 ```
     program ::= instruction+
-instruction ::= expr | funcall
-    funcall ::= SUBST(expr, lowercase_alpha, expr)
+instruction ::= expr | cmdcall
+    cmdcall ::= SUBST(expr, lowercase_alpha, expr)
               | SIMPL(expr)
               | SOLVE(expr, lowercase_alpha)
               | DERIVE(expr, lowercase_alpha)
