@@ -26,6 +26,7 @@ class Normalizer(private val verbose: Boolean) {
 
         val resultExpression = when (ast) {
             is Subst -> Substitution(environment, verbose).subst(ast)
+            is Simpl -> Simplification(environment).simplify(ast)
             is Expression -> Evaluator(environment, verbose).calculate(ast)
             else -> throw UnsupportedOperationException("Not implemented yet")
         }

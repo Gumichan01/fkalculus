@@ -1384,4 +1384,43 @@ class TestKalculusParser {
 
         assertTrue(ast is None)
     }
+
+    @test
+    fun `parse simple simplification of 2`() {
+        val instructionString = "simpl(2)"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Simpl(Const(2.0)))
+    }
+
+    @test
+    fun `parse simple simplification of x`() {
+        val instructionString = "simpl(x)"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Simpl(Var("x")))
+    }
+
+    @test
+    fun `parse simple simplification of v0`() {
+        val instructionString = "simpl(v0)"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is Some)
+        assertTrue(ast is Some && ast.t == Simpl(Identifier("v0")))
+    }
+
+    @test
+    fun `parse bad simplification`() {
+        val instructionString = "simpl()"
+        val parser = KalculusParser(false)
+        val ast: Option<FKalculusAST> = parser.parse(instructionString)
+
+        assertTrue(ast is None)
+    }
 }
