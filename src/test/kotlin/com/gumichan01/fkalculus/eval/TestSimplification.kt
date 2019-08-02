@@ -115,4 +115,20 @@ internal class TestSimplification {
 
         assertTrue(result == expectedValue)
     }
+
+    @Test
+    fun `simplify 42 - 42`() {
+        val result = Simplification(Environment()).simplify(Simpl(Binop(Minus, Const(42.0), Const(42.0))))
+        val expectedValue = Const(0.0)
+
+        assertTrue(result == expectedValue)
+    }
+
+    @Test
+    fun `simplify cos(x) - cos(x)`() {
+        val result = Simplification(Environment()).simplify(Simpl(Binop(Minus, Cos(Var("x")), Cos(Var("x")))))
+        val expectedValue = Const(0.0)
+
+        assertTrue(result == expectedValue)
+    }
 }
