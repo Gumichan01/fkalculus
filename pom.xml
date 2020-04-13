@@ -9,7 +9,7 @@
     <version>0.3.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.3.40</kotlin.version>
+        <kotlin.version>1.3.71</kotlin.version>
         <main.class>com.gumichan01.fkalculus.MainKt</main.class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
@@ -36,7 +36,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- http://jcenter.bintray.com/com/github/h0tk3y/betterParse/better-parse/ -->
+        <!-- https://jcenter.bintray.com/com/github/h0tk3y/betterParse/better-parse/ -->
         <dependency>
             <groupId>com.github.h0tk3y.betterParse</groupId>
             <artifactId>better-parse</artifactId>
@@ -55,7 +55,7 @@
         <!-- This repository is used in order to get better-parser -->
         <repository>
             <id>jcenter</id>
-            <url>http://jcenter.bintray.com/</url>
+            <url>https://jcenter.bintray.com/</url>
         </repository>
     </repositories>
 
